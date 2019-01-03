@@ -20,7 +20,7 @@ ul#icons{
 }
 
 li{
-    font-size: inherit;
+    font-size: 1.25em;
     color: #f8f8f8;
     display: inline-block;
     /*padding-right: 5px;
@@ -30,31 +30,30 @@ li{
 
 pre{
     color: #f92672;
-    font-size: 100%;
 }
 
 h1{
     /*font-size: 36px;*/
-    font-size: 2.5em;
+    font-size: 3em;
     color: #d3cf88;
     border-bottom: 1px solid #eeeeee
 }
 
 h2{
     /*font-size: 30px;*/
-    font-size: 2em;
+    font-size: 2.5em;
     color: #66d9ef;
 }
 
 h3{
     /*font-size: 24px;*/
-    font-size: 1.6em;
+    font-size: 2em;
     color: #a6e22e;
 }
 
 p{
     /*font-size: 18px;*/
-    font-size: 1em;
+    font-size: 1.25em;
     color: #f8f8f2;
     line-height: 1.5;
 }
