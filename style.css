@@ -4,7 +4,10 @@ body{
     background-color: #121311;
     font-family: monospace;
     margin: 0 auto;
-    padding: 45px;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
 ul{
@@ -12,11 +15,9 @@ ul{
 }
 
 ul#icons{
-    font-size: 4.5em;
+    font-size: 10vmin;
     padding-left: 0;
-    margin-left: -5px;
-    margin-top: 40px;
-    margin-bottom: 10px;
+    margin-left: -7.5%;
 }
 
 li{
@@ -28,8 +29,22 @@ li{
     padding: 5px;
 }
 
-pre{
+/* h4 is only for biggest heading, h5 for subtitle */
+h4{
+    font-size: 10vmin;
+    margin: 0;
     color: #f92672;
+}
+h5{
+    font-size: 4vmin;
+    margin:0;
+    color: #424242;
+}
+
+@media (max-width: 700px) {
+    img {
+    width: 90%;
+    }
 }
 
 h1{
