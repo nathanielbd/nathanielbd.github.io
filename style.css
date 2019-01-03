@@ -1,0 +1,89 @@
+/* Monokai-ish theme */
+
+body{
+    background-color: #121311;
+    font-family: monospace;
+    margin: 0 auto;
+    padding: 45px;
+}
+
+ul{
+    padding-left: 0;
+}
+
+ul#icons{
+    font-size: 4.5em;
+    padding-left: 0;
+    margin-left: -5px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+li{
+    font-size: inherit;
+    color: #f8f8f8;
+    display: inline-block;
+    /*padding-right: 5px;
+    padding-left: 5px;*/
+    padding: 5px;
+}
+
+pre{
+    color: #f92672;
+    font-size: 100%;
+}
+
+h1{
+    /*font-size: 36px;*/
+    font-size: 2.5em;
+    color: #d3cf88;
+    border-bottom: 1px solid #eeeeee
+}
+
+h2{
+    /*font-size: 30px;*/
+    font-size: 2em;
+    color: #66d9ef;
+}
+
+h3{
+    /*font-size: 24px;*/
+    font-size: 1.6em;
+    color: #a6e22e;
+}
+
+p{
+    /*font-size: 18px;*/
+    font-size: 1em;
+    color: #f8f8f2;
+    line-height: 1.5;
+}
+
+span{
+    color: #fd971f;
+}
+
+a{
+    font-size: inherit;
+    color: #ae81ff;
+}
+
+a:hover {
+    color: #c8aaff;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #424242;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5e5e5e;
+}
