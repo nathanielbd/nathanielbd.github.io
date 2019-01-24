@@ -2,7 +2,7 @@
 
 body{
     background-color: #121311;
-    font-family: monospace;
+    font-family: "Press Start 2P";
     margin: 0 auto;
     padding-left: 15%;
     padding-right: 15%;
@@ -11,7 +11,7 @@ body{
 }
 
 ul{
-    padding-left: 0;
+    padding-left: 0px;
 }
 
 ul#icons{
@@ -24,47 +24,60 @@ li{
     font-size: 1em;
     color: #f8f8f8;
     display: inline-block;
-    padding: 5px;
+    padding-left: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 /* h4 is only for biggest heading, h5 for subtitle */
 h4{
-    font-size: 10vmin;
+    font-weight: normal;
+    font-size: 8vmin;
     margin: 0;
     color: #f92672;
 }
 h5{
+    font-weight: normal;
     font-size: 4vmin;
     margin:0;
     color: #424242;
 }
 
-@media (max-width: 700px) {
-    img {
+@media (max-width: 700px){
+    img{
     width: 90%;
     }
-    body {
+    body{
         padding-left: 5%;
         padding-right: 5%;
     }
-    ul#icons {
+    ul#icons{
         margin-left: 2.5%;
+    }
+    p{
+        font-size: 3vmin;
+    }
+    li{
+        font-size: 3vmin;
     }
 }
 
 h1{
-    font-size: 2.5em;
+    font-weight: normal;
+    font-size: 7vmin;
     color: #d3cf88;
     border-bottom: 1px solid #eeeeee
 }
 
 h2{
-    font-size: 2em;
+    font-weight: normal;
+    font-size: 6vmin;
     color: #66d9ef;
 }
 
 h3{
-    font-size: 1.5em;
+    font-weight: normal;
+    font-size: 5vmin;
     color: #a6e22e;
 }
 
