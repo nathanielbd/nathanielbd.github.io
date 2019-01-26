@@ -1,8 +1,12 @@
 /* Monokai-ish theme */
 
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     background-color: #121311;
-    font-family: "Press Start 2P";
+    font-family: 'Source Code Pro', monospace;
     margin: 0 auto;
     padding-left: 15%;
     padding-right: 15%;
@@ -12,12 +16,22 @@ body{
 
 ul{
     padding-left: 0px;
+    list-style: none;
+}
+
+ul li::before{
+    content: "\276D   ";
+    color: #f8f8f8;
 }
 
 ul#icons{
     font-size: 10vmin;
     padding-left: 0;
     margin-left: -7.5%;
+}
+
+ul#icons li::before{
+    content: "";
 }
 
 li{
@@ -40,7 +54,7 @@ h5{
     font-weight: normal;
     font-size: 4vmin;
     margin:0;
-    color: #424242;
+    color: #7e7e7e;
 }
 
 @media (max-width: 700px){
@@ -53,6 +67,15 @@ h5{
     }
     ul#icons{
         margin-left: 2.5%;
+    }
+    h4{
+        font-size: 8vmin;
+    }
+    h5{
+        font-size: 4vmin;
+    }
+    h1{
+        font-size: 
     }
     p{
         font-size: 3vmin;
