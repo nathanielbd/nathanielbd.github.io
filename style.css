@@ -4,10 +4,6 @@ html{
     scroll-behavior: smooth;
 }
 
-::selection{
-    background: #424242;
-}
-
 body{
     background-color: #121311;
     font-family: 'Source Code Pro', monospace;
