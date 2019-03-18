@@ -18,6 +18,22 @@ body{
     padding-bottom: 5%;
 }
 
+.header {
+    border-bottom-color: 1px solid #eeeeee;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: block;
+    background-color: #121311;
+}
+
+.sticky + .content {
+    padding-top: 150px;
+}
+
 ul{
     padding-left: 0px;
     list-style: none;
