@@ -1,149 +1,65 @@
+<html style="scroll-behavior:smooth">
 <head>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="script.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/solar/bootstrap.css">
     <meta name="keywords" content="Nathaniel Budijono,portfolio,LinkedIn,code,skills">
     <meta name="author" content="Nathaniel Budijono">
     <meta name="google-site-verification" content="XkvvbvbB2BDVwBrRLkv0RPfIPvOFRXNtDV54W48lQjE" />
     <meta name="description" content="Hi, thanks for Googling me! I'm Nathaniel Budijono, an undergraduate student at the University of Minnesota studying Computer Science. This is my portfolio site."/>
     <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
-    <title>nathanielbd | Nathaniel Budijono, student coder</title>
+    <title>nathanielbd | Nathaniel Budijono's personal website</title>
 </head>
 
 <body>
-    <div class="header" id="header">
-    <h4>nathanielbd</h4>
-    <h5>Nathaniel Budijono, aspiring computational scientist</h5>
-    <ul>
-        <li>
-            <a href="#About me">About me</a>
-        </li>
-        <li>
-            <a href="#My code">My code</a>
-        </li>
-        <li>
-            <a href="#Self-learning">Self-learning</a>
-        </li>
-        <li>
-            <a href="#Stuff for employers">Contact and Stuff for employers</a>
-        </li>
-    </ul>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">nathanielbd</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav" aria-controls="navone" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="content">
-    <h1 id="About me"> About me </h1>
-    <h2> Education </h2>
-    <p> I'm a current undergraduate student at the <span>University of Minnesota - Twin Cities</span> (2018-2021). I major in <span>Computer Science</span> with <span>Mathematics</span> and <span>Computational Biology</span> minors. I expect to graduate in Spring 2021. I'm interested in graduate school.
-    </p>
-    <p>I've taken classes on algorithms, data structures, functional programming, operating systems, machine architecture, organic chemistry, biochemistry, and multivariable calculus.</p>
-    <p>At UMN-TC, I am involved in <span>Quiz Bowl</span>, <span>Copter Club</span>, <span>Society of Asian Scientists and Engineers</span>, and the <span>Business Association of Multicultural Students</span>.</p>
-    <p>As a Minnetonka High School student, I achieved <span>National AP Scholar</span>, 3x <span>Gold Presidential Volunteer Service award</span>, and <span>National Merit Commended Student</span> honors. In high school, I enrolled in college-level courses at the <span>University of Minnesota - Twin Cities</span>. I've been coding in some way or form since middle school, but we don't speak about the writing-a-website-on-Notepad days.
-    </p>
-    <h2> Interests </h2>
-    <ul>
-        <li><span>Bioinformatics</span></li><br>
-        <li><span>Computational Biology</span></li><br>
-        <li><span>Functional Genomics</span></li><br>
-        <li><span>Protein Structure Prediction</span></li><br>
-        <li><span>Machine Learning</span></li><br>
-        <li><span>Machine Learning-assisted Discovery</span></li><br>
-        <li><span>Computational Chemistry</span></li><br>
-        <li><span>Quantitative Finance</span></li><br>
+  <div class="collapse navbar-collapse" id="nav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="./projects.html">Projects</a>
+      </li>
+      <li class="nav-item">
+	<a class="nav-link" href="./resume.html">Résumé</a>
+      </li>
+      <li class="nav-item">
+	<a class="nav-link" href="./blog.html">Blog</a>
+      </li>
+      <li class="nav-item">
+	<a class="nav-link" href="#contact">Contact</a>
+      </li>
     </ul>
-    <h3> Interests that aren't "boring" </h3>
-    <p> I play video games-- both new and old. Sometimes 'old' means <span>Street Fighter II</span>. Other times it means <span>Spacewar!</span>. You'll often find me playing an emulated <span>SNES</span>, <span>PS1</span>, or <span>DS</span> game.</p>
-    <p> If you catch me when I have free time, I'll probably be:</p>
-    <ul>
-        <li>reading or discussing history online,</li><br>
-        <li>reading a novel, possibly by <span>Douglas Adams</span>,</li><br>
-        <li>playing a video game made in the last century,</li><br>
-        <li>playing a board game,</li><br>
-        <li>watching the <span>NFL</span>,</li><br>
-        <li>or finding the prettiest dark theme for my text editor, <span>Vim</span></li>
-    </ul>
-
-    <h1 id="My code"> My code </h1>
-    <p> I've coded with:</p>
-    <ul>
-        <li><span>Java</span></li>
-        <li><span>Python</span></li>
-        <li><span>JavaScript</span></li>
-        <li><span>OCaml</span></li>
-        <li><span>R</span></li>
-        <li><span>C</span></li>
-        <li><span>x86-64 Assembly</span></li>
-        <li><span>Scala</span></li>
-    </ul>
-    <p>I have experience with technologies including <span>numpy</span>, <span>pandas</span>, <span>Flask</span>, <span>Google Cloud Platform</span>, <span>Node.js</span>, <span>Keras</span>, <span>tensorflow</span>, <span>Cytoscape</span>, and <span>Mathematica</span>. I've used these in some personal projects. </p>
-    <h2> cold crisp catnap </h2>
-    <img title="a sarcastic interaction in 'cold crisp catnap'" src="ccc.png"/>
-    <h5 style="font-size:1em;">a sarcastic interaction in 'cold crisp catnap'</h5>
-    <p> Have you ever wanted to re-experience the thrill of out-smarting the <span>Ravenous Bugblatter Beast of Traal</span> (however easy it may be)? The feeling of accomplishment after routing the <span>Wizard of Frobozz</span>? The dread of being eaten by <span>a grue</span>?</p>
-    <p> Maybe none of those things applied to you; but if you, for some reason, wanted to play a text adventure webgame not quite as wittily written as the original '80s <span>Zork Trilogy</span>, <a href="https://cold-crisp-catnap.neocities.org">you can do that here</a>. </p>
-    <p> Alternatively, you could view <a href="https://github.com/nathanielbd/cold-crisp-catnap">the project's code</a>. For some unknown reason, my high school self made it with client-side <span>JavaScript</span>.</p>
-    <h2> Copter Club </h2>
-    <img title="2018 AUVSI SUAS Photo" src="http://www.auvsi-suas.org/static/group_photo.jpg"/>
-    <h5 style="font-size:1em;">Photo from AUVSI SUAS</h5>
-    <p> I'm the software director of my university's <a href="https://gopherlink.umn.edu/organization/3245">Copter Club</a>. The student group enters competitions for the autonomous flight, remote sensing, and navigation of multi-rotor copters. I contribute to the <a href="https://github.com/UMN-UPS">computer vision and automation code</a> used for the <a href="www.auvsi-suas.org">2019 AUVSI SUAS competition</a>.</p>
-    <h2> The Sick Shrimp Project </h2>
-    <img title="a screencap of the Sick Shrimp Project webapp" src="sick.png"/>
-    <h5 style="font-size:1em;">a screencap of the Sick Shrimp Project webapp</h5>
-    <p> I participated in <a href="https://minnehack.io">MinneHack 2019</a>, the largest hackathon in the Twin Cities. In less than 24 hours, my group created <a href="https://sick-shrimp.appspot.com">The Sick Shrimp Project</a>, a webapp that assembles information on various factors for White Spot Virus and Early Mortality Syndrome in 
-        aquacultural shrimp and employs a neural network to classify images of shrimp as either 'healthy' or 'infected' by the two ailments.</p>
-    <h2> CSBIO Lab </h2>
-    <span>
-    <img title="Genetic Interaction Network of the Human Genome" src="PCC_0.5_Network.png"/>
-    <h5 style="font-size:1em;">Genetic Interaction Network of the Human Genome</h5>
-    <p> I'm a volunteer researcher at the <a href="http://csbio.cs.umn.edu/">CSBIO Lab</a> in the University of Minnesota. The lab focuses on <span>computational biology</span> and <span>functional genomics</span>. I am writing code which finds patterns of genetic interactions in <span>CRISPR</span>-edited HAP1 cells using <span>R</span> and visualizes the data using <span>Cytoscape</span>. The associated data visualizations are my own.</p>
-    <img title="SAFE Annotation of global similarity network of human genome" src="PCC_0.5_SAFE.png"/>
-    <h5 style="font-size:1em;">Spatial Analysis of Functional Enrichment of a Global Interaction Network of the Human Genome</h5>
-        <h2> Software Engineer Intern </h2>
-        <p> I am a Software Engineer Intern for Rally Health on the Data Engineering team for the summer of 2019. More on that later... </p>
-
-    <h1 id="Self-learning"> Self-learning </h1>
-    <p>I'm an autodidact. I learn stuff outside of school.</p>
-    <p> I mostly learn and practice coding personal projects. However, one of my favorite topics is protein folding.
-        I follow the <span>CASP</span> experiments and some of their highest performing teams. I'm interested in novel <b>de novo</b> and <b>ab initio</b> methods to predict protein
-        structure from amino acid sequence. I'm also interested in the <b>de novo</b> design of proteins.
-    </p>
-    <p>On my list of things to learn in the future are:</p>
-    <ul>
-        <li><span>Bash</span> scripting for bioinformatics research</li><br>
-        <li>Compeau and Pevzner's Bioinformatics Algorithms MOOC</li><br>
-        <li>EliteDataScience's Machine Learning Self-starter</li><br>
-        <li>Convex Optimization</li><br>
-        <li>How to juggle</li><br>
-        <li><span>Underwater Basket Weaving</span></li>
-    </ul>
-
-    <h1 id="Stuff for employers"> Stuff for employers </h1>
-        <p> I'm actively seeking <span>software development</span>, <span>bioinformatics</span>, <span>computational biology</span>, <span>machine learning</span>, and <span>data science</span> internships and research opportunities.
-    </p>
-    <p> Most of the relevant stuff can be found on this page, my Linkedin, or my résumé. If I had to highlight something implicit, it would be my 
-        transferable skills of communication from my tutoring experience. Recruiters, please feel free to email me.
-    </p>
-    <p> That file icon on the far right is my résumé, by the way.</p>
-    <div>
-        <ul id="icons" align="center">
-            <li>
-                <a href="https://github.com/nathanielbd" title="github"><i class="fab fa-github"></i></a>
-            </li>
-            <li>
-                <a href="https://linkedin.com/in/nathanielbd" title="linkedin"><i class="fab fa-linkedin"></i></a>
-            </li>
-            <li>
-                <a href="mailto:nathanielbd@gmail.com" title="email"><i class="fas fa-envelope"></i></a>
-            </li>
-            <li>
-                <a href="https://www.researchgate.net/profile/Nathaniel_Budijono" title="researchgate"><i class="fab fa-researchgate"></i></a>
-            </li>
-            <li>
-                <a href="https://docs.google.com/document/d/1pFLiKnY5tsJ-q6jsKC9GPUqm2VMtXHM0BriYhqbbmmo/edit?usp=sharing" title="résumé"><i class="fas fa-file"></i></a>
-            </li>
-        </ul>
-    </div>
-    <h5 align="center" style="font-size:1em;">website by Nathaniel Budijono</h5>
-    </div>
+  </div>
+</nav>
+<div class="container" style="padding:30px">
+<div class="jumbotron">
+  <h1 class="display-3">Hello, world!</h1>
+  <p class="lead">Welcome to the personal website of Nathaniel Budijono.</p>
+  <hr class="my-4">
+  <p>You're probably here because you either Googled me, got my résumé, or looked at the repo for this site. Whatever the case may be, I hope you find what you want.</p>
+</div>
+<h1 id="about">About</h1>
+<p class="lead">Info on me and this site</p>
+<p>This site serves as a sort of portfolio. It has links to the GitHub repos of my personal programming projects as well as a few words about them. It also has a blog where I'll sometimes write about different things I find interesting. I'm always learning outside of the classroom using any MOOC, tutorial, textbook, or walkthrough I can get my hands on over the internet. Recruiters can find a copy of my résumé up top.</p>
+<p>I'm currently a 2nd-year undergraduate student at the University of Minnesota where I'm studying computer science, math, and computational biology. I have software engineering internship experience, and I've volunteered my time in a computational biology lab. I am interested in every quantitative discipline, especially those that can be applied to human and public health. However, the field that most engrosses me at the moment is computational structural biology, especially the unsolved problem of protein structure prediction.</p>
+<p>Outside of the spheres of school and career, I love board games, books, TV, and video games. Avalon. Zork. Douglas Adams. Ender's Shadow. NFL. Avatar: The Last Airbender. That's my jam.</p>
+<hr class="my-4">
+<h1 id="contact">Contact</h1>
+<a href="mailto:nathanielbd@gmail.com"><button type="button" class="btn btn-outline-primary">Email</button></a>
+<a href="https://github.com/nathanielbd"><button type="button" class="btn btn-outline-secondary">GitHub</button></a>
+<a href="https://linkedin.com/in/nathanielbd"><button type="button" class="btn btn-outline-info">LinkedIn</button></a>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
+</html>
