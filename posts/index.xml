@@ -1,0 +1,73 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on nathanielbd</title>
+		<link>https://nathanielbd.github.io/posts/</link>
+		<description>Recent content in Posts on nathanielbd</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en-us</language>
+		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+		<lastBuildDate>Mon, 01 Jun 2020 12:40:30 -0500</lastBuildDate>
+		<atom:link href="https://nathanielbd.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Git Familiar With Git</title>
+			<link>https://nathanielbd.github.io/posts/git-familiar-with-git/</link>
+			<pubDate>Mon, 01 Jun 2020 12:40:30 -0500</pubDate>
+			
+			<guid>https://nathanielbd.github.io/posts/git-familiar-with-git/</guid>
+			<description>About Git is a distributed version control system. Think of it as a program that organizes your files as you change them instead of calling them resume_final_for_real_this_time.pdf all the time. Notably, it has functionality to easily undo and redo changes, collaborate with others, and even host your code on GitHub.
+Setup   Install git
+ Linux: https://git-scm.com/download/linux Windows: https://git-scm.com/download/win Mac: https://git-scm.com/download/mac    Create a GitHub account: https://github.com/join</description>
+			<content type="html"><![CDATA[<h2 id="about">About</h2>
+<p>Git is a distributed version control system. Think of it as a program that organizes your files as you change them instead of calling them <code>resume_final_for_real_this_time.pdf</code> all the time. Notably, it has functionality to easily undo and redo changes, collaborate with others, and even host your code on <a href="https://github.com">GitHub</a>.</p>
+<h2 id="setup">Setup</h2>
+<ul>
+<li>
+<p>Install git</p>
+<ul>
+<li>Linux: <a href="https://git-scm.com/download/linux">https://git-scm.com/download/linux</a></li>
+<li>Windows: <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></li>
+<li>Mac: <a href="https://git-scm.com/download/mac">https://git-scm.com/download/mac</a></li>
+</ul>
+</li>
+<li>
+<p>Create a GitHub account: <a href="https://github.com/join">https://github.com/join</a></p>
+</li>
+</ul>
+<p>Type <code>git config user.name &quot;[firstname lastname]&quot;</code> and <code>git config user.email &quot;[email]&quot;</code> to configure user information before using git.</p>
+<h2 id="terminology">Terminology</h2>
+<p>Git organizes your file versions in a tree-like fashion in a repository or repo. Each line of history is called a <code>branch</code>. The canonical branch for deployment is called <code>master</code>. You can change branches if you plan to change make a significant change or are collaborating with someone else. You can tell git to keep track of certain files and ignore others. When you want to add a checkpoint to your file version history, you will <code>commit</code> them along with a descriptive message. Once you have finished, you can then merge your branch with <code>master</code>.</p>
+<h2 id="basics">Basics</h2>
+<p>You should be familiar with the terminal or command line as git uses a command line interface.</p>
+<ul>
+<li><code>git init</code> initializes the current directory as a git repository.</li>
+<li><code>git clone [url]</code> retrieve and copy a repo from the url. The url should look like <code>https://github.com/&lt;user&gt;/&lt;repo&gt;.git</code></li>
+<li><code>git add [file]</code> adds the file in its current state. This must be done before committing.</li>
+<li><code>git commit -m &quot;[mesg]&quot;</code> adds a snapshot of the repo to your branch history</li>
+<li><code>git branch</code> lists your branches</li>
+<li><code>git branch [name]</code> creates a new branch</li>
+<li><code>git checkout [branch]</code> switches branches</li>
+<li><code>git merge [branch]</code> merges the specified branch into the current branch&rsquo;s history</li>
+<li><code>git remote add [alias] [url]</code> remote refers to a non-local repo (like one hosted on GitHub). This command will add a GitHub repo at the specified url under an alias.</li>
+<li><code>git push [alias] [branch]</code> transmits local branch history to the remote</li>
+<li><code>git status</code> shows the files you have modified</li>
+<li><code>git diff</code> shows the line-by-line differences between your unstaged changes and your previous commit</li>
+<li><code>git fetch</code> fetches all branches from a remote</li>
+<li><code>git pull</code> fetches and updates your branch by merging any commits that the remote branch has but your branch does not</li>
+</ul>
+<p>See <a href="https://education.github.com/git-cheat-sheet-education.pdf">this cheat sheet</a> for common git commands. If you forget anything, git is self-documenting. You can always run <code>git --help</code>!</p>
+<h2 id="example">Example</h2>
+<p>I want to create an app with my friend. I navigate the GitHub website and create an empty repo. Now it&rsquo;s hosted at <a href="https://github.com/nathanielbd/app.git">https://github.com/nathanielbd/app.git</a>.</p>
+<p>I hop into my terminal and create some boilerplate code in a directory. While in the directory, I type <code>git init</code> on the terminal. I run <code>git add .</code> to stage all the files in my current directory for commiting. Typing <code>git commit -m &quot;first commit&quot;</code> adds the first snapshot to my repo&rsquo;s history. Running <code>git remote add origin https://github.com/nathanielbd/app.git</code> adds the remote host. I can then use the command <code>git push -u origin master</code> to send the changes in my terminal to GitHub (<code>-u</code> in this case means upstream, which is needed as I created the remote before the local repo).</p>
+<p>If I were to instead help my friend on an app they&rsquo;ve already created and hosted on GitHub, I&rsquo;d only need to run <code>git clone https://github.com/nathanielbd/app.git</code>. That would create a folder called &lsquo;app&rsquo; that will have all of my friend&rsquo;s code ready to go.</p>
+<h3 id="collaboration">Collaboration</h3>
+<p>Let&rsquo;s say that my friend is working on one feature of the app while I&rsquo;m working on a different one. My friend already has a branch called <code>feature_one</code>, so I run <code>git branch feature_two &amp;&amp; git checkout feature_two</code> to create and switch to my branch. I can then go through the steps of staging with <code>git add</code>, committing with <code>git commit</code>, and pushing with <code>git push</code>.</p>
+<p>If my friend were to make changes, I can update my branch by typing <code>git merge origin/feature_one</code> after they push their changes.</p>
+<p>Once we&rsquo;re ready to finalize our changes into the <code>master</code> branch, we create a &lsquo;pull request&rsquo; (PR) to merge the feature branch with <code>master</code>. When the pull request is merged, <code>master</code> will have the changes associated with the branch.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This was a brief practical guide for the basics of git. GitHub has very thorough <a href="https://guides.github.com">guides</a> about the <a href="https://guides.github.com/introduction/flow/">workflow</a> and <a href="https://guides.github.com/activities/hello-world/">creating your first GitHub repo</a> which will give you a much better understanding.</p>
+]]></content>
+		</item>
+		
+	</channel>
+</rss>

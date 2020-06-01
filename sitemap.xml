@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://nathanielbd.github.io/posts/git-familiar-with-git/</loc>
+    <lastmod>2020-06-01T12:40:30-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/</loc>
+    <lastmod>2020-06-01T12:40:30-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/posts/</loc>
+    <lastmod>2020-06-01T12:40:30-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/</loc>
+    <lastmod>2020-06-01T12:40:30-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/tutorial/</loc>
+    <lastmod>2020-06-01T12:40:30-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/about/</loc>
+    <lastmod>2020-05-30T11:45:23-05:00</lastmod>
+  </url>
+  
+</urlset>
