@@ -6,66 +6,195 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Mon, 01 Jun 2020 12:40:30 -0500</lastBuildDate>
+		<lastBuildDate>Wed, 17 Jun 2020 17:17:48 -0500</lastBuildDate>
 		<atom:link href="https://nathanielbd.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
-			<title>Git Familiar With Git</title>
-			<link>https://nathanielbd.github.io/posts/git-familiar-with-git/</link>
-			<pubDate>Mon, 01 Jun 2020 12:40:30 -0500</pubDate>
+			<title>A Segue from Segways</title>
+			<link>https://nathanielbd.github.io/posts/segue-from-segways/</link>
+			<pubDate>Wed, 17 Jun 2020 17:17:48 -0500</pubDate>
 			
-			<guid>https://nathanielbd.github.io/posts/git-familiar-with-git/</guid>
-			<description>About Git is a distributed version control system. Think of it as a program that organizes your files as you change them instead of calling them resume_final_for_real_this_time.pdf all the time. Notably, it has functionality to easily undo and redo changes, collaborate with others, and even host your code on GitHub.
-Setup   Install git
- Linux: https://git-scm.com/download/linux Windows: https://git-scm.com/download/win Mac: https://git-scm.com/download/mac    Create a GitHub account: https://github.com/join</description>
-			<content type="html"><![CDATA[<h2 id="about">About</h2>
-<p>Git is a distributed version control system. Think of it as a program that organizes your files as you change them instead of calling them <code>resume_final_for_real_this_time.pdf</code> all the time. Notably, it has functionality to easily undo and redo changes, collaborate with others, and even host your code on <a href="https://github.com">GitHub</a>.</p>
-<h2 id="setup">Setup</h2>
+			<guid>https://nathanielbd.github.io/posts/segue-from-segways/</guid>
+			<description>This content was created as part of an educational workshop for SASE Labs UMN, of which I served as director from 2020-2021. Check out the demo here.
+Introduction         Polizei make Segways go brrr    Segways are pretty cool, and they can be the perfect segue into talking about control theory.
+Segways need a robust mechanism for correcting itself in order to self-balance.</description>
+			<content type="html"><![CDATA[<p><em>This content was created as part of an <a href="https://github.com/SASE-Labs-2021/inverted-pendulum">educational workshop</a> for <a href="https://saseumn.org">SASE Labs UMN</a>, of which I served as director from 2020-2021. Check out the demo <a href="https://SASE-Labs-2021.github.io/inverted-pendulum">here</a>.</em></p>
+<h1 id="introduction">Introduction</h1>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Segway_Polizei_4.jpg/1024px-Segway_Polizei_4.jpg" alt="Polizei make Segways go brrr"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>Polizei make Segways go brrr</em></td>
+</tr>
+</tbody>
+</table>
+<p>Segways are pretty cool, and they can be the perfect segue into talking about control theory.</p>
+<p>Segways need a robust mechanism for correcting itself in order to self-balance. This mechanism needs to be properly tuned and engineered so that it corrects without overshooting, delaying, or being unstable. Control theory is the study of these mechanisms.</p>
+<p>Other examples of control systems are cruise control, process control, and thermostats.</p>
+<h1 id="the-inverted-pendulum">The Inverted Pendulum</h1>
+<p>A classic system on which to test controllers is the &ldquo;inverted pendulum.&rdquo; It&rsquo;s what you might call the &ldquo;Hello World of control systems&rdquo; and it&rsquo;s very similar to the Segway.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Balancer_with_wine_3.JPG/390px-Balancer_with_wine_3.JPG" alt="An inverted pendulum"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>An inverted pendulum</em></td>
+</tr>
+</tbody>
+</table>
+<p>The inverted pendulum consists of a mass suspended above a pivot point. The control system must measure the angle of the pivot and move under the center of mass before the pendulum can topple down to the floor.</p>
+<h1 id="the-math">The Math</h1>
+<p>The output of the control system (rotating the wheels of the cart in the case of the inverted pendulum) can be described as a function.</p>
+<p>$$u(t) = K_p e(t) + K_i \int_0^t e(\tau)d\tau + K_d \frac{de(t)}{dt}$$</p>
+<p>where</p>
+<p>\(t\) is the current time,</p>
+<p>\(u(t)\) is the output,</p>
+<p>\(K_p\) is our tuning parameter for the proportional term,</p>
+<p>\(K_i\) is our tuning parameter for the integral term,</p>
+<p>\(K_d\) is our tuning parameter for the derivative term,</p>
+<p>\(e(t)\) is the error over time,</p>
+<p>\(\tau\) is the variable of integration which ranges from 0 to \(t\).</p>
+<p>It looks intimidating, but remember that we will have a sensor which will give us the variable to control (angle of the pendulum) in regular intervals of length \(\Delta t\). This will simplify things so that our final algorithm will just be computing secant lines and Riemann sums with rectangles of width \(\Delta t\).</p>
+<h1 id="the-algorithm">The Algorithm</h1>
+<p>In pseudocode, the algorithm reduces to:</p>
+<pre><code>previous_error := 0
+integral := 0
+
+while TRUE
+	error := setpoint - measured_value
+	integral := integral + error*dt
+	derivative := (error - previous_error)/dt
+	output := Kp*error + Ki*integral + Kd*derivative
+	previous_error := error
+	sleep(dt)
+end while
+</code></pre><p>In the case of the inverted pendulum. The setpoint will be 90 degrees or \(\frac{\pi}{2}\) radians because that is the pivot angle we define to have 0 error.</p>
+<p>As you can see, the integral is computed with a left Riemann sum as the rectangles start at the first error measurement.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Riemann_sum_%28leftbox%29.gif" alt="A left Riemann sum for varying values of delta t"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>A left Riemann sum for varying values of \(\Delta t\)</em></td>
+</tr>
+</tbody>
+</table>
+<p>When we increase our value of \(K_i\), the cart holding the pendulum will move quicker proportional to the accumulated error represented by the area colored in green.</p>
+<p>For each measurement \(e(t)\) we take, we approximate the derivative by computing the slope of the secant line:</p>
+<p>$$\frac{e(t) - e(t - \Delta t)}{\Delta t}$$</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/secant.png" alt="I had secant thoughts spending this long making a figure in tikz"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>A secant line</em></td>
+</tr>
+</tbody>
+</table>
+<p>When we increase our value of \(K_d\), the cart will move quicker proportional to the rate of change of the error represented by the slope of the secant curve.</p>
+<h1 id="tuning">Tuning</h1>
+<p>Once we&rsquo;ve programmed our cart with the PID algorithm, we still need to choose values of \(K_p\), \(K_i\), and \(K_d\) that will balance the pendulum quickly without overshooting or being unstable.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/3/33/PID_Compensation_Animated.gif" alt="Wikipedia has a good animation on tuning a PID"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>Wikipedia has a good animation on tuning a PID</em></td>
+</tr>
+</tbody>
+</table>
+<p>The above example shows the tuning process for maintaining a setpoint of 1. It shows how increasing \(K_p\) can decrease the rise time, but lead to overshooting the setpoint. Increasing \(K_i\) will shift the steady-state to the setpoint. Finally, increaseing \(K_d\) will provide stability.</p>
+<p>Given our mathematical intuition relating the integral to accumulated error and the derivative to the rate of change of the error, we can come up with these general rules:</p>
+<h2 id="what-happens-when-we-increase-">What happens when we increase &hellip;?</h2>
+<table>
+<thead>
+<tr>
+<th align="center">Parameter</th>
+<th align="center">Rise time</th>
+<th align="center">Overshoot</th>
+<th align="center">Settling time</th>
+<th align="center">Steady-state error</th>
+<th align="center">Stability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">\(K_p\)</td>
+<td align="center">Decrease</td>
+<td align="center">Increase</td>
+<td align="center">Little change</td>
+<td align="center">Decrease</td>
+<td align="center">Decrease</td>
+</tr>
+<tr>
+<td align="center">\(K_i\)</td>
+<td align="center">Decrease</td>
+<td align="center">Increase</td>
+<td align="center">Increase</td>
+<td align="center">Eliminate</td>
+<td align="center">Decrease</td>
+</tr>
+<tr>
+<td align="center">\(K_d\)</td>
+<td align="center">Little change</td>
+<td align="center">Decrease</td>
+<td align="center">Decrease</td>
+<td align="center">Little change</td>
+<td align="center">Increase</td>
+</tr>
+</tbody>
+</table>
+<h1 id="trying-it-out">Trying it out</h1>
+<p>Now that we know about the tuning process, let&rsquo;s <a href="https://SASE-Labs-2021.github.io/inverted-pendulum">tune a PID on a cart-and-pole simulation</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/inverted-pendulum.gif" alt="Happy tuning!"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>Happy tuning!</em></td>
+</tr>
+</tbody>
+</table>
+<p>After tuning, you can share the url in the address bar and anyone can see your personally hand-tuned PID-controlled inverted pendulum!</p>
+<h1 id="next-steps">Next steps</h1>
 <ul>
-<li>
-<p>Install git</p>
-<ul>
-<li>Linux: <a href="https://git-scm.com/download/linux">https://git-scm.com/download/linux</a></li>
-<li>Windows: <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></li>
-<li>Mac: <a href="https://git-scm.com/download/mac">https://git-scm.com/download/mac</a></li>
+<li>Never look at Segways in the same way again</li>
+<li>Share your very own PID!</li>
+<li>Look at the <a href="https://github.com/SASE-Labs-2021/inverted-pendulum">source code</a></li>
+<li>Appreciate steering wheels and thermostats a little more</li>
+<li>Try applying reinforcement learning or genetic algorithms to the inverted pendulum problem:</li>
 </ul>
-</li>
-<li>
-<p>Create a GitHub account: <a href="https://github.com/join">https://github.com/join</a></p>
-</li>
-</ul>
-<p>Type <code>git config user.name &quot;[firstname lastname]&quot;</code> and <code>git config user.email &quot;[email]&quot;</code> to configure user information before using git.</p>
-<h2 id="terminology">Terminology</h2>
-<p>Git organizes your file versions in a tree-like fashion in a repository or repo. Each line of history is called a <code>branch</code>. The canonical branch for deployment is called <code>master</code>. You can change branches if you plan to change make a significant change or are collaborating with someone else. You can tell git to keep track of certain files and ignore others. When you want to add a checkpoint to your file version history, you will <code>commit</code> them along with a descriptive message. Once you have finished, you can then merge your branch with <code>master</code>.</p>
-<h2 id="basics">Basics</h2>
-<p>You should be familiar with the terminal or command line as git uses a command line interface.</p>
-<ul>
-<li><code>git init</code> initializes the current directory as a git repository.</li>
-<li><code>git clone [url]</code> retrieve and copy a repo from the url. The url should look like <code>https://github.com/&lt;user&gt;/&lt;repo&gt;.git</code></li>
-<li><code>git add [file]</code> adds the file in its current state. This must be done before committing.</li>
-<li><code>git commit -m &quot;[mesg]&quot;</code> adds a snapshot of the repo to your branch history</li>
-<li><code>git branch</code> lists your branches</li>
-<li><code>git branch [name]</code> creates a new branch</li>
-<li><code>git checkout [branch]</code> switches branches</li>
-<li><code>git merge [branch]</code> merges the specified branch into the current branch&rsquo;s history</li>
-<li><code>git remote add [alias] [url]</code> remote refers to a non-local repo (like one hosted on GitHub). This command will add a GitHub repo at the specified url under an alias.</li>
-<li><code>git push [alias] [branch]</code> transmits local branch history to the remote</li>
-<li><code>git status</code> shows the files you have modified</li>
-<li><code>git diff</code> shows the line-by-line differences between your unstaged changes and your previous commit</li>
-<li><code>git fetch</code> fetches all branches from a remote</li>
-<li><code>git pull</code> fetches and updates your branch by merging any commits that the remote branch has but your branch does not</li>
-</ul>
-<p>See <a href="https://education.github.com/git-cheat-sheet-education.pdf">this cheat sheet</a> for common git commands. If you forget anything, git is self-documenting. You can always run <code>git --help</code>!</p>
-<h2 id="example">Example</h2>
-<p>I want to create an app with my friend. I navigate the GitHub website and create an empty repo. Now it&rsquo;s hosted at <a href="https://github.com/nathanielbd/app.git">https://github.com/nathanielbd/app.git</a>.</p>
-<p>I hop into my terminal and create some boilerplate code in a directory. While in the directory, I type <code>git init</code> on the terminal. I run <code>git add .</code> to stage all the files in my current directory for commiting. Typing <code>git commit -m &quot;first commit&quot;</code> adds the first snapshot to my repo&rsquo;s history. Running <code>git remote add origin https://github.com/nathanielbd/app.git</code> adds the remote host. I can then use the command <code>git push -u origin master</code> to send the changes in my terminal to GitHub (<code>-u</code> in this case means upstream, which is needed as I created the remote before the local repo).</p>
-<p>If I were to instead help my friend on an app they&rsquo;ve already created and hosted on GitHub, I&rsquo;d only need to run <code>git clone https://github.com/nathanielbd/app.git</code>. That would create a folder called &lsquo;app&rsquo; that will have all of my friend&rsquo;s code ready to go.</p>
-<h3 id="collaboration">Collaboration</h3>
-<p>Let&rsquo;s say that my friend is working on one feature of the app while I&rsquo;m working on a different one. My friend already has a branch called <code>feature_one</code>, so I run <code>git branch feature_two &amp;&amp; git checkout feature_two</code> to create and switch to my branch. I can then go through the steps of staging with <code>git add</code>, committing with <code>git commit</code>, and pushing with <code>git push</code>.</p>
-<p>If my friend were to make changes, I can update my branch by typing <code>git merge origin/feature_one</code> after they push their changes.</p>
-<p>Once we&rsquo;re ready to finalize our changes into the <code>master</code> branch, we create a &lsquo;pull request&rsquo; (PR) to merge the feature branch with <code>master</code>. When the pull request is merged, <code>master</code> will have the changes associated with the branch.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>This was a brief practical guide for the basics of git. GitHub has very thorough <a href="https://guides.github.com">guides</a> about the <a href="https://guides.github.com/introduction/flow/">workflow</a> and <a href="https://guides.github.com/activities/hello-world/">creating your first GitHub repo</a> which will give you a much better understanding.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Cart-pole_swing_up.gif" alt="Can you teach a computer to do this?"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>Can you teach a computer to do this?</em></td>
+</tr>
+</tbody>
+</table>
 ]]></content>
 		</item>
 		

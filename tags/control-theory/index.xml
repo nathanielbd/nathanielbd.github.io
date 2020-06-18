@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>nathanielbd</title>
-    <link>https://nathanielbd.github.io/</link>
-    <description>Recent content on nathanielbd</description>
+    <title>control theory on nathanielbd</title>
+    <link>https://nathanielbd.github.io/tags/control-theory/</link>
+    <description>Recent content in control theory on nathanielbd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Wed, 17 Jun 2020 17:17:48 -0500</lastBuildDate>
     
-	<atom:link href="https://nathanielbd.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nathanielbd.github.io/tags/control-theory/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -21,19 +21,6 @@
       <description>This content was created as part of an educational workshop for SASE Labs UMN, of which I served as director from 2020-2021. Check out the demo here.
 Introduction         Polizei make Segways go brrr    Segways are pretty cool, and they can be the perfect segue into talking about control theory.
 Segways need a robust mechanism for correcting itself in order to self-balance.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://nathanielbd.github.io/about/</link>
-      <pubDate>Sat, 30 May 2020 11:45:23 -0500</pubDate>
-      
-      <guid>https://nathanielbd.github.io/about/</guid>
-      <description>My name is Nathaniel Budijono.
-I&amp;rsquo;m a life-long autodidact currently studying computer science and math at the University of Minnesota. You can view my résumé here.
-Learning things is my ultimate pursuit. I believe in open educational resources. I like to write about the learning and teaching process.
-When I&amp;rsquo;m not learning, I can often be found board gaming, video gaming, or watching something funny.
-Feel free to contact me through email or submit a pull request if you think I wrote something inaccurate.</description>
     </item>
     
   </channel>
