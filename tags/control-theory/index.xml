@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>control theory on nathanielbd</title>
+    <link>https://nathanielbd.github.io/tags/control-theory/</link>
+    <description>Recent content in control theory on nathanielbd</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Wed, 17 Jun 2020 17:17:48 -0500</lastBuildDate>
+    
+	<atom:link href="https://nathanielbd.github.io/tags/control-theory/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A Segue from Segways</title>
+      <link>https://nathanielbd.github.io/posts/segue-from-segways/</link>
+      <pubDate>Wed, 17 Jun 2020 17:17:48 -0500</pubDate>
+      
+      <guid>https://nathanielbd.github.io/posts/segue-from-segways/</guid>
+      <description>This content was created as part of an educational workshop for SASE Labs UMN, of which I served as director from 2020-2021. Check out the demo here.
+Introduction         Polizei make Segways go brrr    Segways are pretty cool, and they can be the perfect segue into talking about control theory.
+Segways need a robust mechanism for correcting itself in order to self-balance.</description>
+    </item>
+    
+  </channel>
+</rss>

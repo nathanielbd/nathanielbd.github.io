@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="A Segue from Segways">
+<meta itemprop="description" content="This content was created as part of an educational workshop for SASE Labs UMN, of which I served as director from 2020-2021. Check out the demo here.
+Introduction         Polizei make Segways go brrr    Segways are pretty cool, and they can be the perfect segue into talking about control theory.
+Segways need a robust mechanism for correcting itself in order to self-balance.">
+<meta itemprop="datePublished" content="2020-06-17T17:17:48-05:00" />
+<meta itemprop="dateModified" content="2020-06-17T17:17:48-05:00" />
+<meta itemprop="wordCount" content="750">
+
+
+
+<meta itemprop="keywords" content="SASE Labs,control theory," /><meta property="og:title" content="A Segue from Segways" />
+<meta property="og:description" content="This content was created as part of an educational workshop for SASE Labs UMN, of which I served as director from 2020-2021. Check out the demo here.
+Introduction         Polizei make Segways go brrr    Segways are pretty cool, and they can be the perfect segue into talking about control theory.
+Segways need a robust mechanism for correcting itself in order to self-balance." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nathanielbd.github.io/posts/segue-from-segways/" />
+<meta property="article:published_time" content="2020-06-17T17:17:48-05:00" />
+<meta property="article:modified_time" content="2020-06-17T17:17:48-05:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A Segue from Segways"/>
+<meta name="twitter:description" content="This content was created as part of an educational workshop for SASE Labs UMN, of which I served as director from 2020-2021. Check out the demo here.
+Introduction         Polizei make Segways go brrr    Segways are pretty cool, and they can be the perfect segue into talking about control theory.
+Segways need a robust mechanism for correcting itself in order to self-balance."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>A Segue from Segways</title>
+	<link rel="stylesheet" href="https://nathanielbd.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+	
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://nathanielbd.github.io">nathanielbd</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://nathanielbd.github.io/posts/">Posts</a>
+				<a href="https://nathanielbd.github.io/about">About</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://github.com/nathanielbd" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://linkedin.com/in/nathanielbd" target="_blank" rel="noopener me" title="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="mailto:nathanielbd@gmail.com" target="_blank" rel="noopener me" title="Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://nathanielbd.github.io/posts/">Posts</a></li>
+			<li><a href="https://nathanielbd.github.io/about">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jun 17, 2020</span></div>
+				<h1>A Segue from Segways</h1>
+			</header>
+			<div class="content">
+				<p><em>This content was created as part of an <a href="https://github.com/SASE-Labs-2021/inverted-pendulum">educational workshop</a> for <a href="https://saseumn.org">SASE Labs UMN</a>, of which I served as director from 2020-2021. Check out the demo <a href="https://SASE-Labs-2021.github.io/inverted-pendulum">here</a>.</em></p>
+<h1 id="introduction">Introduction<a href="#introduction" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Segway_Polizei_4.jpg/1024px-Segway_Polizei_4.jpg" alt="Polizei make Segways go brrr"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>Polizei make Segways go brrr</em></td>
+</tr>
+</tbody>
+</table>
+<p>Segways are pretty cool, and they can be the perfect segue into talking about control theory.</p>
+<p>Segways need a robust mechanism for correcting itself in order to self-balance. This mechanism needs to be properly tuned and engineered so that it corrects without overshooting, delaying, or being unstable. Control theory is the study of these mechanisms.</p>
+<p>Other examples of control systems are cruise control, process control, and thermostats.</p>
+<h1 id="the-inverted-pendulum">The Inverted Pendulum<a href="#the-inverted-pendulum" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>A classic system on which to test controllers is the &ldquo;inverted pendulum.&rdquo; It&rsquo;s what you might call the &ldquo;Hello World of control systems&rdquo; and it&rsquo;s very similar to the Segway.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Balancer_with_wine_3.JPG/390px-Balancer_with_wine_3.JPG" alt="An inverted pendulum"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>An inverted pendulum</em></td>
+</tr>
+</tbody>
+</table>
+<p>The inverted pendulum consists of a mass suspended above a pivot point. The control system must measure the angle of the pivot and move under the center of mass before the pendulum can topple down to the floor.</p>
+<h1 id="the-math">The Math<a href="#the-math" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>The output of the control system (rotating the wheels of the cart in the case of the inverted pendulum) can be described as a function.</p>
+<p>$$u(t) = K_p e(t) + K_i \int_0^t e(\tau)d\tau + K_d \frac{de(t)}{dt}$$</p>
+<p>where</p>
+<p>\(t\) is the current time,</p>
+<p>\(u(t)\) is the output,</p>
+<p>\(K_p\) is our tuning parameter for the proportional term,</p>
+<p>\(K_i\) is our tuning parameter for the integral term,</p>
+<p>\(K_d\) is our tuning parameter for the derivative term,</p>
+<p>\(e(t)\) is the error over time,</p>
+<p>\(\tau\) is the variable of integration which ranges from 0 to \(t\).</p>
+<p>It looks intimidating, but remember that we will have a sensor which will give us the variable to control (angle of the pendulum) in regular intervals of length \(\Delta t\). This will simplify things so that our final algorithm will just be computing secant lines and Riemann sums with rectangles of width \(\Delta t\).</p>
+<h1 id="the-algorithm">The Algorithm<a href="#the-algorithm" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>In pseudocode, the algorithm reduces to:</p>
+<pre><code>previous_error := 0
+integral := 0
+
+while TRUE
+	error := setpoint - measured_value
+	integral := integral + error*dt
+	derivative := (error - previous_error)/dt
+	output := Kp*error + Ki*integral + Kd*derivative
+	previous_error := error
+	sleep(dt)
+end while
+</code></pre><p>In the case of the inverted pendulum. The setpoint will be 90 degrees or \(\frac{\pi}{2}\) radians because that is the pivot angle we define to have 0 error.</p>
+<p>As you can see, the integral is computed with a left Riemann sum as the rectangles start at the first error measurement.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Riemann_sum_%28leftbox%29.gif" alt="A left Riemann sum for varying values of delta t"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>A left Riemann sum for varying values of \(\Delta t\)</em></td>
+</tr>
+</tbody>
+</table>
+<p>When we increase our value of \(K_i\), the cart holding the pendulum will move quicker proportional to the accumulated error represented by the area colored in green.</p>
+<p>For each measurement \(e(t)\) we take, we approximate the derivative by computing the slope of the secant line:</p>
+<p>$$\frac{e(t) - e(t - \Delta t)}{\Delta t}$$</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/secant.png" alt="I had secant thoughts spending this long making a figure in tikz"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>A secant line</em></td>
+</tr>
+</tbody>
+</table>
+<p>When we increase our value of \(K_d\), the cart will move quicker proportional to the rate of change of the error represented by the slope of the secant curve.</p>
+<h1 id="tuning">Tuning<a href="#tuning" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>Once we&rsquo;ve programmed our cart with the PID algorithm, we still need to choose values of \(K_p\), \(K_i\), and \(K_d\) that will balance the pendulum quickly without overshooting or being unstable.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/3/33/PID_Compensation_Animated.gif" alt="Wikipedia has a good animation on tuning a PID"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>Wikipedia has a good animation on tuning a PID</em></td>
+</tr>
+</tbody>
+</table>
+<p>The above example shows the tuning process for maintaining a setpoint of 1. It shows how increasing \(K_p\) can decrease the rise time, but lead to overshooting the setpoint. Increasing \(K_i\) will shift the steady-state to the setpoint. Finally, increaseing \(K_d\) will provide stability.</p>
+<p>Given our mathematical intuition relating the integral to accumulated error and the derivative to the rate of change of the error, we can come up with these general rules:</p>
+<h2 id="what-happens-when-we-increase-">What happens when we increase &hellip;?<a href="#what-happens-when-we-increase-" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<table>
+<thead>
+<tr>
+<th align="center">Parameter</th>
+<th align="center">Rise time</th>
+<th align="center">Overshoot</th>
+<th align="center">Settling time</th>
+<th align="center">Steady-state error</th>
+<th align="center">Stability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">\(K_p\)</td>
+<td align="center">Decrease</td>
+<td align="center">Increase</td>
+<td align="center">Little change</td>
+<td align="center">Decrease</td>
+<td align="center">Decrease</td>
+</tr>
+<tr>
+<td align="center">\(K_i\)</td>
+<td align="center">Decrease</td>
+<td align="center">Increase</td>
+<td align="center">Increase</td>
+<td align="center">Eliminate</td>
+<td align="center">Decrease</td>
+</tr>
+<tr>
+<td align="center">\(K_d\)</td>
+<td align="center">Little change</td>
+<td align="center">Decrease</td>
+<td align="center">Decrease</td>
+<td align="center">Little change</td>
+<td align="center">Increase</td>
+</tr>
+</tbody>
+</table>
+<h1 id="trying-it-out">Trying it out<a href="#trying-it-out" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>Now that we know about the tuning process, let&rsquo;s <a href="https://SASE-Labs-2021.github.io/inverted-pendulum">tune a PID on a cart-and-pole simulation</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/inverted-pendulum.gif" alt="Happy tuning!"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>Happy tuning!</em></td>
+</tr>
+</tbody>
+</table>
+<p>After tuning, you can share the url in the address bar and anyone can see your personally hand-tuned PID-controlled inverted pendulum!</p>
+<h1 id="next-steps">Next steps<a href="#next-steps" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>Never look at Segways in the same way again</li>
+<li>Share your very own PID!</li>
+<li>Look at the <a href="https://github.com/SASE-Labs-2021/inverted-pendulum">source code</a></li>
+<li>Appreciate steering wheels and thermostats a little more</li>
+<li>Try applying reinforcement learning or genetic algorithms to the inverted pendulum problem:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Cart-pole_swing_up.gif" alt="Can you teach a computer to do this?"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>Can you teach a computer to do this?</em></td>
+</tr>
+</tbody>
+</table>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://nathanielbd.github.io/tags/sase-labs">SASE Labs</a></span><span class="tag"><a href="https://nathanielbd.github.io/tags/control-theory">control theory</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>750 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-06-17 17:17 -0500</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://nathanielbd.github.io">Nathaniel Budijono</a></p>
+		<p>
+		</p>
+	</footer>
+
+
+
+	<script src="https://nathanielbd.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-168359675-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+</body>
+
+</html>
