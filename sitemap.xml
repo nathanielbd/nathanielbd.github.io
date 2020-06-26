@@ -3,6 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nathanielbd.github.io/posts/manim-in-wsl-with-data/</loc>
+    <lastmod>2020-06-26T16:04:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/manim/</loc>
+    <lastmod>2020-06-26T16:04:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/</loc>
+    <lastmod>2020-06-26T16:04:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/posts/</loc>
+    <lastmod>2020-06-26T16:04:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/</loc>
+    <lastmod>2020-06-26T16:04:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/wsl/</loc>
+    <lastmod>2020-06-26T16:04:16-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nathanielbd.github.io/posts/segue-from-segways/</loc>
     <lastmod>2020-06-17T17:17:48-05:00</lastmod>
   </url>
@@ -13,22 +43,7 @@
   </url>
   
   <url>
-    <loc>https://nathanielbd.github.io/</loc>
-    <lastmod>2020-06-17T17:17:48-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanielbd.github.io/posts/</loc>
-    <lastmod>2020-06-17T17:17:48-05:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://nathanielbd.github.io/tags/sase-labs/</loc>
-    <lastmod>2020-06-17T17:17:48-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanielbd.github.io/tags/</loc>
     <lastmod>2020-06-17T17:17:48-05:00</lastmod>
   </url>
   
