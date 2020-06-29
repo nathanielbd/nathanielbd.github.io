@@ -26,12 +26,12 @@
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://blog.mobatek.net/img/screenshots/mobaxterm-local-terminal.png" alt="MobaXTerm"></th>
+<th align="center"><img src="/mobaxterm.png" alt="MobaXTerm"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center">Don&rsquo;t worry, MobaXTerm has dark mode, full screen mode, and nice fonts</td>
+<td align="center">MobaXTerm with X server displaying a pdf using <a href="https://pwmt.org/projects/zathura/">Zathura</a></td>
 </tr>
 </tbody>
 </table>
@@ -116,7 +116,8 @@ python3 -m pip install -r requirements.txt
 <p>My hack around this was to just draw a bunch of lines from the x-axis to the points.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">auc</span> <span class="o">=</span> <span class="n">VGroup</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">Line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coords_to_point</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">coords_to_point</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">coord</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">set_stroke</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">])</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Write</span><span class="p">(</span><span class="n">auc</span><span class="p">))</span>
-</code></pre></div><h1 id="some-documentation-i-wish-i-had">Some Documentation I wish I had</h1>
+</code></pre></div><p><img src="/auc.gif" alt="Another gif from my video"></p>
+<h1 id="some-documentation-i-wish-i-had">Some Documentation I wish I had</h1>
 <h2 id="how-points-work">How Points work</h2>
 <p>Manim has a class called <code>Point</code> which shows up as arguments for the constructors of geometric figures like <code>Dot</code>, <code>Line</code>, and <code>Arrow</code>. They represent points on the screen. The center of the screen has the alias <code>ORIGIN</code> and you can add unit vectors <code>LEFT</code>, <code>RIGHT</code>, <code>UP</code>, and <code>DOWN</code> to create any point on the screen.</p>
 <p>You can also get the center of an <code>Mobject</code> by calling <code>obj.get_center()</code>.</p>
@@ -133,6 +134,24 @@ python3 -m pip install -r requirements.txt
 		<span class="s2">&#34;fill_opacity&#34;</span><span class="p">:</span>	  <span class="mi">0</span><span class="p">,</span>
 		<span class="s2">&#34;stroke_opacity&#34;</span><span class="p">:</span> <span class="mi">1</span>
 	<span class="p">}</span>
+</code></pre></div><p><img src="/tikz.png" alt="A screenshot from my video"></p>
+<p>The above figure can be animated with the following code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">fig</span> <span class="o">=</span> <span class="n">TikzMobject</span><span class="p">(</span>
+	<span class="sa">r</span><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">            \begin{tikzpicture}[
+</span><span class="s2">                circlenode/.style={circle, draw},
+</span><span class="s2">                rectanglenode/.style={rectangle, draw, minimum width=2em},
+</span><span class="s2">                wheelnode/.style={circle, draw, minimum size=1.5em}
+</span><span class="s2">            ]
+</span><span class="s2">                \node[circlenode] at (-0.25,0) {};
+</span><span class="s2">                \draw (-0.25,0)--(0,-4);
+</span><span class="s2">                \node[rectanglenode] at (0,-4) {};
+</span><span class="s2">                \node[wheelnode] at (0.5,-4) {};
+</span><span class="s2">                \node[wheelnode] at (-0.5, -4) {};
+</span><span class="s2">            \end{tikzpicture}
+</span><span class="s2">	&#34;&#34;&#34;</span>
+<span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Write</span><span class="p">(</span><span class="n">fig</span><span class="p">))</span>
 </code></pre></div><h1 id="closing-thoughts">Closing thoughts</h1>
 <p>I found looking through the source code and <a href="https://github.com/3b1b/manim/tree/a529a59abf1f6af02e664dbad1c8474f3a25a61e/from_3b1b">how Grant himself used Manim</a> to be a decent alternative to documentation.</p>
 <p>I&rsquo;m excited because there are <a href="https://github.com/eulertour/eulerv2">ongoing efforts to make Manim web-compatible</a>. The combination of this and better documentation should make for more amazing math videos and other educational visualizations.</p>
