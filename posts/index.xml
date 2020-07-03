@@ -36,7 +36,7 @@
 </tbody>
 </table>
 <h1 id="how-to-install-manim-on-wsl">How to install Manim on WSL</h1>
-<p>Manim uses <a href="https://miktex.org">MiKTeX</a> to handle $\LaTex$. I followed the intructions <a href="https://miktex.org/howto/install-miktex-unx">here</a> to install.</p>
+<p>Manim uses <a href="https://miktex.org">MiKTeX</a> to handle \(\LaTeX\). I followed the intructions <a href="https://miktex.org/howto/install-miktex-unx">here</a> to install.</p>
 <p>Next, install dependencies.</p>
 <pre><code># install dependencies in Ubuntu
 sudo apt install pkg-config libcairo2-dev ffmpeg sox texlive
@@ -123,7 +123,7 @@ python3 -m pip install -r requirements.txt
 <p>You can also get the center of an <code>Mobject</code> by calling <code>obj.get_center()</code>.</p>
 <p>Internally, these points are represented as an <code>[x, y, z]</code> coordinate array. So <code>ORIGIN</code> is just <code>[0.0, 0.0, 0.0]</code>.</p>
 <h2 id="tikz-support">tikz Support</h2>
-<p>Manim renders <code>TextMobjects</code> in $\LaTeX$ by using <code>manim/manimlib/tex_template.tex</code>. Notably, the preamble of this document doesn&rsquo;t include <code>tikz</code>, so if you want to use <code>tikz</code>, you should add</p>
+<p>Manim renders <code>TextMobjects</code> in \(\LaTeX\) by using <code>manim/manimlib/tex_template.tex</code>. Notably, the preamble of this document doesn&rsquo;t include <code>tikz</code>, so if you want to use <code>tikz</code>, you should add</p>
 <pre><code>\usepackage{tikz}
 \usetikzlibrary{positioning}
 </code></pre><p>to the preamble.</p>
