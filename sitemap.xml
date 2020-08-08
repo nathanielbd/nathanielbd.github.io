@@ -3,27 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nathanielbd.github.io/</loc>
+    <lastmod>2020-07-25T18:26:45-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/posts/</loc>
+    <lastmod>2020-07-25T18:26:45-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/programming/</loc>
+    <lastmod>2020-07-25T18:26:45-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/</loc>
+    <lastmod>2020-07-25T18:26:45-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/posts/breaking-webgames/</loc>
+    <lastmod>2020-07-25T18:26:45-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nathanielbd.github.io/posts/manim-in-wsl-with-data/</loc>
     <lastmod>2020-06-26T16:04:16-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://nathanielbd.github.io/tags/manim/</loc>
-    <lastmod>2020-06-26T16:04:16-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanielbd.github.io/</loc>
-    <lastmod>2020-06-26T16:04:16-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanielbd.github.io/posts/</loc>
-    <lastmod>2020-06-26T16:04:16-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanielbd.github.io/tags/</loc>
     <lastmod>2020-06-26T16:04:16-05:00</lastmod>
   </url>
   

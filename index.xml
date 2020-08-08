@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 26 Jun 2020 16:04:16 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jul 2020 18:26:45 -0500</lastBuildDate>
     
 	<atom:link href="https://nathanielbd.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Unexpected Lessons from breaking Webgames</title>
+      <link>https://nathanielbd.github.io/posts/breaking-webgames/</link>
+      <pubDate>Sat, 25 Jul 2020 18:26:45 -0500</pubDate>
+      
+      <guid>https://nathanielbd.github.io/posts/breaking-webgames/</guid>
+      <description>One of the reasons I started programming was to code exploits in webgames. The other reason involves a certain 1980s text adventure, but that is a story for another day.
+        Almost as sarcastic as Zork, but in first person    Looking back, I realize that this unconventional way of getting into programming exposed me to several important concepts early. Let&amp;rsquo;s look at a few from the perspective of a programming noob.</description>
+    </item>
     
     <item>
       <title>How I used Manim with WSL and data points</title>
