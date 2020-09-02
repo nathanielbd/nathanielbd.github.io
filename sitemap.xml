@@ -3,22 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nathanielbd.github.io/posts/making-a-portfolio-site/</loc>
+    <lastmod>2020-08-30T15:39:47-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nathanielbd.github.io/</loc>
-    <lastmod>2020-07-25T18:26:45-05:00</lastmod>
+    <lastmod>2020-08-30T15:39:47-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://nathanielbd.github.io/posts/</loc>
-    <lastmod>2020-07-25T18:26:45-05:00</lastmod>
+    <lastmod>2020-08-30T15:39:47-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://nathanielbd.github.io/tags/programming/</loc>
-    <lastmod>2020-07-25T18:26:45-05:00</lastmod>
+    <loc>https://nathanielbd.github.io/tags/sase-labs/</loc>
+    <lastmod>2020-08-30T15:39:47-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://nathanielbd.github.io/tags/</loc>
+    <lastmod>2020-08-30T15:39:47-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/programming/</loc>
     <lastmod>2020-07-25T18:26:45-05:00</lastmod>
   </url>
   
@@ -49,11 +59,6 @@
   
   <url>
     <loc>https://nathanielbd.github.io/tags/control-theory/</loc>
-    <lastmod>2020-06-17T17:17:48-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanielbd.github.io/tags/sase-labs/</loc>
     <lastmod>2020-06-17T17:17:48-05:00</lastmod>
   </url>
   

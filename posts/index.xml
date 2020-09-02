@@ -6,8 +6,92 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Sat, 25 Jul 2020 18:26:45 -0500</lastBuildDate>
+		<lastBuildDate>Sun, 30 Aug 2020 15:39:47 -0500</lastBuildDate>
 		<atom:link href="https://nathanielbd.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Making a Portfolio Site</title>
+			<link>https://nathanielbd.github.io/posts/making-a-portfolio-site/</link>
+			<pubDate>Sun, 30 Aug 2020 15:39:47 -0500</pubDate>
+			
+			<guid>https://nathanielbd.github.io/posts/making-a-portfolio-site/</guid>
+			<description>This content was created as part of an educational workshop for SASE Labs UMN, of which I served as director from 2020-2021.
+Motivation Having a personal website makes you stand out in the sea of other online applications. It&amp;rsquo;s a way to introduce yourself and control your image to employers online. It&amp;rsquo;s a convient way to host a blog, your résumé, and a portfolio.
+How  Hugo, a static site generator.</description>
+			<content type="html"><![CDATA[<p><em>This content was created as part of an educational workshop for <a href="https://saseumn.org">SASE Labs UMN</a>, of which I served as director from 2020-2021.</em></p>
+<h1 id="motivation">Motivation</h1>
+<p>Having a personal website makes you stand out in the sea of other online applications. It&rsquo;s a
+way to introduce yourself and control your image to employers online. It&rsquo;s a convient way to
+host a blog, your résumé, and a portfolio.</p>
+<h1 id="how">How</h1>
+<ul>
+<li><a href="https://gohugo.io/">Hugo</a>, a static site generator. It takes a chosen theme and your text files and creates the HTML, CSS, and JavaScript files needed to make a nice-looking website.</li>
+<li><a href="https://pages.github.com/">GitHub Pages</a>, a service that allows you to host a website and it&rsquo;s source files for free.</li>
+</ul>
+<h1 id="why">Why&hellip;</h1>
+<p>GitHub Pages?</p>
+<ul>
+<li>It&rsquo;s free</li>
+<li>It&rsquo;s conveniently compatible with git for version control</li>
+</ul>
+<p>Hugo?</p>
+<ul>
+<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a> is really easy to use to write each page of your site. It&rsquo;s much easier than HTML.</li>
+<li>It works well it GitHub Pages</li>
+</ul>
+<p>This site was generated with Hugo and hosted on GitHub Pages.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/hermit.png" alt="Specifically, this site uses the Hermit Hugo theme"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>Specifically, this site uses the <a href="https://themes.gohugo.io/hermit/">Hermit Hugo theme</a></em></td>
+</tr>
+</tbody>
+</table>
+<h1 id="the-setup">The Setup</h1>
+<ol>
+<li><a href="https://github.com/join">Create a GitHub account</a></li>
+<li>Get familiar with using the Linux, Mac, or Windows terminal. Just knowing how to list the files in the directory and change directory is okay. We will use text commands on the command line to interact with git, GitHub, and Hugo.</li>
+<li><a href="https://git-scm.com/downloads">Install git</a>. <a href="https://github.com/SASE-Labs-2020/tutorials/blob/master/2020-01-30-git-familiar-with-git.md">What is git?</a></li>
+<li><a href="https://gohugo.io/getting-started/installing/##homebrew-linux">Install Hugo</a></li>
+<li><a href="https://themes.gohugo.io/tags/portfolio/">Pick a theme</a></li>
+<li>Pick a text editor to use to write your site. I recommend <a href="https://code.visualstudio.com/">VSCode</a> or <a href="https://www.sublimetext.com/">Sublime</a>.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/vscode.png" alt="I wrote this post using VSCode"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">I wrote this post using VSCode</td>
+</tr>
+</tbody>
+</table>
+<h1 id="actually-making-the-site">Actually making the site</h1>
+<ul>
+<li>Read the documentation on your Hugo Theme&rsquo;s page. Make sure to follow any special steps mentioned there not mentioned in this tutorial.</li>
+<li>Type out <code>hugo new site &lt;your-site-name&gt;</code>. This will create a directory called <code>&lt;your-sitename&gt;</code> with subdirectories including <code>content</code>, <code>static</code>, and <code>themes</code>.</li>
+<li>Check out the GitHub repository for your Hugo theme. Look to its <code>exampleSite</code> folder for guidance. Copy the link to the repository and run the command <code>git clone https://github.com/&lt;your-theme-repo-link&gt; themes/&lt;your-hugo-theme-name&gt;</code>. This copies the repository into the <code>themes</code> folder.</li>
+<li>You should follow the example site for how to write your <code>config.toml</code> file</li>
+<li>Typing the command <code>hugo new &lt;title&gt;.md</code> creates a new page <code>&lt;title&gt;.md</code> in the <code>content</code> folder. It will autogenerate a Markdown front matter for you, including the date, title, and other details of the page.</li>
+<li>Follow the <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown cheat sheet</a> to write your page below the front matter. My posts normally only consist of headers, code blocks, tables, images, links, and text.</li>
+<li>Make sure you like how your page looks. To see what it will look like before you make the site live, run <code>hugo serve</code> or <code>hugo server</code> to run the webpage locally. Type &lsquo;localhost:5000&rsquo; in the address bar to see your working version.</li>
+</ul>
+<h1 id="deploying-to-github-pages">Deploying to GitHub Pages</h1>
+<p>Use <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">this guide</a> as a reference.</p>
+<ul>
+<li>If you are using Linux, Mac, or WSL, you can start <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">here</a></li>
+<li>If you are using Windows, instead of running <code>./deploy.sh</code> in the final step, you should run <code>bash -c './deploy.sh'</code> instead</li>
+</ul>
+<p>This will host your site at <code>&lt;your-github-username&gt;.github.io</code>. If you&rsquo;d like yourself to stand out even more, you could purchase a domain name and <a href="https://docs.github.com/en/github/working-with-github-pages/about-custom-domains-and-github-pages">use that name with GitHub Pagse</a>..</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Unexpected Lessons from breaking Webgames</title>
