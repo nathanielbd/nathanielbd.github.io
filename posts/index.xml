@@ -37,7 +37,7 @@ host a blog, your résumé, and a portfolio.</p>
 <p>Hugo?</p>
 <ul>
 <li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a> is really easy to use to write each page of your site. It&rsquo;s much easier than HTML.</li>
-<li>It works well it GitHub Pages</li>
+<li>It works well with GitHub Pages</li>
 </ul>
 <p>This site was generated with Hugo and hosted on GitHub Pages.</p>
 <table>
@@ -81,7 +81,7 @@ host a blog, your résumé, and a portfolio.</p>
 <li>You should follow the example site for how to write your <code>config.toml</code> file</li>
 <li>Typing the command <code>hugo new &lt;title&gt;.md</code> creates a new page <code>&lt;title&gt;.md</code> in the <code>content</code> folder. It will autogenerate a Markdown front matter for you, including the date, title, and other details of the page.</li>
 <li>Follow the <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown cheat sheet</a> to write your page below the front matter. My posts normally only consist of headers, code blocks, tables, images, links, and text.</li>
-<li>Make sure you like how your page looks. To see what it will look like before you make the site live, run <code>hugo serve</code> or <code>hugo server</code> to run the webpage locally. Type &lsquo;localhost:5000&rsquo; in the address bar to see your working version.</li>
+<li>Make sure you like how your page looks. To see what it will look like before you make the site live, run <code>hugo serve</code> or <code>hugo server</code> to run the webpage locally. Type &lsquo;localhost:1313&rsquo; in the address bar to see your working version.</li>
 </ul>
 <h1 id="deploying-to-github-pages">Deploying to GitHub Pages</h1>
 <p>Use <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">this guide</a> as a reference.</p>
@@ -89,7 +89,7 @@ host a blog, your résumé, and a portfolio.</p>
 <li>If you are using Linux, Mac, or WSL, you can start <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">here</a></li>
 <li>If you are using Windows, instead of running <code>./deploy.sh</code> in the final step, you should run <code>bash -c './deploy.sh'</code> instead</li>
 </ul>
-<p>This will host your site at <code>&lt;your-github-username&gt;.github.io</code>. If you&rsquo;d like yourself to stand out even more, you could purchase a domain name and <a href="https://docs.github.com/en/github/working-with-github-pages/about-custom-domains-and-github-pages">use that name with GitHub Pagse</a>..</p>
+<p>This will host your site at <code>&lt;your-github-username&gt;.github.io</code>. If you&rsquo;d like yourself to stand out even more, you could purchase a domain name and <a href="https://docs.github.com/en/github/working-with-github-pages/about-custom-domains-and-github-pages">use that name with GitHub Pages</a>.</p>
 ]]></content>
 		</item>
 		
@@ -464,7 +464,7 @@ python3 -m pip install -r requirements.txt
 <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Write</span><span class="p">(</span><span class="n">dots</span><span class="p">),</span> <span class="n">run_time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div><p><img src="/graph.png" alt="A screenshot from my video"></p>
 <h2 id="tangent-lines-to-data-points">Tangent lines to data points</h2>
-<p>Manim has <a href="https://github.com/3b1b/manim/blob/a529a59abf1f6af02e664dbad1c8474f3a25a61e/manimlib/scene/graph_scene.py#L715">really neat functions</a> for <a href="https://github.com/3b1b/manim/blob/a529a59abf1f6af02e664dbad1c8474f3a25a61e/manimlib/scene/graph_scene.py#L988">plotting tangent lines</a> to <a href="https://github.com/3b1b/manim/blob/839fb4ff582103bd717b9d7937c926ef0390fb01/from_3b1b/old/eoc/chapter9.py#L1080">visualize derivaties</a>, but they only work for graphs created from <code>GraphScene.get_graph</code>. In other words, there is no official support for tangent line plotting for our data points.</p>
+<p>Manim has <a href="https://github.com/3b1b/manim/blob/a529a59abf1f6af02e664dbad1c8474f3a25a61e/manimlib/scene/graph_scene.py#L715">really neat functions</a> for <a href="https://github.com/3b1b/manim/blob/a529a59abf1f6af02e664dbad1c8474f3a25a61e/manimlib/scene/graph_scene.py#L988">plotting tangent lines</a> to <a href="https://github.com/3b1b/manim/blob/839fb4ff582103bd717b9d7937c926ef0390fb01/from_3b1b/old/eoc/chapter9.py#L1080">visualize derivatives</a>, but they only work for graphs created from <code>GraphScene.get_graph</code>. In other words, there is no official support for tangent line plotting for our data points.</p>
 <p>My hack around this was to enumerate the graphs of the instantaneous slopes using the slope intercept form of the <a href="https://en.wikipedia.org/wiki/Numerical_differentiation#Finite_differences">secant line for numerical differentiation</a>.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">derivatives</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_graph</span><span class="p">(</span>
 	<span class="c1"># slope intercept form is ugly as a one-liner lambda func</span>
