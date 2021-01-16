@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>internet culture on nathanielbd</title>
+    <link>https://nathanielbd.github.io/tags/internet-culture/</link>
+    <description>Recent content in internet culture on nathanielbd</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 15 Jan 2021 13:45:56 -0600</lastBuildDate>
+    
+	<atom:link href="https://nathanielbd.github.io/tags/internet-culture/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hacking the Normie Test</title>
+      <link>https://nathanielbd.github.io/posts/hacking-the-normie-test/</link>
+      <pubDate>Fri, 15 Jan 2021 13:45:56 -0600</pubDate>
+      
+      <guid>https://nathanielbd.github.io/posts/hacking-the-normie-test/</guid>
+      <description>The Normie Test is a quiz with ~40 questions that places the taker on a two-axes plot relative to internet culture personality classes like &amp;lsquo;normies&amp;rsquo; and &amp;lsquo;simps.&amp;rsquo;
+        Apparently EDM is mainstream now?    Notably, the quiz is not open source and it runs on server-side PHP. How is X calculated? How is Y calculated? Why am I a &amp;lsquo;Simp&amp;rsquo; if my X-coordinate is over the line by 0.</description>
+    </item>
+    
+  </channel>
+</rss>

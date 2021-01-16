@@ -19,8 +19,9 @@
       
       <guid>https://nathanielbd.github.io/posts/making-a-portfolio-site/</guid>
       <description>This content was created as part of an educational workshop for SASE Labs UMN, of which I served as director from 2020-2021.
-Motivation Having a personal website makes you stand out in the sea of other online applications. It&amp;rsquo;s a way to introduce yourself and control your image to employers online. It&amp;rsquo;s a convient way to host a blog, your résumé, and a portfolio.
-How  Hugo, a static site generator.</description>
+For readers of this blog:
+I use KaTeX for math typesetting. When I embed GitHub gists, I add this CSS (as a Hugo partial). When the GitHub gist is a .csv file I add the following CSS:
+.gist .markdown-body .csv-data th, .gist .markdown-body .csv-data td, .gist .markdown-body .csv-data .</description>
     </item>
     
     <item>

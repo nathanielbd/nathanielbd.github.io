@@ -6,8 +6,248 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Sun, 30 Aug 2020 15:39:47 -0500</lastBuildDate>
+		<lastBuildDate>Fri, 15 Jan 2021 13:45:56 -0600</lastBuildDate>
 		<atom:link href="https://nathanielbd.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Hacking the Normie Test</title>
+			<link>https://nathanielbd.github.io/posts/hacking-the-normie-test/</link>
+			<pubDate>Fri, 15 Jan 2021 13:45:56 -0600</pubDate>
+			
+			<guid>https://nathanielbd.github.io/posts/hacking-the-normie-test/</guid>
+			<description>The Normie Test is a quiz with ~40 questions that places the taker on a two-axes plot relative to internet culture personality classes like &amp;lsquo;normies&amp;rsquo; and &amp;lsquo;simps.&amp;rsquo;
+        Apparently EDM is mainstream now?    Notably, the quiz is not open source and it runs on server-side PHP. How is X calculated? How is Y calculated? Why am I a &amp;lsquo;Simp&amp;rsquo; if my X-coordinate is over the line by 0.</description>
+			<content type="html"><![CDATA[<p>The Normie Test is a quiz with ~40 questions that places the taker on a two-axes plot relative to internet culture personality classes like &lsquo;normies&rsquo; and &lsquo;simps.&rsquo;</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://raw.githubusercontent.com/nathanielbd/normie-neural-networks/master/ex_result.png" alt="heh normie"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Apparently EDM is mainstream now?</td>
+</tr>
+</tbody>
+</table>
+<p>Notably, the quiz is not open source and it runs on server-side PHP. How is X calculated? How is Y calculated? Why am I a &lsquo;Simp&rsquo; if my X-coordinate is over the line by 0.5? To answer these pressing questions, I had to reverse-engineer the Normie Test with nothing but web scraping and machine learning.</p>
+<h2 id="introduction">Introduction</h2>
+<p>The Normie Test&rsquo;s first 20 questions are called the &lsquo;perspective questions&rsquo; meant to determine the quiz taker&rsquo;s outlook on life.</p>
+<blockquote>
+<p>Do you want to be in society?</p>
+</blockquote>
+<p>Questions 21-34 are the &lsquo;actual&rsquo; or &lsquo;normie&rsquo; questions which supposedly determine whether or not the quiz taker is a &lsquo;normie.&rsquo;</p>
+<blockquote>
+<p>Has anyone ever described you as awkward, autistic, weird, etc.?</p>
+</blockquote>
+<p>Questions 35-41 are &lsquo;statistical.&rsquo; They ask the quiz taker their height, BMI, climate, among other things for reference.</p>
+<p>The perspective questions have 5 answer options: Strongly Yes, Yes, Neutral, No, and Strongly No. The <a href="http://dulm.blue/normie/changelog.gimp">changelog</a> shows that the creator of the test, Do You Like Memes? (DULM), calls these 5-option questions &lsquo;dynamic questions.&rsquo; The normie questions have some Yes-No questions and some dynamic questions.</p>
+<p>A few assumptions guided my investigation. Each answer option probably has a positive or negative score which affects the X and Y-coordinates. Then the XY-coordinates are just the sums of the scores of the quiz taker&rsquo;s answers. DULM writes the following subtitle for the statistical questions:</p>
+<blockquote>
+<p>Enter some numbers to see how normal you are.
+<strong>WTF!!! Is this a datamine?</strong>
+The next six questions will make your test results more accurate, as these statistics can determine the likelihood of being normal.</p>
+</blockquote>
+<p>From this, it sounds like DULM looks at the distribution of personality classes for different answers and somehow takes that into account for the final result. I assume they add a &lsquo;correction term&rsquo; to the XY-coordinates based on that distribution. This assumption is necessary since the <a href="https://raw.githubusercontent.com/nathanielbd/normie-neural-networks/master/stats.json">sparse statistical data</a> that DULM makes public does not include any XY means or covariances.</p>
+<h2 id="web-scraping">Web scraping</h2>
+<p>Due to the last assumption, the first round of web scraping answered the perspective and normie questions randomly while leaving the statistical questions in their default options (with the exception of answering male/female/other) and recorded the resulting XY coordinates. In order to solve for the weights, this first round needed to collect at least 146 samples (25 dynamic questions, 9 Yes-No questions, and the male/female/other question) for the system not to be <a href="https://en.wikipedia.org/wiki/Underdetermined_system">underdetermined</a>.</p>
+<p>Also due to the last assumption, the second round of web scraping required a sample for each of the 14400 combinations (2 3-option questions, 3 4-option questions, and 2 5-option questions) of answers to the statistical quesitons. This time, I also recorded the resulting personality class for each sample.</p>
+<p>During my investigation, DULM actually added their own captcha robot test, which made web scraping a little more difficult.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/captcha.png" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Shoutout to fellow Golden Gopher <a href="https://www-users.cs.umn.edu/~hoppernj/">Dr. Nick Hooper</a> for co-creating CAPTCHA</td>
+</tr>
+</tbody>
+</table>
+<p>In the end, I had my <a href="https://github.com/nathanielbd/normie-neural-networks/blob/master/scrape.py">scraping script</a> prompt me to answer the CAPTCHA and quit whenever the CAPTCHA expired. It would write to the same CSV file each time and would know which combination it last wrote.</p>
+
+ <script src="https://gist.github.com/nathanielbd/607b9eb3756e111e8d33b80d3ae4ce85.js"></script> 
+<p>It was through this web scraping that I found that the X coordinate is always in increments of 0.5 and the Y coordinate is always in increments of 0.25.</p>
+<h2 id="findings">Findings</h2>
+<h3 id="xy-coordinates">XY coordinates</h3>
+<p>Figuring out the weights toward the X and Y coordinates for each question option requires solving the system</p>
+<p>$$Ax=b$$</p>
+<p>where \(A\) is the matrix whose rows contain the <a href="https://en.wikipedia.org/wiki/One-hot">one-hot encoded</a> answers to the questions, \(x\) is a vector containing the weights of the answers, and \(b\) is the X or the Y coordinate. Although this can be a simple call to <code>numpy.linalg.solve</code>, I decided to solve this with linear regression. In this case, I could tell if the assumption of linear weights is wrong if there was an atrocious mean squared error.</p>
+<p>After rounding to the nearest 0.5 for the X weights and to the nearest 0.25 for the Y weights, we obtain the table:</p>
+
+ <script src="https://gist.github.com/nathanielbd/2969ed56fe1de2784433f83ac3a0b0ed.js"></script> 
+
+ <style>
+.gist .markdown-body .csv-data th, .gist .markdown-body .csv-data td, .gist .markdown-body .csv-data .blob-num {background: #000; background-color: #000;}
+.gist .blob-interaction-bar .octicon-search > path {fill: #fff}
+.gist .blob-interaction-bar > input {background: #000}
+.gist .blob-interaction-bar {background: #000}
+</style> 
+<h4 id="normie-neural-networkshttpsgithubcomnathanielbdnormie-neural-networks"><a href="https://github.com/nathanielbd/normie-neural-networks">Normie Neural Networks</a></h4>
+<p>Let&rsquo;s try doing the same thing, but with a single layer neural network. Just for fun.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">SingleLayerNeuralNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span> <span class="o">=</span> <span class="n">input_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">=</span> <span class="n">output_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">SingleLayerNeuralNetwork</span><span class="p">(</span><span class="n">answers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">XY</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">L1Loss</span><span class="p">()</span>
+<span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">EPOCHS</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">ans</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+        <span class="n">ans</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="n">ans</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">res</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">pred_res</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+        <span class="n">train_loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">pred_res</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+        <span class="n">train_loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="n">loss</span> <span class="o">+=</span> <span class="n">train_loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">100</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;epoch: {epoch+1}/{EPOCHS}, loss: {loss}&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">loss</span> <span class="o">&lt;=</span> <span class="mf">0.5</span><span class="p">:</span>
+        <span class="k">break</span>
+</code></pre></div><p>This is probably the most explainable neural net possible. It&rsquo;s simply optimizing</p>
+<p>$$\min_x \left\lVert Ax-b \right\rVert_1$$</p>
+<p>and the parameters of the model can actually be interpreted! They are the weights of the answers towards the X and Y coordinates.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+
+<span class="n">x_weights</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]])</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">x_weights</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x_weights</span><span class="o">.</span><span class="n">numpy</span><span class="p">()]),</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+<span class="c1"># observe from the .csv files that X is always in increments of 0.5</span>
+<span class="n">x_weights</span> <span class="o">=</span> <span class="n">x_weights</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">val</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">y_weights</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+<span class="n">y_weights</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y_weights</span><span class="o">.</span><span class="n">numpy</span><span class="p">()]),</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+<span class="c1"># observe from the .csv files that Y is always in increments of 0.25</span>
+<span class="n">y_weights</span> <span class="o">=</span> <span class="n">y_weights</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">val</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">all_weights</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">x_weights</span><span class="p">,</span> <span class="n">y_weights</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">all_weights</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span>
+<span class="n">all_weights</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;weights.csv&#39;</span><span class="p">)</span>
+<span class="c1"># same output as linear regression</span>
+</code></pre></div><p>Yes, solving a system of linear equations and linear regression are both much simpler than training a neural net. However, I just couldn&rsquo;t pass up making the wonderfully alliterative phrase of &lsquo;Normie Neural Networks&rsquo; (NNN) a reality! Too bad I didn&rsquo;t do this in November&hellip;</p>
+<h3 id="statistical-corrections">Statistical corrections</h3>
+<p>When we dot product the X and Y weights with our answer data, we find that the difference between the predicted and actual XY coordinates is <code>[-2, -0.25]</code>. So when the quiz taker gives the default answers to the statistical questions (besides the male/female/other one), their XY coordinates are adjusted 2 left and 0.25 down.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">ans</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">data_loader</span><span class="p">:</span>
+    <span class="n">pred_res</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="n">ans</span><span class="nd">@x_tensor.T</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">(),(</span><span class="n">ans</span><span class="nd">@y_tensor.T</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()]]))</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">-</span><span class="n">pred_res</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;diff: {diff}&#39;</span><span class="p">)</span>
+    <span class="c1"># [-2, -0.25]</span>
+</code></pre></div><p>Doing a similar thing to the other combinations yielded the <a href="https://github.com/nathanielbd/normie-neural-networks/blob/master/stat-corrections.csv">statistical corrections</a> for every combination of answers to the statistical questions. It turns out that linear regression fails to predict the statistical corrections, so this approach may have been the way to go. However, as the Normie Test receives more and more data, the statistics may change to the point where these corrections are no longer accurate.</p>
+<h3 id="classification">Classification</h3>
+<p>The white dividing lines seen on the results page diagram are misleading. The actual class boundaries are measured in intervals of 0.5 for the X coordinates and 0.25 for the Y coordinates.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/normie.png" alt="Made with MSPaint!"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">These intervals achieved 100% accuracy on the 14400 point dataset</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>So I guess now there&rsquo;s a way to create an open source version of the Normie Test. And you can try to calculate the probability that your friend rates their life below 3 if you know some of their answers and their XY coordinates.</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Ode to the Perceptron</title>
+			<link>https://nathanielbd.github.io/posts/ode-to-the-perceptron/</link>
+			<pubDate>Fri, 08 Jan 2021 00:21:04 -0600</pubDate>
+			
+			<guid>https://nathanielbd.github.io/posts/ode-to-the-perceptron/</guid>
+			<description>If I had to explain to someone the paradigm of deep learning, I&amp;rsquo;d start by mentioning
+The Perceptron Given
+\(X\), an \(n \times m\) matrix where each row \(x\) is a data vector with \(m\) features,
+\(w\), a vector of \(m\) weights,
+\(b\), a bias value,
+define a function \(f\):
+$$f(x) = \begin{cases}1 &amp;amp; \text{if } w \cdot x + b &amp;gt; 0 \\ 0 &amp;amp; \text{otherwise} \end{cases}$$
+The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &amp;lsquo;trained&amp;rsquo; with the data in \(X\).</description>
+			<content type="html"><![CDATA[<p>If I had to explain to someone the paradigm of deep learning, I&rsquo;d start by mentioning</p>
+<h2 id="the-perceptron">The Perceptron</h2>
+<p>Given</p>
+<p>\(X\), an \(n \times m\) matrix where each row \(x\) is a data vector with \(m\) features,</p>
+<p>\(w\), a vector of \(m\) weights,</p>
+<p>\(b\), a bias value,</p>
+<p>define a function \(f\):</p>
+<p>$$f(x) = \begin{cases}1 &amp; \text{if } w \cdot x + b &gt; 0 \\ 0 &amp; \text{otherwise} \end{cases}$$</p>
+<p>The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\). The traing algorithm pseudocode is:</p>
+<pre><code>initialize w
+define epochs
+define rate
+for 1...epochs
+	for row x in X
+		y := f(x)
+		w := w + rate*(d-y)*x
+	stop if w has converged
+</code></pre><table>
+<thead>
+<tr>
+<th align="center">
+ <video controls width="80%"><source src="/Perceptron.mp4"></video> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">\(w\) is the <a href="https://en.wikipedia.org/wiki/Normal_(geometry)"><em>normal vector</em></a> to the decision boundary. It is updated when there is a classification mistake <em>i.e.</em> when \(d\not=y\). <a href="https://gist.github.com/nathanielbd/9f61a02fd76b244cb180db171998c814">Code</a></td>
+</tr>
+</tbody>
+</table>
+<p>While simple and limited (it can only achieve perfect classification when the data is <a href="https://en.wikipedia.org/wiki/Linear_separability">linearly separable</a>), it has many of the ingredients later used in the deep learning &lsquo;paradigm&rsquo;:</p>
+<h3 id="parameters">Parameters</h3>
+<p>We may think of each entry \(w_i\) of \(w\) as a variational parameter; \(f\) behaves slightly differently for slightly different combinations of values of all the \(w_i\)s. In fact, \(f\) can model all linear decision boundaries by varying \(w\) and \(b\).</p>
+<p>There are several key differences between deep learning and perceptrons. Of course, deep learning has many more parameters, but the variation of those parameters allow them to model a much richer class of functions than just linear ones. In fact, deeps neural networks <a href="http://neuralnetworksanddeeplearning.com/chap4.html">can approximately compute any function</a>. This enables them to complete many tasks other than classification. For example, deep Q networks approximately compute the function which returns the <a href="https://en.wikipedia.org/wiki/Q-learning#Algorithm">reward given a state and an action</a> in order to determine the optimal policy of an agent in an environment such as an Atari game.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Q-Learning_Matrix_Initialized_and_After_Training.png" alt="Credit: LearnDataSci, Wikipedia"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Q-learning approximating the state-action function through the training process</td>
+</tr>
+</tbody>
+</table>
+<p><em>Note</em>: You might have noticed that \(b\) is not changed in the training algorithm despite being a parameter. In practice, we often solve this by having \(w_0\) be the bias and appending 1 as the first entry of each row \(x\) in \(X\).</p>
+<h3 id="convergence">Convergence</h3>
+<p>The training algorithm stops when \(w\) ceases to change by a certain amount with each step.</p>
+<p>More importantly, this is achieved <em>despite</em> the random initialization of \(w\). The training algorithm can correct mistakes during training by the vector addition</p>
+<p>$$w := w + r(d-y)x$$</p>
+<p>which rotates the decision boundary in the appropriate direction, as seen in the animation. Deep learning makes a more powerful generalization to convergence and self-correction: loss functions. While linear decision boundaries can measure their performance by computing the dot product and therefore the <a href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity</a> of its norm and positive-class data points, we can define loss functions which establishes how well the neural network is approximating the desired function. Since these loss functions are differentiable with respect to our parameters, we can iteratively subtract multiples of the gradient for self-correction instead of vector addition like the perceptron does. Actually, there are a rich class of optimization algorithms based on the gradient and Hessian of the loss function.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://emiliendupont.github.io/imgs/optim_viz_only_adam.png" alt="so cool"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Check out this <a href="https://emiliendupont.github.io/2018/01/24/optimization-visualization/">wonderful visualization</a> of optimization algorithms by Emilien Dupont</td>
+</tr>
+</tbody>
+</table>
+<h3 id="activation-functions">Activation functions</h3>
+<p>Notice in the definition of \(f\) that we predicted the class based on whether the sign of \(w \cdot x + b\) was positive or negative. This alludes to the concept of an activation function: an operation applied on the outputs of the neural network so that its computation is not merely matrix or vector multiplication. Can you convince yourself that matrix multiplication alone does not enable universal function approximation? That activation functions like <a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a> does? What about <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a>?</p>
+<hr>
+<p>Although in retrospect it is easy to trace many of the features of the deep learning paradigm to the perceptron, this connectionist view of AI is one that was developed over several decades after Frank Rosenblatt&rsquo;s original research on the perceptron. To me, it&rsquo;s a fun toy example to plant the seeds in an enthusiast&rsquo;s mind for the future contributions by Werbos, Rumelhart, Hopfield, McCullough, and more!</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Making a Portfolio Site</title>
@@ -16,9 +256,18 @@
 			
 			<guid>https://nathanielbd.github.io/posts/making-a-portfolio-site/</guid>
 			<description>This content was created as part of an educational workshop for SASE Labs UMN, of which I served as director from 2020-2021.
-Motivation Having a personal website makes you stand out in the sea of other online applications. It&amp;rsquo;s a way to introduce yourself and control your image to employers online. It&amp;rsquo;s a convient way to host a blog, your résumé, and a portfolio.
-How  Hugo, a static site generator.</description>
+For readers of this blog:
+I use KaTeX for math typesetting. When I embed GitHub gists, I add this CSS (as a Hugo partial). When the GitHub gist is a .csv file I add the following CSS:
+.gist .markdown-body .csv-data th, .gist .markdown-body .csv-data td, .gist .markdown-body .csv-data .</description>
 			<content type="html"><![CDATA[<p><em>This content was created as part of an educational workshop for <a href="https://saseumn.org">SASE Labs UMN</a>, of which I served as director from 2020-2021.</em></p>
+<p>For readers of this blog:</p>
+<p>I use <a href="https://katex.org/">KaTeX</a> for math typesetting. When I embed GitHub gists, I add <a href="https://gist.github.com/adimancv/eb2f4b46d3c95e6b8fe4dd52375236b2">this CSS</a> (as a Hugo partial). When the GitHub gist is a <code>.csv</code> file I add the following CSS:</p>
+<div class="highlight"><pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">gist</span> <span class="p">.</span><span class="nc">markdown-body</span> <span class="p">.</span><span class="nc">csv-data</span> <span class="nt">th</span><span class="o">,</span> <span class="p">.</span><span class="nc">gist</span> <span class="p">.</span><span class="nc">markdown-body</span> <span class="p">.</span><span class="nc">csv-data</span> <span class="nt">td</span><span class="o">,</span> <span class="p">.</span><span class="nc">gist</span> <span class="p">.</span><span class="nc">markdown-body</span> <span class="p">.</span><span class="nc">csv-data</span> <span class="p">.</span><span class="nc">blob-num</span> <span class="p">{</span><span class="k">background</span><span class="p">:</span> <span class="mh">#000</span><span class="p">;</span> <span class="k">background-color</span><span class="p">:</span> <span class="mh">#000</span><span class="p">;}</span>
+<span class="p">.</span><span class="nc">gist</span> <span class="p">.</span><span class="nc">blob-interaction-bar</span> <span class="p">.</span><span class="nc">octicon-search</span> <span class="o">&gt;</span> <span class="nt">path</span> <span class="p">{</span><span class="n">fill</span><span class="p">:</span> <span class="mh">#fff</span><span class="p">}</span>
+<span class="p">.</span><span class="nc">gist</span> <span class="p">.</span><span class="nc">blob-interaction-bar</span> <span class="o">&gt;</span> <span class="nt">input</span> <span class="p">{</span><span class="k">background</span><span class="p">:</span> <span class="mh">#000</span><span class="p">}</span>
+<span class="p">.</span><span class="nc">gist</span> <span class="p">.</span><span class="nc">blob-interaction-bar</span> <span class="p">{</span><span class="k">background</span><span class="p">:</span> <span class="mh">#000</span><span class="p">}</span>
+</code></pre></div><p>Due to GitHub&rsquo;s JavaScript messing with the CSS, this must be added after the embedding. I accomplish this by using a raw HTML shortcode: <code>{{.Inner}}</code>.</p>
+<hr>
 <h1 id="motivation">Motivation</h1>
 <p>Having a personal website makes you stand out in the sea of other online applications. It&rsquo;s a
 way to introduce yourself and control your image to employers online. It&rsquo;s a convient way to
