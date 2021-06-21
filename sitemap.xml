@@ -3,6 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nathanielbd.github.io/posts/celebrating-aleksandr-lyapunov/</loc>
+    <lastmod>2021-06-06T16:04:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/dynamical-systems/</loc>
+    <lastmod>2021-06-06T16:04:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/manim/</loc>
+    <lastmod>2021-06-06T16:04:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/</loc>
+    <lastmod>2021-06-06T16:04:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/posts/</loc>
+    <lastmod>2021-06-06T16:04:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/</loc>
+    <lastmod>2021-06-06T16:04:16-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nathanielbd.github.io/posts/hacking-the-normie-test/</loc>
     <lastmod>2021-01-15T13:45:56-06:00</lastmod>
   </url>
@@ -14,21 +44,6 @@
   
   <url>
     <loc>https://nathanielbd.github.io/tags/machine-learning/</loc>
-    <lastmod>2021-01-15T13:45:56-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanielbd.github.io/</loc>
-    <lastmod>2021-01-15T13:45:56-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanielbd.github.io/posts/</loc>
-    <lastmod>2021-01-15T13:45:56-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanielbd.github.io/tags/</loc>
     <lastmod>2021-01-15T13:45:56-06:00</lastmod>
   </url>
   
@@ -64,11 +79,6 @@
   
   <url>
     <loc>https://nathanielbd.github.io/posts/manim-in-wsl-with-data/</loc>
-    <lastmod>2020-06-26T16:04:16-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanielbd.github.io/tags/manim/</loc>
     <lastmod>2020-06-26T16:04:16-05:00</lastmod>
   </url>
   

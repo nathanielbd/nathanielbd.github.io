@@ -6,8 +6,76 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Fri, 15 Jan 2021 13:45:56 -0600</lastBuildDate>
+		<lastBuildDate>Sun, 06 Jun 2021 16:04:16 -0500</lastBuildDate>
 		<atom:link href="https://nathanielbd.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Celebrating Aleksandr Lyapunov</title>
+			<link>https://nathanielbd.github.io/posts/celebrating-aleksandr-lyapunov/</link>
+			<pubDate>Sun, 06 Jun 2021 16:04:16 -0500</pubDate>
+			
+			<guid>https://nathanielbd.github.io/posts/celebrating-aleksandr-lyapunov/</guid>
+			<description>Happy 164th birthday, Aleksandr Lyapunov!    I recently participated in the first annual Manim math animation engine hackathon! The theme was aniversaries, so I created the above animation to celebrate the 164t anniversary of mathematician Aleksandr Lyapunov&amp;rsquo;s birth. This extended some ideas I presented from Steven Strogatz&amp;rsquo;s nonlinear dynamics textbook at the University of Minnesota&amp;rsquo;s math directed reading program symposium.</description>
+			<content type="html"><![CDATA[<table>
+<thead>
+<tr>
+<th align="center">
+ <video controls width="80%"><source src="/Lyapunov.mp4"></video> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Happy 164th birthday, Aleksandr Lyapunov!</td>
+</tr>
+</tbody>
+</table>
+<p>I recently participated in the first annual <a href="https://www.manim.community/">Manim</a> math animation engine hackathon! The theme was aniversaries, so I created the above animation to celebrate the 164t anniversary of mathematician Aleksandr Lyapunov&rsquo;s birth. This extended some ideas I presented from <a href="http://www.stevenstrogatz.com/books/nonlinear-dynamics-and-chaos-with-applications-to-physics-biology-chemistry-and-engineering">Steven Strogatz&rsquo;s nonlinear dynamics textbook</a> at the University of Minnesota&rsquo;s <a href="https://www-users.math.umn.edu/~mahrud/drp/">math directed reading program</a> symposium.</p>
+<h1 id="the-math">The math</h1>
+<p>Consider the system</p>
+<p>$$
+\begin{aligned}
+\frac{dx}{dt} &amp;= y-x^3 \newline
+\frac{dy}{dt} &amp;= -x-y^3.
+\end{aligned}
+$$</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/DSImage.png" alt="Our dynamical system"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Our dynamical system</td>
+</tr>
+</tbody>
+</table>
+<p>We can&rsquo;t use linearization about the fixed point at the origin to determine its stability; the Jacobian has pure imaginary eigenvalues, so the linearization is not robust to small nonlinear terms.</p>
+<p>However, Lyapunov showed that finding a Lyapunov function \(V\) which is locally positive definite and has a locally negative definite time derivative implies stability. This is simimlar to an energy function as the trajectories move monotonically down the basis of \(V\). Let&rsquo;s try \(V = x^2 + y^2\) for the system.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/ParabImage.png" alt="The chosen Lyapunov function"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">The chosen Lyapunov function</td>
+</tr>
+</tbody>
+</table>
+<p>$$
+\begin{aligned}
+\frac{dV}{dt} &amp;= \frac{dV}{dx} \frac{dx}{dt} + \frac{dV}{dy} \frac{dy}{dt} \newline
+&amp;= 2x(y-x^3) + 2y(-x-y^3) \newline
+&amp;= 2xy -2x^4 - 2yx -2y^4 \newline
+&amp;= -2x^4 - 2y^4
+\end{aligned}
+$$</p>
+<p>\(V\) is nonnegative and \(\frac{dV}{dt}\) is nonpositive, so it truly is a Lyapunov function. Its existence implies that the system is aysmptototically stable; trajectories all eventually converge to the origin.</p>
+<p>Outside of this toy example, Lyapunov functions are used in the engineering of nonlinear control systems. Their analogue in <a href="https://en.wikipedia.org/wiki/Control-Lyapunov_function">control-Lyapunov functions</a> has been used in <a href="https://arc.aiaa.org/doi/10.2514/3.21375">robotics for path planning around obstacles</a>.</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Hacking the Normie Test</title>
@@ -266,7 +334,8 @@ I use KaTeX for math typesetting. When I embed GitHub gists, I add this CSS (as 
 <span class="p">.</span><span class="nc">gist</span> <span class="p">.</span><span class="nc">blob-interaction-bar</span> <span class="p">.</span><span class="nc">octicon-search</span> <span class="o">&gt;</span> <span class="nt">path</span> <span class="p">{</span><span class="n">fill</span><span class="p">:</span> <span class="mh">#fff</span><span class="p">}</span>
 <span class="p">.</span><span class="nc">gist</span> <span class="p">.</span><span class="nc">blob-interaction-bar</span> <span class="o">&gt;</span> <span class="nt">input</span> <span class="p">{</span><span class="k">background</span><span class="p">:</span> <span class="mh">#000</span><span class="p">}</span>
 <span class="p">.</span><span class="nc">gist</span> <span class="p">.</span><span class="nc">blob-interaction-bar</span> <span class="p">{</span><span class="k">background</span><span class="p">:</span> <span class="mh">#000</span><span class="p">}</span>
-</code></pre></div><p>Due to GitHub&rsquo;s JavaScript messing with the CSS, this must be added after the embedding. I accomplish this by using a raw HTML shortcode: <code>{{.Inner}}</code>.</p>
+</code></pre></div><p>This ensures that the gists are in dark theme.</p>
+<p>Due to GitHub&rsquo;s JavaScript messing with the CSS, this must be added after the embedding. I accomplish this by using a raw HTML shortcode: <code>{{.Inner}}</code>.</p>
 <hr>
 <h1 id="motivation">Motivation</h1>
 <p>Having a personal website makes you stand out in the sea of other online applications. It&rsquo;s a

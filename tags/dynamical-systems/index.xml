@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Manim on nathanielbd</title>
-    <link>https://nathanielbd.github.io/tags/manim/</link>
-    <description>Recent content in Manim on nathanielbd</description>
+    <title>dynamical systems on nathanielbd</title>
+    <link>https://nathanielbd.github.io/tags/dynamical-systems/</link>
+    <description>Recent content in dynamical systems on nathanielbd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sun, 06 Jun 2021 16:04:16 -0500</lastBuildDate>
     
-	<atom:link href="https://nathanielbd.github.io/tags/manim/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nathanielbd.github.io/tags/dynamical-systems/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       
       <guid>https://nathanielbd.github.io/posts/celebrating-aleksandr-lyapunov/</guid>
       <description>Happy 164th birthday, Aleksandr Lyapunov!    I recently participated in the first annual Manim math animation engine hackathon! The theme was aniversaries, so I created the above animation to celebrate the 164t anniversary of mathematician Aleksandr Lyapunov&amp;rsquo;s birth. This extended some ideas I presented from Steven Strogatz&amp;rsquo;s nonlinear dynamics textbook at the University of Minnesota&amp;rsquo;s math directed reading program symposium.</description>
-    </item>
-    
-    <item>
-      <title>How I used Manim with WSL and data points</title>
-      <link>https://nathanielbd.github.io/posts/manim-in-wsl-with-data/</link>
-      <pubDate>Fri, 26 Jun 2020 16:04:16 -0500</pubDate>
-      
-      <guid>https://nathanielbd.github.io/posts/manim-in-wsl-with-data/</guid>
-      <description>I recently (last night) submitted my video entry for the Breakthrough Junior Challenge 2020, a competition for students aged 13-18 to submit a video explaining a topic in physics, life sciences, or math in a 3 minute video. In a competition filled with entries with amazing Adobe After Effects and Element 3D editors, I sought to be unique among the 10,000 competitors by using Grant Sanderson/3Blue1Brown&amp;rsquo;s math animation engine, Manim. The source code for my video can be found here.</description>
     </item>
     
   </channel>
