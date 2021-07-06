@@ -7,44 +7,23 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="theme-color" content="#494f5c">
 	<meta name="msapplication-TileColor" content="#494f5c">
-<meta itemprop="name" content="Ode to the Perceptron">
-<meta itemprop="description" content="If I had to explain to someone the paradigm of deep learning, I&rsquo;d start by mentioning
-The Perceptron Given
-\(X\), an \(n \times m\) matrix where each row \(x\) is a data vector with \(m\) features,
-\(w\), a vector of \(m\) weights,
-\(b\), a bias value,
-define a function \(f\):
-$$f(x) = \begin{cases}1 &amp; \text{if } w \cdot x &#43; b &gt; 0 \\ 0 &amp; \text{otherwise} \end{cases}$$
-The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\).">
-<meta itemprop="datePublished" content="2021-01-08T00:21:04-06:00" />
-<meta itemprop="dateModified" content="2021-01-08T00:21:04-06:00" />
-<meta itemprop="wordCount" content="687">
+<meta itemprop="name" content="Animations">
+<meta itemprop="description" content="TODO: make this and change config.toml to make it visible">
+<meta itemprop="datePublished" content="2021-07-05T17:44:10-05:00" />
+<meta itemprop="dateModified" content="2021-07-05T17:44:10-05:00" />
+<meta itemprop="wordCount" content="10">
 
 
 
-<meta itemprop="keywords" content="machine learning," /><meta property="og:title" content="Ode to the Perceptron" />
-<meta property="og:description" content="If I had to explain to someone the paradigm of deep learning, I&rsquo;d start by mentioning
-The Perceptron Given
-\(X\), an \(n \times m\) matrix where each row \(x\) is a data vector with \(m\) features,
-\(w\), a vector of \(m\) weights,
-\(b\), a bias value,
-define a function \(f\):
-$$f(x) = \begin{cases}1 &amp; \text{if } w \cdot x &#43; b &gt; 0 \\ 0 &amp; \text{otherwise} \end{cases}$$
-The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\)." />
+<meta itemprop="keywords" content="" /><meta property="og:title" content="Animations" />
+<meta property="og:description" content="TODO: make this and change config.toml to make it visible" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nathanielbd.github.io/posts/ode-to-the-perceptron/" />
-<meta property="article:published_time" content="2021-01-08T00:21:04-06:00" />
-<meta property="article:modified_time" content="2021-01-08T00:21:04-06:00" />
+<meta property="og:url" content="https://nathanielbd.github.io/animations/" />
+<meta property="article:published_time" content="2021-07-05T17:44:10-05:00" />
+<meta property="article:modified_time" content="2021-07-05T17:44:10-05:00" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Ode to the Perceptron"/>
-<meta name="twitter:description" content="If I had to explain to someone the paradigm of deep learning, I&rsquo;d start by mentioning
-The Perceptron Given
-\(X\), an \(n \times m\) matrix where each row \(x\) is a data vector with \(m\) features,
-\(w\), a vector of \(m\) weights,
-\(b\), a bias value,
-define a function \(f\):
-$$f(x) = \begin{cases}1 &amp; \text{if } w \cdot x &#43; b &gt; 0 \\ 0 &amp; \text{otherwise} \end{cases}$$
-The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\)."/>
+<meta name="twitter:title" content="Animations"/>
+<meta name="twitter:description" content="TODO: make this and change config.toml to make it visible"/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -53,7 +32,7 @@ The task of predicting a class \(d\) of some row \(x\) can be solved via an iter
 	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
 	<link rel="shortcut icon" href="/favicon.ico">
 
-	<title>Ode to the Perceptron</title>
+	<title>Animations</title>
 	<link rel="stylesheet" href="https://nathanielbd.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
 	
 	
@@ -102,102 +81,12 @@ The task of predicting a class \(d\) of some row \(x\) can be solved via an iter
 	</div>
 
 
-	<main class="site-main section-inner animated fadeIn faster">
-		<article class="thin">
-			<header class="post-header">
-				<div class="post-meta"><span>Jan 8, 2021</span></div>
-				<h1>Ode to the Perceptron</h1>
-			</header>
-			<div class="content">
-				<p>If I had to explain to someone the paradigm of deep learning, I&rsquo;d start by mentioning</p>
-<h2 id="the-perceptron">The Perceptron<a href="#the-perceptron" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<p>Given</p>
-<p>\(X\), an \(n \times m\) matrix where each row \(x\) is a data vector with \(m\) features,</p>
-<p>\(w\), a vector of \(m\) weights,</p>
-<p>\(b\), a bias value,</p>
-<p>define a function \(f\):</p>
-<p>$$f(x) = \begin{cases}1 &amp; \text{if } w \cdot x + b &gt; 0 \\ 0 &amp; \text{otherwise} \end{cases}$$</p>
-<p>The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\). The training algorithm pseudocode is:</p>
-<pre><code>initialize w
-define epochs
-define rate
-for 1...epochs
-	for row x in X
-		y := f(x)
-		w := w + rate*(d-y)*x
-	stop if w has converged
-</code></pre><table>
-<thead>
-<tr>
-<th align="center">
- <video controls width="80%"><source src="/Perceptron.mp4"></video> </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">\(w\) is the <a href="https://en.wikipedia.org/wiki/Normal_(geometry)"><em>normal vector</em></a> to the decision boundary. It is updated when there is a classification mistake <em>i.e.</em> when \(d\not=y\). <a href="https://gist.github.com/nathanielbd/9f61a02fd76b244cb180db171998c814">Code</a></td>
-</tr>
-</tbody>
-</table>
-<p>While simple and limited (it can only achieve perfect classification when the data is <a href="https://en.wikipedia.org/wiki/Linear_separability">linearly separable</a>), it has many of the ingredients later used in the deep learning &lsquo;paradigm&rsquo;:</p>
-<h3 id="parameters">Parameters<a href="#parameters" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<p>We may think of each entry \(w_i\) of \(w\) as a variational parameter; \(f\) behaves slightly differently for slightly different combinations of values of all the \(w_i\)s. In fact, \(f\) can model all linear decision boundaries by varying \(w\) and \(b\).</p>
-<p>There are several key differences between deep learning and perceptrons. Of course, deep learning has many more parameters, but the variation of those parameters allow them to model a much richer class of functions than just linear ones. In fact, deeps neural networks <a href="http://neuralnetworksanddeeplearning.com/chap4.html">can approximately compute any function</a>. This enables them to complete many tasks other than classification. For example, deep Q networks approximately compute the function which returns the <a href="https://en.wikipedia.org/wiki/Q-learning#Algorithm">reward given a state and an action</a> in order to determine the optimal policy of an agent in an environment such as an Atari game.</p>
-<table>
-<thead>
-<tr>
-<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Q-Learning_Matrix_Initialized_and_After_Training.png" alt="Credit: LearnDataSci, Wikipedia"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">Q-learning approximating the state-action function through the training process</td>
-</tr>
-</tbody>
-</table>
-<p><em>Note</em>: You might have noticed that \(b\) is not changed in the training algorithm despite being a parameter. In practice, we often solve this by having \(w_0\) be the bias and appending 1 as the first entry of each row \(x\) in \(X\).</p>
-<h3 id="convergence">Convergence<a href="#convergence" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<p>The training algorithm stops when \(w\) ceases to change by a certain amount with each step.</p>
-<p>More importantly, this is achieved <em>despite</em> the random initialization of \(w\). The training algorithm can correct mistakes during training by the vector addition</p>
-<p>$$w := w + r(d-y)x$$</p>
-<p>which rotates the decision boundary in the appropriate direction, as seen in the animation. Deep learning makes a more powerful generalization to convergence and self-correction: loss functions. While linear decision boundaries can measure their performance by computing the dot product and therefore the <a href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity</a> of its norm and positive-class data points, we can define loss functions which establishes how well the neural network is approximating the desired function. Since these loss functions are differentiable with respect to our parameters, we can iteratively subtract multiples of the gradient for self-correction instead of vector addition like the perceptron does. Actually, there are a rich class of optimization algorithms based on the gradient and Hessian of the loss function.</p>
-<table>
-<thead>
-<tr>
-<th align="center"><img src="https://emiliendupont.github.io/imgs/optim_viz_only_adam.png" alt="so cool"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">Check out this <a href="https://emiliendupont.github.io/2018/01/24/optimization-visualization/">wonderful visualization</a> of optimization algorithms by Emilien Dupont</td>
-</tr>
-</tbody>
-</table>
-<h3 id="activation-functions">Activation functions<a href="#activation-functions" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<p>Notice in the definition of \(f\) that we predicted the class based on whether the sign of \(w \cdot x + b\) was positive or negative. This alludes to the concept of an activation function: an operation applied on the outputs of the neural network so that its computation is not merely matrix or vector multiplication. Can you convince yourself that matrix multiplication alone does not enable universal function approximation? That activation functions like <a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a> does? What about <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a>?</p>
-<hr>
-<p>Although in retrospect it is easy to trace many of the features of the deep learning paradigm to the perceptron, this connectionist view of AI is one that was developed over several decades after Frank Rosenblatt&rsquo;s original research on the perceptron. To me, it&rsquo;s a fun toy example to plant the seeds in an enthusiast&rsquo;s mind for the future contributions by Werbos, Rumelhart, Hopfield, McCullough, and more!</p>
+	<main class="site-main section-inner thin animated fadeIn faster">
+		<h1>Animations</h1>
+		<div class="content">
+			<p>TODO: make this and change config.toml to make it visible</p>
 
-			</div>
-			<hr class="post-end">
-			<footer class="post-info">
-				<p>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://nathanielbd.github.io/tags/machine-learning">machine learning</a></span>
-				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>687 Words</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-01-08 00:21 -0600</p>
-			</footer>
-		</article>
-		<div class="post-nav thin">
-			<a class="next-post" href="https://nathanielbd.github.io/posts/hacking-the-normie-test/">
-				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Hacking the Normie Test</span>
-			</a>
-			<a class="prev-post" href="https://nathanielbd.github.io/posts/making-a-portfolio-site/">
-				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Making a Portfolio Site</span>
-			</a>
 		</div>
-		<div id="comments" class="thin">
-</div>
 	</main>
 
 	<footer id="site-footer" class="section-inner thin animated fadeIn faster">

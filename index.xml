@@ -13,12 +13,33 @@
     
     
     <item>
+      <title>Animations</title>
+      <link>https://nathanielbd.github.io/animations/</link>
+      <pubDate>Mon, 05 Jul 2021 17:44:10 -0500</pubDate>
+      
+      <guid>https://nathanielbd.github.io/animations/</guid>
+      <description>TODO: make this and change config.toml to make it visible</description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>https://nathanielbd.github.io/projects/</link>
+      <pubDate>Mon, 05 Jul 2021 16:49:33 -0500</pubDate>
+      
+      <guid>https://nathanielbd.github.io/projects/</guid>
+      <description>An incomplete list of some things I&amp;rsquo;ve worked on outside of jobs and school that aren&amp;rsquo;t mentioned in the blog. All of the projects have their own GitHub repository of code either on my profile or one of the organizations on my profile.
+2021 I got my first industry research job!
+ 2020 I turned 18 years old!
+WhoDaMan A multiplayer trivia game named after a classmate&amp;rsquo;s quote on Jeopardy!. I created the playable webapp, a tutorial, and open-source community version where anyone can contribute to learn by doing!</description>
+    </item>
+    
+    <item>
       <title>Celebrating Aleksandr Lyapunov</title>
       <link>https://nathanielbd.github.io/posts/celebrating-aleksandr-lyapunov/</link>
       <pubDate>Sun, 06 Jun 2021 16:04:16 -0500</pubDate>
       
       <guid>https://nathanielbd.github.io/posts/celebrating-aleksandr-lyapunov/</guid>
-      <description>Happy 164th birthday, Aleksandr Lyapunov!    I recently participated in the first annual Manim math animation engine hackathon! The theme was aniversaries, so I created the above animation to celebrate the 164t anniversary of mathematician Aleksandr Lyapunov&amp;rsquo;s birth. This extended some ideas I presented from Steven Strogatz&amp;rsquo;s nonlinear dynamics textbook at the University of Minnesota&amp;rsquo;s math directed reading program symposium.</description>
+      <description>Happy 164th birthday, Aleksandr Lyapunov!    I recently participated in the first annual Manim math animation engine hackathon! The theme was aniversaries, so I created the above animation to celebrate the 164th anniversary of mathematician Aleksandr Lyapunov&amp;rsquo;s birth. This extended some ideas I presented from Steven Strogatz&amp;rsquo;s nonlinear dynamics textbook at the University of Minnesota&amp;rsquo;s math directed reading program symposium.</description>
     </item>
     
     <item>
@@ -98,7 +119,7 @@ Segways need a robust mechanism for correcting itself in order to self-balance.<
       <description>My name is Nathaniel Budijono.
 I&amp;rsquo;m a life-long autodidact currently studying computer science and math at the University of Minnesota. In the future, I hope to be an interdisciplinary computational researcher using computational structural biology or computational chemistry to create technologies for health and the climate.
 Right now, I am reading
- Nonlinear Dynamics and Chaos with Applications to Physics, Biology, Chemistry, and Engineering by Steven Strogatz Quantum Computation and Quantum Information by Michael Nielsen and Isaac Chuang  You can view my résumé here and my CV here.</description>
+ Nonlinear Dynamics and Chaos with Applications to Physics, Biology, Chemistry, and Engineering by Steven Strogatz Quantum Computation and Quantum Information by Michael Nielsen and Isaac Chuang  In the past, I have worked as a software engineer intern at Rally Health and AI research intern at Smart Information Flow Technologies.</description>
     </item>
     
   </channel>
