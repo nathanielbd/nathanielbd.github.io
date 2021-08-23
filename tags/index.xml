@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 06 Jun 2021 16:04:16 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 22 Aug 2021 17:33:48 -0600</lastBuildDate>
     
 	<atom:link href="https://nathanielbd.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>computational number theory</title>
+      <link>https://nathanielbd.github.io/tags/computational-number-theory/</link>
+      <pubDate>Sun, 22 Aug 2021 17:33:48 -0600</pubDate>
+      
+      <guid>https://nathanielbd.github.io/tags/computational-number-theory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mathematical cryptography</title>
+      <link>https://nathanielbd.github.io/tags/mathematical-cryptography/</link>
+      <pubDate>Sun, 22 Aug 2021 17:33:48 -0600</pubDate>
+      
+      <guid>https://nathanielbd.github.io/tags/mathematical-cryptography/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming</title>
+      <link>https://nathanielbd.github.io/tags/programming/</link>
+      <pubDate>Sun, 22 Aug 2021 17:33:48 -0600</pubDate>
+      
+      <guid>https://nathanielbd.github.io/tags/programming/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>dynamical systems</title>
@@ -63,15 +90,6 @@
       <pubDate>Sun, 30 Aug 2020 15:39:47 -0500</pubDate>
       
       <guid>https://nathanielbd.github.io/tags/sase-labs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>programming</title>
-      <link>https://nathanielbd.github.io/tags/programming/</link>
-      <pubDate>Sat, 25 Jul 2020 18:26:45 -0500</pubDate>
-      
-      <guid>https://nathanielbd.github.io/tags/programming/</guid>
       <description></description>
     </item>
     

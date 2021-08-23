@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="The Algorithm Built to Fail">
+<meta itemprop="description" content="This is my entry for 3blue1brown&rsquo;s first summer of math exposition (SoME1)
+ There&rsquo;s no question that elliptic curves are incredibly important to math and cryptography.
+        ECC spotted in Wikipedia&rsquo;s security certificate    It was the key to Andrew Wiles&rsquo;s famous proof of Fermat&rsquo;s Last Theorem. But its most creative use, in my opinion, was its application in my favorite algorithm.">
+<meta itemprop="datePublished" content="2021-08-22T17:33:48-06:00" />
+<meta itemprop="dateModified" content="2021-08-22T17:33:48-06:00" />
+<meta itemprop="wordCount" content="2108">
+
+
+
+<meta itemprop="keywords" content="mathematical cryptography,computational number theory,programming," /><meta property="og:title" content="The Algorithm Built to Fail" />
+<meta property="og:description" content="This is my entry for 3blue1brown&rsquo;s first summer of math exposition (SoME1)
+ There&rsquo;s no question that elliptic curves are incredibly important to math and cryptography.
+        ECC spotted in Wikipedia&rsquo;s security certificate    It was the key to Andrew Wiles&rsquo;s famous proof of Fermat&rsquo;s Last Theorem. But its most creative use, in my opinion, was its application in my favorite algorithm." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nathanielbd.github.io/posts/algorithm-built-to-fail/" />
+<meta property="article:published_time" content="2021-08-22T17:33:48-06:00" />
+<meta property="article:modified_time" content="2021-08-22T17:33:48-06:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The Algorithm Built to Fail"/>
+<meta name="twitter:description" content="This is my entry for 3blue1brown&rsquo;s first summer of math exposition (SoME1)
+ There&rsquo;s no question that elliptic curves are incredibly important to math and cryptography.
+        ECC spotted in Wikipedia&rsquo;s security certificate    It was the key to Andrew Wiles&rsquo;s famous proof of Fermat&rsquo;s Last Theorem. But its most creative use, in my opinion, was its application in my favorite algorithm."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>The Algorithm Built to Fail</title>
+	<link rel="stylesheet" href="https://nathanielbd.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+	
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<style>
+ 
+.gist{font-size: 18px}.gist-meta, .gist-file, .octotree_toggle, ul.comparison-list > li.title,button.button, a.button, span.button, button.minibutton, a.minibutton,span.minibutton, .clone-url-button > .clone-url-link{background: linear-gradient(#202020, #181818) !important;border-color: #383838 !important;border-radius: 0 0 3px 3px !important;text-shadow: none !important;color: #b5b5b5 !important}.markdown-format pre, .markdown-body pre, .markdown-format .highlight pre,.markdown-body .highlight pre, body.blog pre, #facebox pre, .blob-expanded,.terminal, .copyable-terminal, #notebook .input_area, .blob-code-context,.markdown-format code, body.blog pre > code, .api pre, .api code,.CodeMirror,.highlight{background-color: #1D1F21!important;color: #C5C8C6!important}.gist .blob-code{padding: 1px 10px !important;text-align: left;background: #000;border: 0}::selection{background: #24890d;color: #fff;text-shadow: none}::-moz-selection{background: #24890d;color: #fff;text-shadow: none}.blob-num{padding: 10px 8px 9px;text-align: right;color: #6B6B6B!important;border: 0}.blob-code,.blob-code-inner{color: #C5C8C6!important}.pl-c,.pl-c span{color: #969896!important;font-style: italic!important}.pl-c1{color: #DE935F!important}.pl-cce{color: #DE935F!important}.pl-cn{color: #DE935F!important}.pl-coc{color: #DE935F!important}.pl-cos{color: #B5BD68!important}.pl-e{color: #F0C674!important}.pl-ef{color: #F0C674!important}.pl-en{color: #F0C674!important}.pl-enc{color: #DE935F!important}.pl-enf{color: #F0C674!important}.pl-enm{color: #F0C674!important}.pl-ens{color: #DE935F!important}.pl-ent{color: #B294BB!important}.pl-entc{color: #F0C674!important}.pl-enti{color: #F0C674!important;font-weight: 700!important}.pl-entm{color: #C66!important}.pl-eoa{color: #B294BB!important}.pl-eoac{color: #C66!important}.pl-eoac .pl-pde{color: #C66!important}.pl-eoai{color: #B294BB!important}.pl-eoai .pl-pde{color: #B294BB!important}.pl-eoi{color: #F0C674!important}.pl-k{color: #B294BB!important}.pl-ko{color: #B294BB!important}.pl-kolp{color: #B294BB!important}.pl-kos{color: #DE935F!important}.pl-kou{color: #DE935F!important}.pl-mai .pl-sf{color: #C66!important}.pl-mb{color: #B5BD68!important;font-weight: 700!important}.pl-mc{color: #B294BB!important}.pl-mh .pl-pdh{color: #DE935F!important}.pl-mi{color: #B294BB!important;font-style: italic!important}.pl-ml{color: #B5BD68!important}.pl-mm{color: #C66!important}.pl-mp{color: #81A2BE!important}.pl-mp1 .pl-sf{color: #81A2BE!important}.pl-mq{color: #DE935F!important}.pl-mr{color: #B294BB!important}.pl-ms{color: #B294BB!important}.pl-pdb{color: #B5BD68!important;font-weight: 700!important}.pl-pdc{color: #969896!important;font-style: italic!important}.pl-pdc1{color: #DE935F!important}.pl-pde{color: #DE935F!important}.pl-pdi{color: #B294BB!important;font-style: italic!important}.pl-pds{color: #B5BD68!important}.pl-pdv{color: #C66!important}.pl-pse{color: #DE935F!important}.pl-pse .pl-s2{color: #DE935F!important}.pl-s{color: #B294BB!important}.pl-s1{color: #B5BD68!important}.pl-s2{color: #c5c8c6!important}.pl-mp .pl-s3{color: #B294BB!important}.pl-s3{color: #81a2be!important}.pl-sc{color: #c5c8c6!important}.pl-scp{color: #DE935F!important}.pl-sf{color: #DAD085!important}.pl-smc{color: #F0C674!important}.pl-smi{color: #c5c8c6!important}.pl-smp{color: #c5c8c6!important}.pl-sok{color: #B294BB!important}.pl-sol{color: #B5BD68!important}.pl-som{color: #C66!important}.pl-sr{color: #C66!important}.pl-sra{color: #B294BB!important}.pl-src{color: #B294BB!important}.pl-sre{color: #B294BB!important}.pl-st{color: #B294BB!important}.pl-stj{color: #c5c8c6!important}.pl-stp{color: #DE935F!important}.pl-sv{color: #DE935F!important}.pl-v{color: #DE935F!important}.pl-vi{color: #DE935F!important}.pl-vo{color: #C66!important}.pl-vpf{color: #DE935F!important}.pl-mi1{color: #8F9D6A!important;background: rgba(0,64,0,.5)!important}.pl-mdht{color: #8F9D6A!important;background: rgba(0,64,0,.5)!important}.pl-md{color: #C66!important;background: rgba(64,0,0,.5)!important}.pl-mdhf{color: #C66!important;background: rgba(64,0,0,.5)!important}.pl-mdr{color: #DE935F!important;font-weight: 400!important}.pl-mdh{color: #C66!important;font-weight: 400!important}.pl-mdi{color: #C66!important;font-weight: 400!important}.pl-ib{background-color: #C66!important}.pl-id{background-color: #C66!important;color: #fff!important}.pl-ii{background-color: #C66!important;color: #fff!important}.pl-iu{background-color: #C66!important}.pl-mo{color: #c5c8c6!important}.pl-mri{color: #DE935F!important}.pl-ms1{background-color: #c5c8c6!important}.pl-va{color: #DE935F!important}.pl-vpu{color: #DE935F!important}.pl-entl{color: #c5c8c6!important}.CodeMirror-gutters{background: #222!important;border-right: 1px solid #484848!important}.CodeMirror-guttermarker{color: #fff!important}.CodeMirror-guttermarker-subtle{color: #aaa!important}.CodeMirror-linenumber{color: #aaa!important}.CodeMirror-cursor{border-left: 1px solid #fff!important}.CodeMirror-activeline-background{background: #27282E!important}.CodeMirror-matchingbracket{outline: 1px solid grey!important;color: #fff!important}.cm-keyword{color: #f9ee98!important}.cm-atom{color: #FC0!important}.cm-number{color: #ca7841!important}.cm-def{color: #8DA6CE!important}.cm-variable-2,span.cm-tag{color: #607392!important}.cm-variable-3,span.cm-def{color: #607392!important}.cm-operator{color: #cda869!important}.cm-comment{color: #777!important;font-style: italic!important;font-weight: 400!important}.cm-string{color: #8f9d6a!important}.cm-string-2{color: #bd6b18!important}.cm-meta{background-color: #141414!important;color: #f7f7f7!important}.cm-builtin{color: #cda869!important}.cm-tag{color: #997643!important}.cm-attribute{color: #d6bb6d!important}.cm-header{color: #FF6400!important}.cm-hr{color: #AEAEAE!important}.cm-link{color: #ad9361!important;font-style: italic!important;text-decoration: none!important}.cm-error{border-bottom: 1px solid red!important}#notebook .highlight table{background: #1d1f21!important;color: #c5c8c6!important}.highlight .hll{background-color: #373b41!important}.highlight .c{color: #969896!important}.highlight .err{color: #c66!important}.highlight .k{color: #b294bb!important}.highlight .l{color: #de935f!important}.highlight .h,.highlight .n{color: #c5c8c6!important}.highlight .o{color: #8abeb7!important}.highlight .p{color: #c5c8c6!important}.highlight .cm{color: #969896!important}.highlight .cp{color: #969896!important}.highlight .c1{color: #969896!important}.highlight .cs{color: #969896!important}.highlight .gd{color: #c66!important}.highlight .ge{font-style: italic!important}.highlight .gh{color: #c5c8c6!important;font-weight: 700!important}.highlight .gi{color: #b5bd68!important}.highlight .gp{color: #969896!important;font-weight: 700!important}.highlight .gs{font-weight: 700!important}.highlight .gu{color: #8abeb7!important;font-weight: 700!important}.highlight .kc{color: #b294bb!important}.highlight .kd{color: #b294bb!important}.highlight .kn{color: #8abeb7!important}.highlight .kp{color: #b294bb!important}.highlight .kr{color: #b294bb!important}.highlight .kt{color: #f0c674!important}.highlight .ld{color: #b5bd68!important}.highlight .m{color: #de935f!important}.highlight .s{color: #b5bd68!important}.highlight .na{color: #81a2be!important}.highlight .nb{color: #c5c8c6!important}.highlight .nc{color: #f0c674!important}.highlight .no{color: #c66!important}.highlight .nd{color: #8abeb7!important}.highlight .ni{color: #c5c8c6!important}.highlight .ne{color: #c66!important}.highlight .nf{color: #81a2be!important}.highlight .nl{color: #c5c8c6!important}.highlight .nn{color: #f0c674!important}.highlight .nx{color: #81a2be!important}.highlight .py{color: #c5c8c6!important}.highlight .nt{color: #8abeb7!important}.highlight .nv{color: #c66!important}.highlight .ow{color: #8abeb7!important}.highlight .w{color: #c5c8c6!important}.highlight .mf{color: #de935f!important}.highlight .mh{color: #de935f!important}.highlight .mi{color: #de935f!important}.highlight .mo{color: #de935f!important}.highlight .sb{color: #b5bd68!important}.highlight .sc{color: #c5c8c6!important}.highlight .sd{color: #969896!important}.highlight .s2{color: #b5bd68!important}.highlight .se{color: #de935f!important}.highlight .sh{color: #b5bd68!important}.highlight .si{color: #de935f!important}.highlight .sx{color: #b5bd68!important}.highlight .sr{color: #b5bd68!important}.highlight .s1{color: #b5bd68!important}.highlight .ss{color: #b5bd68!important}.highlight .bp{color: #c5c8c6!important}.highlight .vc{color: #c66!important}.highlight .vg{color: #c66!important}.highlight .vi{color: #c66!important}.highlight .il{color: #de935f!important}
+</style>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://nathanielbd.github.io">nathanielbd</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://nathanielbd.github.io/posts/">Posts</a>
+				<a href="https://nathanielbd.github.io/about">About</a>
+				<a href="https://nathanielbd.github.io/projects">Projects</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://github.com/nathanielbd" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://linkedin.com/in/nathanielbd" target="_blank" rel="noopener me" title="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="mailto:nathanielbd@gmail.com" target="_blank" rel="noopener me" title="Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://nathanielbd.github.io/posts/">Posts</a></li>
+			<li><a href="https://nathanielbd.github.io/about">About</a></li>
+			<li><a href="https://nathanielbd.github.io/projects">Projects</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Aug 22, 2021</span></div>
+				<h1>The Algorithm Built to Fail</h1>
+			</header>
+			<div class="content">
+				<p><em>This is my entry for 3blue1brown&rsquo;s <a href="https://www.3blue1brown.com/blog/some1">first summer of math exposition (SoME1)</a></em></p>
+<hr>
+<p>There&rsquo;s no question that elliptic curves are incredibly important to math and cryptography.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/bois.png" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">ECC spotted in Wikipedia&rsquo;s security certificate</td>
+</tr>
+</tbody>
+</table>
+<p>It was the key to Andrew Wiles&rsquo;s <a href="https://doi.org/10.2307/2118559">famous proof</a> of <a href="https://en.wikipedia.org/wiki/Fermat%27s_Last_Theorem">Fermat&rsquo;s Last Theorem</a>. But its most creative use, in my opinion, was its application in my favorite algorithm. Strangely enough, it&rsquo;s an algorithm literally built to fail. My goal is that this blog post reads like a combination of an engaging textbook and a mystery novel. By the end, I hope to give you the feeling that you could have invented this algorithm yourself by piecing together the title of this post and what you&rsquo;ve learned.</p>
+<p>By the way, the this algorithm is a factoring algorithm. The goal is, given an integer, find an equivalent expression that&rsquo;s a product of other integers.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/FactorBois.gif" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">A pretty good example</td>
+</tr>
+</tbody>
+</table>
+<h1 id="what-are-elliptic-curves">What are elliptic curves?<a href="#what-are-elliptic-curves" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p><a href="https://en.wikipedia.org/wiki/Elliptic_curve">Elliptic curves</a> consist of the solutions to</p>
+<p>$$y^2 = x^3 + ax + b.$$</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/ec.gif" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Some choices of \(a\) and \(b\) result in the graph having two components.</td>
+</tr>
+</tbody>
+</table>
+<p>What&rsquo;s interesting about elliptic curves for this algorithm is that it has</p>
+<h2 id="group-structure">Group structure<a href="#group-structure" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>Roughly speaking, we say that a set has a group structure if we can define an operation on all its elements which behaves like addition. That is, for a set \(G\) and \(+\), an operation on \(G\), if</p>
+<ul>
+<li>For all \(a\), \(b\), \(c\) in \(G\), we have \((a + b) + c = a + (b + c)\)</li>
+<li>There exists \(0\) in \(G\) such that, for every \(a\) in \(G\), we have \(0 + a = a + 0 = a\). \(0\) is known as the <em>identity element</em> of \(G\)$</li>
+<li>For each \(a\) in \(G\), there exists a unique \(b\) in \(G\) such that \(a + b = b + a = 0\). \(b = -a\) is known as the <em>inverse</em> of \(a\),</li>
+</ul>
+<p>then \(G\) has group structure.</p>
+<p>In the case of elliptic curves, the elements of the set of the points and the operation of choice involves first drawing a line through the points. The third point that the line passes through is denoted as the inverse of the sum. Since elliptic curves are symmetric, the inverse can be inverted by reflecting across the \(x\)-axis to recover the sum.</p>
+<table>
+<thead>
+<tr>
+<th align="center">
+ <video controls width='80%'><source src='/PointAddition.mp4'></video> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Point addition for the usual case of two distinct points</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><em>Note: If you were confused why we have to invert the third intersection previously, read the following paragraph then consider the above video animating \(P + Q = R\). Rearranging results in \(P + Q - R = \mathcal{O}\). If we did not invert the third intersection, does this equation still hold?</em></p>
+<hr>
+<p>In the case of adding a point to its inverse, there&rsquo;s no third intersection between the line and the curve. This leads us to define the non-existant point &lsquo;at infinity&rsquo; to be the identity element (denoted \(\mathcal{O}\)), since its sum with any other point can be defined as simply the other point, in addition to being the sum of inverses.</p>
+<p>$$P + -P = -P + P = \mathcal{O}$$</p>
+<p>$$P + \mathcal{O} = \mathcal{O} + P = P$$</p>
+<table>
+<thead>
+<tr>
+<th align="center">
+ <video controls width='80%'><source src='/PointAdditionInv.mp4'></video> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Point at infinity not shown</td>
+</tr>
+</tbody>
+</table>
+<p>Last is the case where we add a point to itself.</p>
+<table>
+<thead>
+<tr>
+<th align="center">
+ <video controls width='80%'><source src='/PointAdditionTangent.mp4'></video> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">The drawn line is tangent to the elliptic curve</td>
+</tr>
+</tbody>
+</table>
+<p>With this definition of the addition operation on the curve, we can formulate an algorithm that takes in point coordinates and returns the coordinates of the sum of the points.</p>
+<p><strong>Elliptic curve addition algorithm</strong></p>
+<p>Given the curve</p>
+<p>$$y^2 = x^3 + ax + b$$</p>
+<p>and points \(P = (x_p, y_p)\) and \(Q = (x_q, y_q)\),</p>
+<ol>
+<li>If \(P = \mathcal{O}\), then \(P + Q = Q\)</li>
+<li>If \(Q = \mathcal{O}\), then \(p + Q = P\)</li>
+<li>If \(x_p = x_q\) and \(y_p = y_q\), then \(P + Q = \mathcal{O}\)</li>
+<li>Let the slope be</li>
+</ol>
+<p>$$
+\lambda = \begin{cases}
+\frac{y_q - y_p}{x_q - x_p} &amp; \text{if }P \not= Q \newline
+\frac{3x_1^2 + a}{2y_1} &amp; \text{if }P = Q.
+\end{cases}
+$$</p>
+<p>The first case is the standard rise-over-run calculation of slope. The second is the slope of the tangent line computed via <a href="https://en.wikipedia.org/wiki/Implicit_function#Implicit_differentiation">implicit differentiation</a>.</p>
+<p>Either way, we have our tangent line</p>
+<p>$$y = \lambda x + \nu,$$</p>
+<p>where \(\nu = y_p - \lambda x_p\) is the \(y\)-intercept needed to pass through \(P\).</p>
+<p>We plug this expression of \(y\) into the elliptic curve equation to begin solving for the third intersection:</p>
+<p>$$\begin{equation}(\lambda x + \nu)^2 = x^3 + ax + b.\end{equation}$$</p>
+<p>Expanding, rearranging, and grouping terms gives</p>
+<p>$$0 = x^3 - \lambda^2 x^2 + (a - 2\lambda \nu)x + (b - \nu^2).$$</p>
+<p>Remember, \((1)\) was written using both the tangent line equation and the elliptic curve equation, meaning any solution to the previous equation represents an intersection between the two. So if the third intersection is \(R = (x_r, y_r)\),</p>
+<p>$$
+\begin{aligned}
+(x - x_p)(x - x_q)(x - x_r) &amp;= x^3 - \lambda^2 x^2 + (a - 2\lambda \nu)x + (b - \nu^2) \newline
+x^3 - (x_p + x_q + x_r)x^2 + (x_q x_r + x_p x_r - x_p x_q)x + x_p x_q x_r &amp;= x^3 - \lambda^2 x^2 + (a - 2\lambda \nu)x + (b - \nu^2).
+\end{aligned}
+$$</p>
+<p>Notice the \(x^2\) coefficients imply \(x_p + x_q + x_r = \lambda^2\). We can rearrange this into \(x_r = \lambda^2 - x_p - x_q\) and plug into the tangent line equation to find the corresponding \(y\)-coordinate.</p>
+<p>$$
+\begin{aligned}
+y_r &amp;= \lambda x_r + \nu \newline
+&amp;= \lambda x_r + y_p - \lambda x_p \newline
+&amp;= \lambda(x_r - x_p) + y_p.
+\end{aligned}
+$$</p>
+<p>Finally, we invert the third intersection coordinates to get our answer: \(P + Q = S = (x_r, -y_r)\).</p>
+<hr>
+<p>The other key detail besides the group structure of elliptic curves to consider for this algorithm is considering the curves under</p>
+<h1 id="modular-arithmetic">Modular arithmetic<a href="#modular-arithmetic" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/ECtoFF.gif" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Modular arithmetic works on integers making the elliptic curve look unrecognizable</td>
+</tr>
+</tbody>
+</table>
+<p>Modular arithmetic refers to the system of operating on the integers where numbers &lsquo;wrap around&rsquo; when reaching a critical value called the modulus. In modular arithmetic, we may take expressions &lsquo;modulo&rsquo; or &lsquo;mod&rsquo; the modulus, meaning that we take the remainder after dividing by the modulus.</p>
+<p>For us to continue to be able to add points elliptic curves under modular arithmetic, we need to see the modular equivalents to operations in the procedure:</p>
+<p>$$
+\lambda = \begin{cases}
+\frac{y_q - y_p}{x_q - x_p} &amp; \text{if }P \not= Q \newline
+\frac{3x_1^2 + a}{2y_1} &amp; \text{if }P = Q.
+\end{cases}
+$$</p>
+<p>Addition, subtraction, multiplication, and division.</p>
+
+
+<table>
+  <tr>
+    <td><img src='/ModAdd.gif'/></td>
+    <td><img src='/ModSub.gif'></td>
+  </tr>
+  <tr>
+    <td colspan=2><center>Modular arithmetic is sometimes called clock arithmetic for its familiar use in clocks</center></td>
+  </tr>
+</table>
+
+<p>Multiplication behaves well under modular arithmetic thanks to the useful property</p>
+<p>$$(a \cdot b) \mod n = (a \mod n)(b \mod n) \mod n.$$</p>
+<p>Division is slightly more complicated. But modular division is slightly more complicated. It requires finding a number called the modular multiplicative inverse. In regular arithmetic, if we wanted to divide by 5, we could just multiply by one fifth&mdash;its reciprocal, the number to multiply to get 1. Here in modular arithmetic land, we&rsquo;re going to use the extended Euclidean algorithm to find the modular multiplicative inverse and make modular division possible.</p>
+<h2 id="extended-euclidean-algorithm">Extended Euclidean algorithm<a href="#extended-euclidean-algorithm" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>Given integers \(a\) and \(b\), the extended Euclidean algorithm finds solutions to</p>
+<p>$$\begin{equation}au + bv = \gcd(a, b),\end{equation}$$</p>
+<p>where \(\gcd(a, b)\) is the greatest common divisor (GCD) of \(a\) and \(b\), the largest number that divides both numbers of interest evenly. Let&rsquo;s see how it works with an example with \(a = 21\) and \(b = 71\). First, we compute \(\gcd(a, b)\) using the regular, non-extended, Euclidean algorithm. You simply store remainder, divide, and repeat.</p>
+<p>$$
+\begin{aligned}
+71 &amp;= 3 \cdot 21 + 8 \newline
+21 &amp;= 2 \cdot 8 + 5 \newline
+8 &amp;= 1 \cdot 5 + 3 \newline
+5 &amp;= 1 \cdot 3 + 2 \newline
+3 &amp;= 1 \cdot 2 + 1 \newline
+2 &amp;= 2 \cdot 1 + 0 \newline
+\end{aligned}
+$$</p>
+<p>Each step after</p>
+<p>$$
+\begin{aligned}
+b &amp;= m_0 a + r_0 \newline
+a &amp;= m_1 r_0 + r_1 \newline
+\end{aligned}
+$$</p>
+<p>is in the general form</p>
+<p>$$r_{i-2} = m_i r_{i-1} + r_i.$$</p>
+<p>The remainders \(r_0, r_1, r_2, \dots r_n = 8, 5, 3, \dots 0\) are non-increasing. Since we know that the last remainder is 0, \(r_{n-1}\) evenly divides \(r_{n-2} = m_n r_{n-1}\). \(r_{n-1}\) also divides</p>
+<p>$$
+\begin{aligned}
+r_{n-3} &amp;= m_{n-1} r_{n-2} + r_{n-1} \newline
+&amp;= m_{n-1} (m_n r_{n-1}) + r_{n-1} \newline
+&amp;= (m_{n-1} m_n + 1) r_{n-1}.
+\end{aligned}
+$$</p>
+<p>We can continue this pattern all the way back up to show that \(r_{n-1}\) divides \(b\) and \(a\) like a GCD should.</p>
+<p>$$\gcd(21, 71) = 1$$</p>
+<p>Next, we work backwards to find \(u\) and \(v\) from \((2)\).</p>
+<p>$$
+\begin{aligned}
+8 &amp;= 1 \cdot 71 + -3 \cdot 21 \newline
+5 &amp;= 0 \cdot 71 + 1 \cdot 21 - 2 (1 \cdot 71 + -3 \cdot 21) = -2 \cdot 71 + 7 \cdot 21 \newline
+3 &amp;= 1 \cdot 71 + -3 \cdot 21 - 1 (-2 \cdot 71 + 7 \cdot 21) = 3 \cdot 71 + -10 \cdot 21 \newline
+2 &amp;= -2 \cdot 71 + 7 \cdot 21 - 1 (3 \cdot 71 + -10 \cdot 21) = -5 \cdot 71 + 17 \cdot 21 \newline
+1 &amp;= 3 \cdot 71 + -10 \cdot 21 - 1 (-5 \cdot 71 + 17 \cdot 21) = 8 \cdot 71 + -27 \cdot 21
+\end{aligned}
+$$</p>
+<p>So we have
+$$
+\begin{aligned}
+au + bv &amp;= \gcd(a, b) \newline
+au + bv &amp;= 1 \newline
+au - 1 &amp;= -bv \newline
+au - 1 &amp;= 0 \mod b \newline
+au &amp;= 1 \mod b.
+\end{aligned}
+$$</p>
+<p>By definition, \(u\) is the modular multiplicative; when multiplied with \(a\) it is congruent to \(1 \mod b\). In this case, -27 is the modular multiplicative inverse of 21 modulo 71.</p>
+<p>Notice that \(\gcd(a, b)\) had to be equal to 1 for this to work. Similar to regular arithmetic needing a number to be non-zero for division, modular arithmetic also has conditions for division.</p>
+<h1 id="recap">Recap<a href="#recap" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>At this point, you have all you need to be able to come up with a factoring algorithm using elliptic curves modulo a number. Given the context of everything you&rsquo;ve learned, can you come up with an algorithm?</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/lenstra_topics.png" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Goals: factor a number, fail along the way</td>
+</tr>
+</tbody>
+</table>
+<p>Consider the title of this post as your final hint.</p>
+<h1 id="the-reveal">The reveal<a href="#the-reveal" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<p>The key is to consider the scenario where \(\gcd(a, b)\) is not 1. That would mean the extended Euclidan algorithm fails to compute a modular multiplicative inverse. We fail to divide when calculating the slope and it is undefined.</p>
+<p>But if \(\gcd(a, b) = c &gt; 1\), then \(c\) is a number we can use to factor \(a\) or \(b\), since it divides both!</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/tangent.png" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Undefined slope, but due to failure to divide from dividing by zero, not \(\gcd \not= 1\)</td>
+</tr>
+</tbody>
+</table>
+<p>Now our algorithm just needs</p>
+<ol>
+<li>a way to generate elliptic curves modulo the number to be factored</li>
+<li>a way to quickly add many points</li>
+</ol>
+<p>We can accomplish both of these by picking the coordinates of a point, defining an elliptic curve such that it contains that point, and adding that point to itself repeatedly*. If we choose \(P = (a, b)\), then pick a random \(A\), we have</p>
+<p>$$
+\begin{aligned}
+y^2 &amp;= x^3 + Ax + B \mod N \newline
+b^2 &amp;= a^3 + Aa + B \mod N
+\end{aligned}
+$$</p>
+<p>when we evalute the curve at \(P\). In order for \(P\) to be a solution of the curve, we must have \(B = b^2 - a^3 - Aa \mod N\) to satisfy the equation.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/ecs.gif" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Choosing random elliptic curves</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><em>Note: in reality, it is faster to compute \(n!P\) in the \(n\)th step of the algorithm than to repeatedly add a point ot itself. This is accomplished by the double-and-add algorithm, which I will cover in the sequel post.</em></p>
+<hr>
+<h1 id="conclusion">Conclusion<a href="#conclusion" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>I hope you were able to reinvent this algorithm&mdash;Lenstra&rsquo;s elliptic curve factorization algorithm&mdash;before its reveal.</p>
+<p>It&rsquo;s intriguing that the algorithm doesn&rsquo;t just fail, but accomplishes its goal as a result of failing to compute a value. If only math tests were like that!</p>
+<p>I plan to write a follow-up post to this one where I implement the algorithm in Python. Along the way, you can expect to learn about the programming conditions known as exceptions and how they can be used to write what might be the most intuitive implementation of the algorithm. Stay tuned and if you want to look ahead, see <a href="https://github.com/nathanielbd/HPS-crypto">the source code</a>.</p>
+<h1 id="acknowledgements">Acknowledgements<a href="#acknowledgements" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>I learned this from <em>An Introduction to Mathematical Cryptography</em> by Hoffstein, Pipher and Silverman.</p>
+<p>Animations are made with <a href="https://www.manim.community/">ManimCE</a> and illustrations with <a href="https://www.figma.com">Figma</a>.</p>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://nathanielbd.github.io/tags/mathematical-cryptography">mathematical cryptography</a></span><span class="tag"><a href="https://nathanielbd.github.io/tags/computational-number-theory">computational number theory</a></span><span class="tag"><a href="https://nathanielbd.github.io/tags/programming">programming</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2108 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-08-22 18:33 -0500</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="https://nathanielbd.github.io/posts/celebrating-aleksandr-lyapunov/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Celebrating Aleksandr Lyapunov</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2021 <a href="https://nathanielbd.github.io">Nathaniel Budijono</a></p>
+		<p>
+		</p>
+	</footer>
+
+
+
+	<script src="https://nathanielbd.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-168359675-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+</body>
+
+</html>
