@@ -12,7 +12,7 @@
         Almost as sarcastic as Zork, but in first person    Looking back, I realize that this unconventional way of getting into programming exposed me to several important concepts early. Let&rsquo;s look at a few from the perspective of a programming noob.">
 <meta itemprop="datePublished" content="2020-07-25T18:26:45-05:00" />
 <meta itemprop="dateModified" content="2020-07-25T18:26:45-05:00" />
-<meta itemprop="wordCount" content="1587">
+<meta itemprop="wordCount" content="1588">
 
 
 
@@ -122,7 +122,7 @@
 </table>
 <h2 id="code-obfuscation">Code Obfuscation<a href="#code-obfuscation" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 <p>Obfuscation is the process of deliberately making code hard to read by humans. In the case of a JavaScript app like Protobowl, it makes the scripts sent to the user for the web-page smaller and quicker to download. This meant that while they will be harder to find, if there is a vulnerability in <code>app.js</code>, I would be able to execute it on my device (the client).</p>
-<p>A common patten in obfuscation is renaming variables from their human-readable names to typically 1-2 letter names. However, you cannot change strings without changing the behavior of the program. Therefore, any string found in the source code will be found verbatim in the obfuscated code I find on my device. The tricky part would be finding a string that would lead me directly to a vulnerability&hellip;</p>
+<p>A common pattern in obfuscation is renaming variables from their human-readable names to typically 1-2 letter names. However, you cannot change strings without changing the behavior of the program. Therefore, any string found in the source code will be found verbatim in the obfuscated code I find on my device. The tricky part would be finding a string that would lead me directly to a vulnerability&hellip;</p>
 <h2 id="css-selector-strings-and-the-dom">CSS Selector Strings and the DOM<a href="#css-selector-strings-and-the-dom" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 <p>My idea for a vulnerability was to trigger an event to reveal the current question&rsquo;s answer before the question had actually ended. I knew the HTML for the page looked like this:</p>
 <pre><code>&lt;div id=&quot;history&quot;&gt;
@@ -187,7 +187,7 @@
 </table>
 <p>The first code I ever read was obfuscated and the first code I ever wrote was a webgame exploit, but I&rsquo;d argue that this natural introduction to the DOM, HTML, and CSS gave me a good start as a beginner.</p>
 <h1 id="morsecodeme">morsecode.me<a href="#morsecodeme" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
-<p>This is a weekend project by <a href="https://twitter.com/bkanber">Burak Kanber</a> that hosts morse code chat rooms. In my attempt to create a tool to allow me to chat without knowing any morse code, I got a healthy taste of JavaScript higher-order functions, concurrency, and <code>Promise</code>s.</p>
+<p>This is a weekend project by <a href="https://twitter.com/bkanber">Burak Kanber</a> that hosts Morse code chat rooms. In my attempt to create a tool to allow me to chat without knowing any Morse code, I got a healthy taste of JavaScript higher-order functions, concurrency, and <code>Promise</code>s.</p>
 <table>
 <thead>
 <tr>
@@ -201,7 +201,7 @@
 </tbody>
 </table>
 <h2 id="the-idea">The idea<a href="#the-idea" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<p>Instead of using the button to emit the dits and dahs of morse code, let&rsquo;s create a tool that will translate your keypresses into the appropriate dits and dahs.</p>
+<p>Instead of using the button to emit the &lsquo;dits&rsquo; and &lsquo;dahs&rsquo; of Morse code, let&rsquo;s create a tool that will translate your keypresses into the appropriate dits and dahs.</p>
 <h3 id="signal-duration">Signal duration<a href="#signal-duration" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>We can use <code>mouseup</code> and <code>mousedown</code> events to trigger the signal, but there needs to be a way to sleep between those two events. There isn&rsquo;t any sleep function, but asynchronous functions can pause their execution until another function returns a fulfilled <code>Promise</code>. Here, a <code>Promise</code> is an object that holds information on the completion of an asynchronous call. It is said to be fulfilled when that call is completed.</p>
 <p>If our asynchronous call is <code>setTimeout</code>, we can create our own &lsquo;sleep&rsquo; from scratch.</p>
@@ -288,14 +288,14 @@
 </thead>
 <tbody>
 <tr>
-<td align="center">I still don&rsquo;t fully know morse code</td>
+<td align="center">I still don&rsquo;t fully know Morse code</td>
 </tr>
 </tbody>
 </table>
 <h1 id="skribblio">skribbl.io<a href="#skribblio" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
 <p>It&rsquo;s a popular game similar to Pictionary, except you know how many letters the word is like in Hangman. I found that <a href="https://github.com/skribbliohints/skribbliohints.github.io">someone had collected data using a bot that played on the site for months</a>, so I decided to create an exploit for it also.</p>
 <h2 id="the-idea-1">The idea<a href="#the-idea-1" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<p>The idea is essentially what didn&rsquo;t end up happening with the morse code exploit; add possible words into a queue and have a <code>setInterval</code> guess from the queue as fast as possible (without getting banned for spam).</p>
+<p>The idea is essentially what didn&rsquo;t end up happening with the Morse code exploit; add possible words into a queue and have a <code>setInterval</code> guess from the queue as fast as possible (without getting banned for spam).</p>
 <p><em>Aside</em>: Looking back, the familiarity with this pattern of fetching data to store for future use probably helped me learn React very quickly. Have you ever written a <code>componentDidMount</code> before?</p>
 <h3 id="regex">RegEx<a href="#regex" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>The idea is somewhat simple, but a complicated part is trying to only guess words that fit the number of letters and any letter that is revealed.</p>
@@ -307,11 +307,11 @@
 </thead>
 <tbody>
 <tr>
-<td align="center"><em>Ackchually</em> he&rsquo;s called &lsquo;The Child&rsquo;</td>
+<td align="center"><em>Ackchually</em> he&rsquo;s called <del>'The Child'</del> Grogu</td>
 </tr>
 </tbody>
 </table>
-<p>For what is revealed here, we want to guess &lsquo;soda,&rsquo; &lsquo;yoda,&rsquo; or any four letter words containing a &rsquo;d&rsquo; in the third spot. This turns out to be a natural place to use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">regular expressions</a> since they can match patterns in strings.</p>
+<p>For what is revealed here, we want to guess &lsquo;soda,&rsquo; &lsquo;Yoda,&rsquo; or any four letter words containing a &rsquo;d&rsquo; in the third spot. This turns out to be a natural place to use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">regular expressions</a> since they can match patterns in strings.</p>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">hint</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#currentWord&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">textContent</span><span class="p">;</span> 
 <span class="c1">// &#39;__d_&#39;
 </span><span class="c1"></span><span class="kd">var</span> <span class="nx">regex</span> <span class="o">=</span> <span class="s1">&#39;^&#39;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">raw</span><span class="sb">`</span><span class="err">\</span><span class="sb">b`</span> <span class="o">+</span> <span class="nx">hint</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/_/g</span><span class="p">,</span> <span class="s1">&#39;[a-zA-Z0-9]&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/ /g</span><span class="p">,</span> <span class="nb">String</span><span class="p">.</span><span class="nx">raw</span><span class="sb">`</span><span class="err">\</span><span class="sb">s`</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">raw</span><span class="sb">`</span><span class="err">\</span><span class="sb">b`</span> <span class="o">+</span> <span class="s1">&#39;$&#39;</span><span class="p">;</span>
@@ -368,7 +368,7 @@
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://nathanielbd.github.io/tags/programming">programming</a></span>
 				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1587 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1588 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-07-25 18:26 -0500</p>
 			</footer>
 		</article>

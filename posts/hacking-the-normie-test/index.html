@@ -12,7 +12,7 @@
         Apparently EDM is mainstream now?    Notably, the quiz is not open source and it runs on server-side PHP. How is X calculated? How is Y calculated? Why am I a &lsquo;Simp&rsquo; if my X-coordinate is over the line by 0.">
 <meta itemprop="datePublished" content="2021-01-15T13:45:56-06:00" />
 <meta itemprop="dateModified" content="2021-01-15T13:45:56-06:00" />
-<meta itemprop="wordCount" content="1210">
+<meta itemprop="wordCount" content="1217">
 
 
 
@@ -115,18 +115,18 @@
 <p>Has anyone ever described you as awkward, autistic, weird, etc.?</p>
 </blockquote>
 <p>Questions 35-41 are &lsquo;statistical.&rsquo; They ask the quiz taker their height, BMI, climate, among other things for reference.</p>
-<p>The perspective questions have 5 answer options: Strongly Yes, Yes, Neutral, No, and Strongly No. The <a href="http://dulm.blue/normie/changelog.gimp">changelog</a> shows that the creator of the test, Do You Like Memes? (DULM), calls these 5-option questions &lsquo;dynamic questions.&rsquo; The normie questions have some Yes-No questions and some dynamic questions.</p>
-<p>A few assumptions guided my investigation. Each answer option probably has a positive or negative score which affects the X and Y-coordinates. Then the XY-coordinates are just the sums of the scores of the quiz taker&rsquo;s answers. DULM writes the following subtitle for the statistical questions:</p>
+<p>The perspective questions have 5 answer options: Strongly Yes, Yes, Neutral, No, and Strongly No. The <a href="http://dulm.blue/normie/changelog.gimp">change log</a> shows that the creator of the test, Do You Like Memes? (DULM), calls these 5-option questions &lsquo;dynamic questions.&rsquo; The normie questions have some Yes-No questions and some dynamic questions.</p>
+<p>A few assumptions guided my investigation. Each answer option probably has a positive or negative score which affects the X- and Y-coordinates. Then the coordinates are just the sums of the scores of the quiz taker&rsquo;s answers. DULM writes the following subtitle for the statistical questions:</p>
 <blockquote>
 <p>Enter some numbers to see how normal you are.
 <strong>WTF!!! Is this a datamine?</strong>
 The next six questions will make your test results more accurate, as these statistics can determine the likelihood of being normal.</p>
 </blockquote>
-<p>From this, it sounds like DULM looks at the distribution of personality classes for different answers and somehow takes that into account for the final result. I assume they add a &lsquo;correction term&rsquo; to the XY-coordinates based on that distribution. This assumption is necessary since the <a href="https://raw.githubusercontent.com/nathanielbd/normie-neural-networks/master/stats.json">sparse statistical data</a> that DULM makes public does not include any XY means or covariances.</p>
+<p>From this, it sounds like DULM looks at the distribution of personality classes for different answers and somehow takes that into account for the final result. I assume they add a &lsquo;correction term&rsquo; to the coordinates based on that distribution. This assumption is necessary since the <a href="https://raw.githubusercontent.com/nathanielbd/normie-neural-networks/master/stats.json">sparse statistical data</a> that DULM makes public does not include any X or Y means or covariances.</p>
 <h2 id="web-scraping">Web scraping<a href="#web-scraping" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<p>Due to the last assumption, the first round of web scraping answered the perspective and normie questions randomly while leaving the statistical questions in their default options (with the exception of answering male/female/other) and recorded the resulting XY coordinates. In order to solve for the weights, this first round needed to collect at least 146 samples (25 dynamic questions, 9 Yes-No questions, and the male/female/other question) for the system not to be <a href="https://en.wikipedia.org/wiki/Underdetermined_system">underdetermined</a>.</p>
+<p>Due to the last assumption, the first round of web scraping answered the perspective and normie questions randomly while leaving the statistical questions in their default options (except answering male/female/other) and recorded the resulting X- and Y-coordinates. In order to solve for the weights, this first round needed to collect at least 146 samples (25 dynamic questions, 9 Yes-No questions, and the male/female/other question) for the system not to be <a href="https://en.wikipedia.org/wiki/Underdetermined_system">underdetermined</a>.</p>
 <p>Also due to the last assumption, the second round of web scraping required a sample for each of the 14400 combinations (2 3-option questions, 3 4-option questions, and 2 5-option questions) of answers to the statistical quesitons. This time, I also recorded the resulting personality class for each sample.</p>
-<p>During my investigation, DULM actually added their own captcha robot test, which made web scraping a little more difficult.</p>
+<p>During my investigation, DULM actually added their own CAPTCHA robot test, which made web scraping a little more difficult.</p>
 <table>
 <thead>
 <tr>
@@ -135,7 +135,7 @@ The next six questions will make your test results more accurate, as these stati
 </thead>
 <tbody>
 <tr>
-<td align="center">Shoutout to fellow Golden Gopher <a href="https://www-users.cs.umn.edu/~hoppernj/">Dr. Nick Hooper</a> for co-creating CAPTCHA</td>
+<td align="center">Shout out to fellow Golden Gopher <a href="https://www-users.cs.umn.edu/~hoppernj/">Dr. Nick Hooper</a> for co-creating CAPTCHA</td>
 </tr>
 </tbody>
 </table>
@@ -144,7 +144,7 @@ The next six questions will make your test results more accurate, as these stati
  <script src="https://gist.github.com/nathanielbd/607b9eb3756e111e8d33b80d3ae4ce85.js"></script> 
 <p>It was through this web scraping that I found that the X coordinate is always in increments of 0.5 and the Y coordinate is always in increments of 0.25.</p>
 <h2 id="findings">Findings<a href="#findings" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<h3 id="xy-coordinates">XY coordinates<a href="#xy-coordinates" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<h3 id="x--and-y--coordinates">X- and Y- coordinates<a href="#x--and-y--coordinates" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>Figuring out the weights toward the X and Y coordinates for each question option requires solving the system</p>
 <p>$$Ax=b$$</p>
 <p>where \(A\) is the matrix whose rows contain the <a href="https://en.wikipedia.org/wiki/One-hot">one-hot encoded</a> answers to the questions, \(x\) is a vector containing the weights of the answers, and \(b\) is the X or the Y coordinate. Although this can be a simple call to <code>numpy.linalg.solve</code>, I decided to solve this with linear regression. In this case, I could tell if the assumption of linear weights is wrong if there was an atrocious mean squared error.</p>
@@ -159,7 +159,7 @@ The next six questions will make your test results more accurate, as these stati
 .gist .blob-interaction-bar {background: #000}
 </style> 
 <h4 id="normie-neural-networkshttpsgithubcomnathanielbdnormie-neural-networks"><a href="https://github.com/nathanielbd/normie-neural-networks">Normie Neural Networks</a><a href="#normie-neural-networkshttpsgithubcomnathanielbdnormie-neural-networks" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
-<p>Let&rsquo;s try doing the same thing, but with a single layer neural network. Just for fun.</p>
+<p>Let&rsquo;s try doing the same thing, but with a single layer neural network. Just for fun. And also alliteration.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">SingleLayerNeuralNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -242,7 +242,7 @@ The next six questions will make your test results more accurate, as these stati
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://nathanielbd.github.io/tags/web-scraping">web scraping</a></span><span class="tag"><a href="https://nathanielbd.github.io/tags/internet-culture">internet culture</a></span><span class="tag"><a href="https://nathanielbd.github.io/tags/machine-learning">machine learning</a></span>
 				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1210 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1217 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-01-15 13:45 -0600</p>
 			</footer>
 		</article>

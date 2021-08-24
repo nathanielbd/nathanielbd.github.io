@@ -34,7 +34,7 @@
 </tbody>
 </table>
 <p>It was the key to Andrew Wiles&rsquo;s <a href="https://doi.org/10.2307/2118559">famous proof</a> of <a href="https://en.wikipedia.org/wiki/Fermat%27s_Last_Theorem">Fermat&rsquo;s Last Theorem</a>. But its most creative use, in my opinion, was its application in my favorite algorithm. Strangely enough, it&rsquo;s an algorithm literally built to fail. My goal is that this blog post reads like a combination of an engaging textbook and a mystery novel. By the end, I hope to give you the feeling that you could have invented this algorithm yourself by piecing together the title of this post and what you&rsquo;ve learned.</p>
-<p>By the way, the this algorithm is a factoring algorithm. The goal is, given an integer, find an equivalent expression that&rsquo;s a product of other integers.</p>
+<p>By the way, the algorithm is a factoring algorithm. The goal is, given an integer, find an equivalent expression that&rsquo;s a product of other integers.</p>
 <table>
 <thead>
 <tr>
@@ -88,7 +88,7 @@
 <hr>
 <p><em>Note: If you were confused why we have to invert the third intersection previously, read the following paragraph then consider the above video animating \(P + Q = R\). Rearranging results in \(P + Q - R = \mathcal{O}\). If we did not invert the third intersection, does this equation still hold?</em></p>
 <hr>
-<p>In the case of adding a point to its inverse, there&rsquo;s no third intersection between the line and the curve. This leads us to define the non-existant point &lsquo;at infinity&rsquo; to be the identity element (denoted \(\mathcal{O}\)), since its sum with any other point can be defined as simply the other point, in addition to being the sum of inverses.</p>
+<p>In the case of adding a point to its inverse, there&rsquo;s no third intersection between the line and the curve. This leads us to define the nonexistent point &lsquo;at infinity&rsquo; to be the identity element (denoted \(\mathcal{O}\)), since its sum with any other point can be defined as simply the other point, in addition to being the sum of inverses.</p>
 <p>$$P + -P = -P + P = \mathcal{O}$$</p>
 <p>$$P + \mathcal{O} = \mathcal{O} + P = P$$</p>
 <table>
@@ -279,7 +279,7 @@ $$</p>
 <hr>
 <hr>
 <hr>
-<p>The key is to consider the scenario where \(\gcd(a, b)\) is not 1. That would mean the extended Euclidan algorithm fails to compute a modular multiplicative inverse. We fail to divide when calculating the slope and it is undefined.</p>
+<p>The key is to consider the scenario where \(\gcd(a, b)\) is not 1. That would mean the extended Euclidean algorithm fails to compute a modular multiplicative inverse. We fail to divide when calculating the slope and it is undefined.</p>
 <p>But if \(\gcd(a, b) = c &gt; 1\), then \(c\) is a number we can use to factor \(a\) or \(b\), since it divides both!</p>
 <table>
 <thead>
@@ -296,7 +296,7 @@ $$</p>
 <p>Now our algorithm just needs</p>
 <ol>
 <li>a way to generate elliptic curves modulo the number to be factored</li>
-<li>a way to quickly add many points</li>
+<li>a way to quickly add many points.</li>
 </ol>
 <p>We can accomplish both of these by picking the coordinates of a point, defining an elliptic curve such that it contains that point, and adding that point to itself repeatedly*. If we choose \(P = (a, b)\), then pick a random \(A\), we have</p>
 <p>$$
@@ -305,7 +305,7 @@ y^2 &amp;= x^3 + Ax + B \mod N \newline
 b^2 &amp;= a^3 + Aa + B \mod N
 \end{aligned}
 $$</p>
-<p>when we evalute the curve at \(P\). In order for \(P\) to be a solution of the curve, we must have \(B = b^2 - a^3 - Aa \mod N\) to satisfy the equation.</p>
+<p>when we evaluate the curve at \(P\). In order for \(P\) to be a solution of the curve, we must have \(B = b^2 - a^3 - Aa \mod N\) to satisfy the equation.</p>
 <table>
 <thead>
 <tr>
@@ -319,13 +319,13 @@ $$</p>
 </tbody>
 </table>
 <hr>
-<p><em>Note: in reality, it is faster to compute \(n!P\) in the \(n\)th step of the algorithm than to repeatedly add a point ot itself. This is accomplished by the double-and-add algorithm, which I will cover in the sequel post.</em></p>
+<p><em>Note: in reality, it is faster to compute \(n!P\) in the \(n\)th step of the algorithm than to repeatedly add a point to itself. This is accomplished by the double-and-add algorithm, which I will cover in the sequel post.</em></p>
 <hr>
 <h1 id="conclusion">Conclusion</h1>
 <p>I hope you were able to reinvent this algorithm&mdash;Lenstra&rsquo;s elliptic curve factorization algorithm&mdash;before its reveal.</p>
 <p>It&rsquo;s intriguing that the algorithm doesn&rsquo;t just fail, but accomplishes its goal as a result of failing to compute a value. If only math tests were like that!</p>
 <p>I plan to write a follow-up post to this one where I implement the algorithm in Python. Along the way, you can expect to learn about the programming conditions known as exceptions and how they can be used to write what might be the most intuitive implementation of the algorithm. Stay tuned and if you want to look ahead, see <a href="https://github.com/nathanielbd/HPS-crypto">the source code</a>.</p>
-<h1 id="acknowledgements">Acknowledgements</h1>
+<h1 id="acknowledgments">Acknowledgments</h1>
 <p>I learned this from <em>An Introduction to Mathematical Cryptography</em> by Hoffstein, Pipher and Silverman.</p>
 <p>Animations are made with <a href="https://www.manim.community/">ManimCE</a> and illustrations with <a href="https://www.figma.com">Figma</a>.</p>
 ]]></content>
@@ -337,7 +337,7 @@ $$</p>
 			<pubDate>Sun, 06 Jun 2021 16:04:16 -0500</pubDate>
 			
 			<guid>https://nathanielbd.github.io/posts/celebrating-aleksandr-lyapunov/</guid>
-			<description>Happy 164th birthday, Aleksandr Lyapunov!    I recently participated in the first annual Manim math animation engine hackathon! The theme was aniversaries, so I created the above animation to celebrate the 164th anniversary of mathematician Aleksandr Lyapunov&amp;rsquo;s birth. This extended some ideas I presented from Steven Strogatz&amp;rsquo;s nonlinear dynamics textbook at the University of Minnesota&amp;rsquo;s math directed reading program symposium.</description>
+			<description>Happy 164th birthday, Aleksandr Lyapunov!    I recently participated in the first annual Manim math animation engine hackathon! The theme was anniversaries, so I created the above animation to celebrate the 164th anniversary of mathematician Aleksandr Lyapunov&amp;rsquo;s birth. This extended some ideas I presented from Steven Strogatz&amp;rsquo;s nonlinear dynamics textbook at the University of Minnesota&amp;rsquo;s math directed reading program symposium.</description>
 			<content type="html"><![CDATA[<table>
 <thead>
 <tr>
@@ -351,7 +351,7 @@ $$</p>
 </tr>
 </tbody>
 </table>
-<p>I recently participated in the first annual <a href="https://www.manim.community/">Manim</a> math animation engine hackathon! The theme was aniversaries, so I created the above animation to celebrate the 164th anniversary of mathematician Aleksandr Lyapunov&rsquo;s birth. This extended some ideas I presented from <a href="http://www.stevenstrogatz.com/books/nonlinear-dynamics-and-chaos-with-applications-to-physics-biology-chemistry-and-engineering">Steven Strogatz&rsquo;s nonlinear dynamics textbook</a> at the University of Minnesota&rsquo;s <a href="https://www-users.math.umn.edu/~mahrud/drp/">math directed reading program</a> symposium.</p>
+<p>I recently participated in the first annual <a href="https://www.manim.community/">Manim</a> math animation engine hackathon! The theme was anniversaries, so I created the above animation to celebrate the 164th anniversary of mathematician Aleksandr Lyapunov&rsquo;s birth. This extended some ideas I presented from <a href="http://www.stevenstrogatz.com/books/nonlinear-dynamics-and-chaos-with-applications-to-physics-biology-chemistry-and-engineering">Steven Strogatz&rsquo;s nonlinear dynamics textbook</a> at the University of Minnesota&rsquo;s <a href="https://www-users.math.umn.edu/~mahrud/drp/">math directed reading program</a> symposium.</p>
 <h1 id="the-math">The math</h1>
 <p>Consider the system</p>
 <p>$$
@@ -394,7 +394,7 @@ $$</p>
 &amp;= -2x^4 - 2y^4
 \end{aligned}
 $$</p>
-<p>\(V\) is nonnegative and \(\frac{dV}{dt}\) is nonpositive, so it truly is a Lyapunov function. Its existence implies that the system is aysmptototically stable; trajectories all eventually converge to the origin.</p>
+<p>\(V\) is non negative and \(\frac{dV}{dt}\) is non positive, so it truly is a Lyapunov function. Its existence implies that the system is asymptotically stable; trajectories all eventually converge to the origin.</p>
 <p>So the key insight that Lyapunov found was that there doesn&rsquo;t need to be a real energy function, nor does a system have to be physical; all you need is a Lyapunov function that satisfies a few properties to determine its stability.</p>
 <p>Outside of this toy example, Lyapunov functions are used in the engineering of nonlinear control systems. Their analogue in <a href="https://en.wikipedia.org/wiki/Control-Lyapunov_function">control-Lyapunov functions</a> has been used in <a href="https://arc.aiaa.org/doi/10.2514/3.21375">robotics for path planning around obstacles</a>.</p>
 ]]></content>
@@ -432,18 +432,18 @@ $$</p>
 <p>Has anyone ever described you as awkward, autistic, weird, etc.?</p>
 </blockquote>
 <p>Questions 35-41 are &lsquo;statistical.&rsquo; They ask the quiz taker their height, BMI, climate, among other things for reference.</p>
-<p>The perspective questions have 5 answer options: Strongly Yes, Yes, Neutral, No, and Strongly No. The <a href="http://dulm.blue/normie/changelog.gimp">changelog</a> shows that the creator of the test, Do You Like Memes? (DULM), calls these 5-option questions &lsquo;dynamic questions.&rsquo; The normie questions have some Yes-No questions and some dynamic questions.</p>
-<p>A few assumptions guided my investigation. Each answer option probably has a positive or negative score which affects the X and Y-coordinates. Then the XY-coordinates are just the sums of the scores of the quiz taker&rsquo;s answers. DULM writes the following subtitle for the statistical questions:</p>
+<p>The perspective questions have 5 answer options: Strongly Yes, Yes, Neutral, No, and Strongly No. The <a href="http://dulm.blue/normie/changelog.gimp">change log</a> shows that the creator of the test, Do You Like Memes? (DULM), calls these 5-option questions &lsquo;dynamic questions.&rsquo; The normie questions have some Yes-No questions and some dynamic questions.</p>
+<p>A few assumptions guided my investigation. Each answer option probably has a positive or negative score which affects the X- and Y-coordinates. Then the coordinates are just the sums of the scores of the quiz taker&rsquo;s answers. DULM writes the following subtitle for the statistical questions:</p>
 <blockquote>
 <p>Enter some numbers to see how normal you are.
 <strong>WTF!!! Is this a datamine?</strong>
 The next six questions will make your test results more accurate, as these statistics can determine the likelihood of being normal.</p>
 </blockquote>
-<p>From this, it sounds like DULM looks at the distribution of personality classes for different answers and somehow takes that into account for the final result. I assume they add a &lsquo;correction term&rsquo; to the XY-coordinates based on that distribution. This assumption is necessary since the <a href="https://raw.githubusercontent.com/nathanielbd/normie-neural-networks/master/stats.json">sparse statistical data</a> that DULM makes public does not include any XY means or covariances.</p>
+<p>From this, it sounds like DULM looks at the distribution of personality classes for different answers and somehow takes that into account for the final result. I assume they add a &lsquo;correction term&rsquo; to the coordinates based on that distribution. This assumption is necessary since the <a href="https://raw.githubusercontent.com/nathanielbd/normie-neural-networks/master/stats.json">sparse statistical data</a> that DULM makes public does not include any X or Y means or covariances.</p>
 <h2 id="web-scraping">Web scraping</h2>
-<p>Due to the last assumption, the first round of web scraping answered the perspective and normie questions randomly while leaving the statistical questions in their default options (with the exception of answering male/female/other) and recorded the resulting XY coordinates. In order to solve for the weights, this first round needed to collect at least 146 samples (25 dynamic questions, 9 Yes-No questions, and the male/female/other question) for the system not to be <a href="https://en.wikipedia.org/wiki/Underdetermined_system">underdetermined</a>.</p>
+<p>Due to the last assumption, the first round of web scraping answered the perspective and normie questions randomly while leaving the statistical questions in their default options (except answering male/female/other) and recorded the resulting X- and Y-coordinates. In order to solve for the weights, this first round needed to collect at least 146 samples (25 dynamic questions, 9 Yes-No questions, and the male/female/other question) for the system not to be <a href="https://en.wikipedia.org/wiki/Underdetermined_system">underdetermined</a>.</p>
 <p>Also due to the last assumption, the second round of web scraping required a sample for each of the 14400 combinations (2 3-option questions, 3 4-option questions, and 2 5-option questions) of answers to the statistical quesitons. This time, I also recorded the resulting personality class for each sample.</p>
-<p>During my investigation, DULM actually added their own captcha robot test, which made web scraping a little more difficult.</p>
+<p>During my investigation, DULM actually added their own CAPTCHA robot test, which made web scraping a little more difficult.</p>
 <table>
 <thead>
 <tr>
@@ -452,7 +452,7 @@ The next six questions will make your test results more accurate, as these stati
 </thead>
 <tbody>
 <tr>
-<td align="center">Shoutout to fellow Golden Gopher <a href="https://www-users.cs.umn.edu/~hoppernj/">Dr. Nick Hooper</a> for co-creating CAPTCHA</td>
+<td align="center">Shout out to fellow Golden Gopher <a href="https://www-users.cs.umn.edu/~hoppernj/">Dr. Nick Hooper</a> for co-creating CAPTCHA</td>
 </tr>
 </tbody>
 </table>
@@ -461,7 +461,7 @@ The next six questions will make your test results more accurate, as these stati
  <script src="https://gist.github.com/nathanielbd/607b9eb3756e111e8d33b80d3ae4ce85.js"></script> 
 <p>It was through this web scraping that I found that the X coordinate is always in increments of 0.5 and the Y coordinate is always in increments of 0.25.</p>
 <h2 id="findings">Findings</h2>
-<h3 id="xy-coordinates">XY coordinates</h3>
+<h3 id="x--and-y--coordinates">X- and Y- coordinates</h3>
 <p>Figuring out the weights toward the X and Y coordinates for each question option requires solving the system</p>
 <p>$$Ax=b$$</p>
 <p>where \(A\) is the matrix whose rows contain the <a href="https://en.wikipedia.org/wiki/One-hot">one-hot encoded</a> answers to the questions, \(x\) is a vector containing the weights of the answers, and \(b\) is the X or the Y coordinate. Although this can be a simple call to <code>numpy.linalg.solve</code>, I decided to solve this with linear regression. In this case, I could tell if the assumption of linear weights is wrong if there was an atrocious mean squared error.</p>
@@ -476,7 +476,7 @@ The next six questions will make your test results more accurate, as these stati
 .gist .blob-interaction-bar {background: #000}
 </style> 
 <h4 id="normie-neural-networkshttpsgithubcomnathanielbdnormie-neural-networks"><a href="https://github.com/nathanielbd/normie-neural-networks">Normie Neural Networks</a></h4>
-<p>Let&rsquo;s try doing the same thing, but with a single layer neural network. Just for fun.</p>
+<p>Let&rsquo;s try doing the same thing, but with a single layer neural network. Just for fun. And also alliteration.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">SingleLayerNeuralNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -568,7 +568,7 @@ The Perceptron Given
 \(b\), a bias value,
 define a function \(f\):
 $$f(x) = \begin{cases}1 &amp;amp; \text{if } w \cdot x + b &amp;gt; 0 \\ 0 &amp;amp; \text{otherwise} \end{cases}$$
-The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &amp;lsquo;trained&amp;rsquo; with the data in \(X\).</description>
+The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively improving algorithm thought to be &amp;lsquo;trained&amp;rsquo; with the data in \(X\).</description>
 			<content type="html"><![CDATA[<p>If I had to explain to someone the paradigm of deep learning, I&rsquo;d start by mentioning</p>
 <h2 id="the-perceptron">The Perceptron</h2>
 <p>Given</p>
@@ -577,7 +577,7 @@ The task of predicting a class \(d\) of some row \(x\) can be solved via an iter
 <p>\(b\), a bias value,</p>
 <p>define a function \(f\):</p>
 <p>$$f(x) = \begin{cases}1 &amp; \text{if } w \cdot x + b &gt; 0 \\ 0 &amp; \text{otherwise} \end{cases}$$</p>
-<p>The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\). The training algorithm pseudocode is:</p>
+<p>The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\). The training algorithm pseudocode is:</p>
 <pre><code>initialize w
 define epochs
 define rate
@@ -619,7 +619,7 @@ for 1...epochs
 <h3 id="convergence">Convergence</h3>
 <p>The training algorithm stops when \(w\) ceases to change by a certain amount with each step.</p>
 <p>More importantly, this is achieved <em>despite</em> the random initialization of \(w\). The training algorithm can correct mistakes during training by the vector addition</p>
-<p>$$w := w + r(d-y)x$$</p>
+<p>$$w := w + r(d-y)x,$$</p>
 <p>which rotates the decision boundary in the appropriate direction, as seen in the animation. Deep learning makes a more powerful generalization to convergence and self-correction: loss functions. While linear decision boundaries can measure their performance by computing the dot product and therefore the <a href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity</a> of its norm and positive-class data points, we can define loss functions which establishes how well the neural network is approximating the desired function. Since these loss functions are differentiable with respect to our parameters, we can iteratively subtract multiples of the gradient for self-correction instead of vector addition like the perceptron does. Actually, there are a rich class of optimization algorithms based on the gradient and Hessian of the loss function.</p>
 <table>
 <thead>
@@ -662,7 +662,7 @@ I use KaTeX for math typesetting. When I embed GitHub gists, I add this CSS (as 
 <hr>
 <h1 id="motivation">Motivation</h1>
 <p>Having a personal website makes you stand out in the sea of other online applications. It&rsquo;s a
-way to introduce yourself and control your image to employers online. It&rsquo;s a convient way to
+way to introduce yourself and control your image to employers online. It&rsquo;s a convenient way to
 host a blog, your résumé, and a portfolio.</p>
 <h1 id="how">How</h1>
 <ul>
@@ -773,7 +773,7 @@ host a blog, your résumé, and a portfolio.</p>
 </table>
 <h2 id="code-obfuscation">Code Obfuscation</h2>
 <p>Obfuscation is the process of deliberately making code hard to read by humans. In the case of a JavaScript app like Protobowl, it makes the scripts sent to the user for the web-page smaller and quicker to download. This meant that while they will be harder to find, if there is a vulnerability in <code>app.js</code>, I would be able to execute it on my device (the client).</p>
-<p>A common patten in obfuscation is renaming variables from their human-readable names to typically 1-2 letter names. However, you cannot change strings without changing the behavior of the program. Therefore, any string found in the source code will be found verbatim in the obfuscated code I find on my device. The tricky part would be finding a string that would lead me directly to a vulnerability&hellip;</p>
+<p>A common pattern in obfuscation is renaming variables from their human-readable names to typically 1-2 letter names. However, you cannot change strings without changing the behavior of the program. Therefore, any string found in the source code will be found verbatim in the obfuscated code I find on my device. The tricky part would be finding a string that would lead me directly to a vulnerability&hellip;</p>
 <h2 id="css-selector-strings-and-the-dom">CSS Selector Strings and the DOM</h2>
 <p>My idea for a vulnerability was to trigger an event to reveal the current question&rsquo;s answer before the question had actually ended. I knew the HTML for the page looked like this:</p>
 <pre><code>&lt;div id=&quot;history&quot;&gt;
@@ -838,7 +838,7 @@ host a blog, your résumé, and a portfolio.</p>
 </table>
 <p>The first code I ever read was obfuscated and the first code I ever wrote was a webgame exploit, but I&rsquo;d argue that this natural introduction to the DOM, HTML, and CSS gave me a good start as a beginner.</p>
 <h1 id="morsecodeme">morsecode.me</h1>
-<p>This is a weekend project by <a href="https://twitter.com/bkanber">Burak Kanber</a> that hosts morse code chat rooms. In my attempt to create a tool to allow me to chat without knowing any morse code, I got a healthy taste of JavaScript higher-order functions, concurrency, and <code>Promise</code>s.</p>
+<p>This is a weekend project by <a href="https://twitter.com/bkanber">Burak Kanber</a> that hosts Morse code chat rooms. In my attempt to create a tool to allow me to chat without knowing any Morse code, I got a healthy taste of JavaScript higher-order functions, concurrency, and <code>Promise</code>s.</p>
 <table>
 <thead>
 <tr>
@@ -852,7 +852,7 @@ host a blog, your résumé, and a portfolio.</p>
 </tbody>
 </table>
 <h2 id="the-idea">The idea</h2>
-<p>Instead of using the button to emit the dits and dahs of morse code, let&rsquo;s create a tool that will translate your keypresses into the appropriate dits and dahs.</p>
+<p>Instead of using the button to emit the &lsquo;dits&rsquo; and &lsquo;dahs&rsquo; of Morse code, let&rsquo;s create a tool that will translate your keypresses into the appropriate dits and dahs.</p>
 <h3 id="signal-duration">Signal duration</h3>
 <p>We can use <code>mouseup</code> and <code>mousedown</code> events to trigger the signal, but there needs to be a way to sleep between those two events. There isn&rsquo;t any sleep function, but asynchronous functions can pause their execution until another function returns a fulfilled <code>Promise</code>. Here, a <code>Promise</code> is an object that holds information on the completion of an asynchronous call. It is said to be fulfilled when that call is completed.</p>
 <p>If our asynchronous call is <code>setTimeout</code>, we can create our own &lsquo;sleep&rsquo; from scratch.</p>
@@ -939,14 +939,14 @@ host a blog, your résumé, and a portfolio.</p>
 </thead>
 <tbody>
 <tr>
-<td align="center">I still don&rsquo;t fully know morse code</td>
+<td align="center">I still don&rsquo;t fully know Morse code</td>
 </tr>
 </tbody>
 </table>
 <h1 id="skribblio">skribbl.io</h1>
 <p>It&rsquo;s a popular game similar to Pictionary, except you know how many letters the word is like in Hangman. I found that <a href="https://github.com/skribbliohints/skribbliohints.github.io">someone had collected data using a bot that played on the site for months</a>, so I decided to create an exploit for it also.</p>
 <h2 id="the-idea-1">The idea</h2>
-<p>The idea is essentially what didn&rsquo;t end up happening with the morse code exploit; add possible words into a queue and have a <code>setInterval</code> guess from the queue as fast as possible (without getting banned for spam).</p>
+<p>The idea is essentially what didn&rsquo;t end up happening with the Morse code exploit; add possible words into a queue and have a <code>setInterval</code> guess from the queue as fast as possible (without getting banned for spam).</p>
 <p><em>Aside</em>: Looking back, the familiarity with this pattern of fetching data to store for future use probably helped me learn React very quickly. Have you ever written a <code>componentDidMount</code> before?</p>
 <h3 id="regex">RegEx</h3>
 <p>The idea is somewhat simple, but a complicated part is trying to only guess words that fit the number of letters and any letter that is revealed.</p>
@@ -958,11 +958,11 @@ host a blog, your résumé, and a portfolio.</p>
 </thead>
 <tbody>
 <tr>
-<td align="center"><em>Ackchually</em> he&rsquo;s called &lsquo;The Child&rsquo;</td>
+<td align="center"><em>Ackchually</em> he&rsquo;s called <del>'The Child'</del> Grogu</td>
 </tr>
 </tbody>
 </table>
-<p>For what is revealed here, we want to guess &lsquo;soda,&rsquo; &lsquo;yoda,&rsquo; or any four letter words containing a &rsquo;d&rsquo; in the third spot. This turns out to be a natural place to use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">regular expressions</a> since they can match patterns in strings.</p>
+<p>For what is revealed here, we want to guess &lsquo;soda,&rsquo; &lsquo;Yoda,&rsquo; or any four letter words containing a &rsquo;d&rsquo; in the third spot. This turns out to be a natural place to use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">regular expressions</a> since they can match patterns in strings.</p>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">hint</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#currentWord&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">textContent</span><span class="p">;</span> 
 <span class="c1">// &#39;__d_&#39;
 </span><span class="c1"></span><span class="kd">var</span> <span class="nx">regex</span> <span class="o">=</span> <span class="s1">&#39;^&#39;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">raw</span><span class="sb">`</span><span class="err">\</span><span class="sb">b`</span> <span class="o">+</span> <span class="nx">hint</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/_/g</span><span class="p">,</span> <span class="s1">&#39;[a-zA-Z0-9]&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/ /g</span><span class="p">,</span> <span class="nb">String</span><span class="p">.</span><span class="nx">raw</span><span class="sb">`</span><span class="err">\</span><span class="sb">s`</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">raw</span><span class="sb">`</span><span class="err">\</span><span class="sb">b`</span> <span class="o">+</span> <span class="s1">&#39;$&#39;</span><span class="p">;</span>
@@ -1026,7 +1026,7 @@ host a blog, your résumé, and a portfolio.</p>
 <p><img src="https://raw.githubusercontent.com/3b1b/manim/master/logo/cropped.png" alt="Manim logo"></p>
 <p>The engine is incredible, but lacks documentation and tutorials. There are a couple good ones that show up when you search &ldquo;manim tutorial&rdquo;, like <a href="https://github.com/Elteoremadebeethoven/AnimationsWithManim">this</a>, <a href="https://github.com/malhotra5/Manim-Tutorial">this</a>, and <a href="https://github.com/saturnman/manim_turorial">this</a>. However, nothing relevant shows up when you search &ldquo;manim WSL&rdquo; or &ldquo;manim data points,&rdquo; so I think that alone justifies making this post.</p>
 <h1 id="my-ramblings-on-wsl">My ramblings on WSL</h1>
-<p>Feel free to skip this if you&rsquo;re familiar with WSL, but it&rsquo;s greatly improved my software development experience so I thought I&rsquo;d share my thoughts and setup if it&rsquo;d be able to help some people, even if I&rsquo;m not sponsored to do that.</p>
+<p>Feel free to skip this if you&rsquo;re familiar with WSL, but it&rsquo;s greatly improved my software development experience, so I thought I&rsquo;d share my thoughts and setup if it&rsquo;d be able to help some people, even if I&rsquo;m not sponsored to do that.</p>
 <p>WSL stands for &ldquo;Windows Subsystem for Linux.&rdquo; It allows developers to run a Linux environment on their Windows computer. You can run your favorite distro. It comes with Bash. Perhaps its best perk is giving Windows users access to all the installers and package managers that are so convenient on Linux.</p>
 <p>WSL requires an X server to run GUI applications. The one I use and love is <a href="https://mobaxterm.mobatek.net/">MobaXterm</a>. It runs smoothly, has tabs for multiple terminals, pretty colors, and even works over SSH. Personally, I&rsquo;m really happy with my VSCodium/MobaXterm/Vim setup. After switching from Cygwin, PuTTY, and <a href="https://vole.cse.umn.edu/">my university&rsquo;s online Linux desktop</a>, I&rsquo;ve never looked back.</p>
 <table>
@@ -1163,6 +1163,9 @@ python3 -m pip install -r requirements.txt
 <p>I&rsquo;m excited because there are <a href="https://github.com/eulertour/eulerv2">ongoing efforts to make Manim web-compatible</a>. The combination of this and better documentation should make for more amazing math videos and other educational visualizations.</p>
 <p>My entry for BJC 2020 wasn&rsquo;t the best, but it gave me an excuse to learn Manim and video editing with <a href="https://www.blackmagicdesign.com/products/davinciresolve/">DaVinci Resolve</a>! The effort to production value ratio is really high for both of these tools.</p>
 <p>Now I need an excuse to evaluate some presentation/slidedeck tools for this ratio. Would the winner be <a href="https://www.overleaf.com/learn/latex/Beamer">Beamer</a>, <a href="https://revealjs.com/">reveal.js</a>, or <a href="https://impress.js.org/">impress.js</a>?</p>
+<hr>
+<p><em>Note: I&rsquo;ve since switched to using the <a href="https://www.manim.community/">open source community&rsquo;s version of Manim</a>!</em></p>
+<hr>
 ]]></content>
 		</item>
 		
@@ -1276,7 +1279,7 @@ end while
 </tr>
 </tbody>
 </table>
-<p>The above example shows the tuning process for maintaining a setpoint of 1. It shows how increasing \(K_p\) can decrease the rise time, but lead to overshooting the setpoint. Increasing \(K_i\) will shift the steady-state to the setpoint. Finally, increaseing \(K_d\) will provide stability.</p>
+<p>The above example shows the tuning process for maintaining a setpoint of 1. It shows how increasing \(K_p\) can decrease the rise time, but lead to overshooting the setpoint. Increasing \(K_i\) will shift the steady-state to the setpoint. Finally, increasing \(K_d\) will provide stability.</p>
 <p>Given our mathematical intuition relating the integral to accumulated error and the derivative to the rate of change of the error, we can come up with these general rules:</p>
 <h2 id="what-happens-when-we-increase-">What happens when we increase &hellip;?</h2>
 <table>

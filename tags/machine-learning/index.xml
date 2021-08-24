@@ -35,7 +35,7 @@ The Perceptron Given
 \(b\), a bias value,
 define a function \(f\):
 $$f(x) = \begin{cases}1 &amp;amp; \text{if } w \cdot x + b &amp;gt; 0 \\ 0 &amp;amp; \text{otherwise} \end{cases}$$
-The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &amp;lsquo;trained&amp;rsquo; with the data in \(X\).</description>
+The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively improving algorithm thought to be &amp;lsquo;trained&amp;rsquo; with the data in \(X\).</description>
     </item>
     
   </channel>

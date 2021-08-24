@@ -15,10 +15,10 @@ The Perceptron Given
 \(b\), a bias value,
 define a function \(f\):
 $$f(x) = \begin{cases}1 &amp; \text{if } w \cdot x &#43; b &gt; 0 \\ 0 &amp; \text{otherwise} \end{cases}$$
-The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\).">
+The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\).">
 <meta itemprop="datePublished" content="2021-01-08T00:21:04-06:00" />
 <meta itemprop="dateModified" content="2021-01-08T00:21:04-06:00" />
-<meta itemprop="wordCount" content="687">
+<meta itemprop="wordCount" content="688">
 
 
 
@@ -30,7 +30,7 @@ The Perceptron Given
 \(b\), a bias value,
 define a function \(f\):
 $$f(x) = \begin{cases}1 &amp; \text{if } w \cdot x &#43; b &gt; 0 \\ 0 &amp; \text{otherwise} \end{cases}$$
-The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\)." />
+The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\)." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nathanielbd.github.io/posts/ode-to-the-perceptron/" />
 <meta property="article:published_time" content="2021-01-08T00:21:04-06:00" />
@@ -44,7 +44,7 @@ The Perceptron Given
 \(b\), a bias value,
 define a function \(f\):
 $$f(x) = \begin{cases}1 &amp; \text{if } w \cdot x &#43; b &gt; 0 \\ 0 &amp; \text{otherwise} \end{cases}$$
-The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\)."/>
+The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\)."/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -117,7 +117,7 @@ The task of predicting a class \(d\) of some row \(x\) can be solved via an iter
 <p>\(b\), a bias value,</p>
 <p>define a function \(f\):</p>
 <p>$$f(x) = \begin{cases}1 &amp; \text{if } w \cdot x + b &gt; 0 \\ 0 &amp; \text{otherwise} \end{cases}$$</p>
-<p>The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively-improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\). The training algorithm pseudocode is:</p>
+<p>The task of predicting a class \(d\) of some row \(x\) can be solved via an iteratively improving algorithm thought to be &lsquo;trained&rsquo; with the data in \(X\). The training algorithm pseudocode is:</p>
 <pre><code>initialize w
 define epochs
 define rate
@@ -159,7 +159,7 @@ for 1...epochs
 <h3 id="convergence">Convergence<a href="#convergence" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>The training algorithm stops when \(w\) ceases to change by a certain amount with each step.</p>
 <p>More importantly, this is achieved <em>despite</em> the random initialization of \(w\). The training algorithm can correct mistakes during training by the vector addition</p>
-<p>$$w := w + r(d-y)x$$</p>
+<p>$$w := w + r(d-y)x,$$</p>
 <p>which rotates the decision boundary in the appropriate direction, as seen in the animation. Deep learning makes a more powerful generalization to convergence and self-correction: loss functions. While linear decision boundaries can measure their performance by computing the dot product and therefore the <a href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity</a> of its norm and positive-class data points, we can define loss functions which establishes how well the neural network is approximating the desired function. Since these loss functions are differentiable with respect to our parameters, we can iteratively subtract multiples of the gradient for self-correction instead of vector addition like the perceptron does. Actually, there are a rich class of optimization algorithms based on the gradient and Hessian of the loss function.</p>
 <table>
 <thead>
@@ -184,7 +184,7 @@ for 1...epochs
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://nathanielbd.github.io/tags/machine-learning">machine learning</a></span>
 				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>687 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>688 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-01-08 00:21 -0600</p>
 			</footer>
 		</article>
