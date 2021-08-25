@@ -10,17 +10,17 @@
 <meta itemprop="name" content="The Algorithm Built to Fail">
 <meta itemprop="description" content="This is my entry for 3blue1brown&rsquo;s first summer of math exposition (SoME1)
  There&rsquo;s no question that elliptic curves are incredibly important to math and cryptography.
-        ECC spotted in Wikipedia&rsquo;s security certificate    It was the key to Andrew Wiles&rsquo;s famous proof of Fermat&rsquo;s Last Theorem. But its most creative use, in my opinion, was its application in my favorite algorithm.">
+        ECC spotted in Wikipedia&rsquo;s security certificate    It was the key to Andrew Wiles&rsquo;s famous proof of Fermat&rsquo;s Last Theorem. It was even used to fill a void in one of M. C. Escher&rsquo;s artworks.">
 <meta itemprop="datePublished" content="2021-08-22T17:33:48-06:00" />
 <meta itemprop="dateModified" content="2021-08-22T17:33:48-06:00" />
-<meta itemprop="wordCount" content="2107">
+<meta itemprop="wordCount" content="2695">
 
 
 
 <meta itemprop="keywords" content="mathematical cryptography,computational number theory,programming," /><meta property="og:title" content="The Algorithm Built to Fail" />
 <meta property="og:description" content="This is my entry for 3blue1brown&rsquo;s first summer of math exposition (SoME1)
  There&rsquo;s no question that elliptic curves are incredibly important to math and cryptography.
-        ECC spotted in Wikipedia&rsquo;s security certificate    It was the key to Andrew Wiles&rsquo;s famous proof of Fermat&rsquo;s Last Theorem. But its most creative use, in my opinion, was its application in my favorite algorithm." />
+        ECC spotted in Wikipedia&rsquo;s security certificate    It was the key to Andrew Wiles&rsquo;s famous proof of Fermat&rsquo;s Last Theorem. It was even used to fill a void in one of M. C. Escher&rsquo;s artworks." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nathanielbd.github.io/posts/algorithm-built-to-fail/" />
 <meta property="article:published_time" content="2021-08-22T17:33:48-06:00" />
@@ -29,7 +29,7 @@
 <meta name="twitter:title" content="The Algorithm Built to Fail"/>
 <meta name="twitter:description" content="This is my entry for 3blue1brown&rsquo;s first summer of math exposition (SoME1)
  There&rsquo;s no question that elliptic curves are incredibly important to math and cryptography.
-        ECC spotted in Wikipedia&rsquo;s security certificate    It was the key to Andrew Wiles&rsquo;s famous proof of Fermat&rsquo;s Last Theorem. But its most creative use, in my opinion, was its application in my favorite algorithm."/>
+        ECC spotted in Wikipedia&rsquo;s security certificate    It was the key to Andrew Wiles&rsquo;s famous proof of Fermat&rsquo;s Last Theorem. It was even used to fill a void in one of M. C. Escher&rsquo;s artworks."/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -109,7 +109,20 @@
 </tr>
 </tbody>
 </table>
-<p>It was the key to Andrew Wiles&rsquo;s <a href="https://doi.org/10.2307/2118559">famous proof</a> of <a href="https://en.wikipedia.org/wiki/Fermat%27s_Last_Theorem">Fermat&rsquo;s Last Theorem</a>. But its most creative use, in my opinion, was its application in my favorite algorithm. Strangely enough, it&rsquo;s an algorithm literally built to fail. My goal is that this blog post reads like a combination of an engaging textbook and a mystery novel. By the end, I hope to give you the feeling that you could have invented this algorithm yourself by piecing together the title of this post and what you&rsquo;ve learned.</p>
+<p>It was the key to Andrew Wiles&rsquo;s <a href="https://doi.org/10.2307/2118559">famous proof</a> of <a href="https://en.wikipedia.org/wiki/Fermat%27s_Last_Theorem">Fermat&rsquo;s Last Theorem</a>. It was even used to <a href="https://im-possible.info/english/articles/escher_printgallery/">fill a void in one of M. C. Escher&rsquo;s artworks</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/escher.png" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>Print gallery</em> by M. C. Escher and a &lsquo;filled-in&rsquo; version exhibiting the <a href="https://en.wikipedia.org/wiki/Droste_effect">Droste effect</a></td>
+</tr>
+</tbody>
+</table>
+<p>But its most creative use, in my opinion, was its application in my favorite algorithm. Strangely enough, it&rsquo;s an algorithm literally built to fail. My goal is that this blog post reads like a combination of an engaging textbook and a mystery novel. By the end, I hope to give you the feeling that you could have invented this algorithm yourself by piecing together the title of this post and what you&rsquo;ve learned.</p>
 <p>By the way, the algorithm is a factoring algorithm. The goal is, given an integer, find an equivalent expression that&rsquo;s a product of other integers.</p>
 <table>
 <thead>
@@ -251,6 +264,7 @@ $$</p>
 </tbody>
 </table>
 <p>Modular arithmetic refers to the system of operating on the integers where numbers &lsquo;wrap around&rsquo; when reaching a critical value called the modulus. In modular arithmetic, we may take expressions &lsquo;modulo&rsquo; or &lsquo;mod&rsquo; the modulus, meaning that we take the remainder after dividing by the modulus.</p>
+<p>More formally, if we say that \(a\) divides \(b\), then there exists another integer \(c\) where \(ac = b\). Then in modular arithmetic, we say that \(a \equiv b \mod n\) ('\(a\) is congruent to \(b\) mod \(n\)') if \(n\) divides \(b-a\).</p>
 <p>For us to continue to be able to add points elliptic curves under modular arithmetic, we need to see the modular equivalents to operations in the procedure:</p>
 <p>$$
 \lambda = \begin{cases}
@@ -272,7 +286,7 @@ $$</p>
 </table>
 
 <p>Multiplication behaves well under modular arithmetic thanks to the useful property</p>
-<p>$$(a \cdot b) \mod n = (a \mod n)(b \mod n) \mod n.$$</p>
+<p>$$(a \cdot b) \mod n \equiv (a \mod n)(b \mod n) \mod n.$$</p>
 <p>Division is slightly more complicated. But modular division is slightly more complicated. It requires finding a number called the modular multiplicative inverse. In regular arithmetic, if we wanted to divide by 5, we could just multiply by one fifth&mdash;its reciprocal, the number to multiply to get 1. Here in modular arithmetic land, we&rsquo;re going to use the extended Euclidean algorithm to find the modular multiplicative inverse and make modular division possible.</p>
 <h2 id="extended-euclidean-algorithm">Extended Euclidean algorithm<a href="#extended-euclidean-algorithm" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 <p>Given integers \(a\) and \(b\), the extended Euclidean algorithm finds solutions to</p>
@@ -323,8 +337,8 @@ $$
 au + bv &amp;= \gcd(a, b) \newline
 au + bv &amp;= 1 \newline
 au - 1 &amp;= -bv \newline
-au - 1 &amp;= 0 \mod b \newline
-au &amp;= 1 \mod b.
+au - 1 &amp;\equiv 0 \mod b \newline
+au &amp;\equiv 1 \mod b.
 \end{aligned}
 $$</p>
 <p>By definition, \(u\) is the modular multiplicative; when multiplied with \(a\) it is congruent to \(1 \mod b\). In this case, -27 is the modular multiplicative inverse of 21 modulo 71.</p>
@@ -374,7 +388,16 @@ $$</p>
 <li>a way to generate elliptic curves modulo the number to be factored</li>
 <li>a way to quickly add many points.</li>
 </ol>
-<p>We can accomplish both of these by picking the coordinates of a point, defining an elliptic curve such that it contains that point, and adding that point to itself repeatedly*. If we choose \(P = (a, b)\), then pick a random \(A\), we have</p>
+<p>We can accomplish both of these by picking the coordinates of a point, defining an elliptic curve such that it contains that point, and adding that point to itself repeatedly (computing its multiples).</p>
+<p>$$
+\begin{aligned}
+P + P &amp;= 2P \newline
+2P + P &amp;= 3P \newline
+\dots \newline
+(n-1)P + P &amp;= \mathcal{O}
+\end{aligned}
+$$</p>
+<p>If we choose \(P = (a, b)\), then pick a random \(A\), we have</p>
 <p>$$
 \begin{aligned}
 y^2 &amp;= x^3 + Ax + B \mod N \newline
@@ -401,6 +424,44 @@ $$</p>
 <p>I hope you were able to reinvent this algorithm&mdash;Lenstra&rsquo;s elliptic curve factorization algorithm&mdash;before its reveal.</p>
 <p>It&rsquo;s intriguing that the algorithm doesn&rsquo;t just fail, but accomplishes its goal as a result of failing to compute a value. If only math tests were like that!</p>
 <p>I plan to write a follow-up post to this one where I implement the algorithm in Python. Along the way, you can expect to learn about the programming conditions known as exceptions and how they can be used to write what might be the most intuitive implementation of the algorithm. Stay tuned and if you want to look ahead, see <a href="https://github.com/nathanielbd/HPS-crypto">the source code</a>.</p>
+<h1 id="anticipated-questions">Anticipated questions<a href="#anticipated-questions" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>Why do we expect adding a point to itself repeatedly eventually become the point at infinity?</p>
+<ul>
+<li>When you have a group with finitely many elements like we do with elliptic curves modulo a number, then computing the multiples of an element by repeatedly adding it to itself will generate new points in the group, including the identity element. If you add one more multiple to the identity element, then we will be back where we started. Thus, mathematicians call the set of elements generated by doing this a cyclic subgroup of the original group. We expect this to happen because of the point&rsquo;s inclusion in a cyclic subgroup:</li>
+</ul>
+<p>$$H = \{ \dots \mathcal{O}, P, 2P, \dots \mathcal{O}, \dots \}$$</p>
+<p>Who made this wonderful algorithm?</p>
+<ul>
+<li>Hendrik Lenstra, a Dutch mathematician. Three of his brothers are also mathematicians, and he actually was the one who <a href="https://im-possible.info/english/articles/escher_printgallery/">once used ellipctic curves to fill the void in M. C. Escher&rsquo;s <em>Print Gallery</em></a>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://tse2.mm.bing.net/th?id=OIP.TzI1bE7iA1tXwlvveHtdOgAAAA&amp;pid=Api" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">&ldquo;The art of doing mathematics is forgetting about the superfluous information.&rdquo; &mdash;Hendrik Lenstra</td>
+</tr>
+</tbody>
+</table>
+<p>How do we know that finding a factor is likely? From the last note, why is computing the factorial of a number multiples of a point instead of just adding a point to itself many times faster?</p>
+<ul>
+<li>I didn&rsquo;t want to drag on an already long blog post with talking about finite fields, but the answer requires knowing about them. They are algebraic objects like groups that are defined with prime numbers. Essentially, if we are trying to factor \(n\) which has prime factor \(p\) using point \(P\), then if we look at the elliptic curve over the finite field defined by \(p\), \(mP = \mathcal{O}\) for some number \(m\). Getting a division failure that we want from the elliptic curve \(\mod n\) will happen when we compute \(kP\) where \(k\) is some multiple of \(m\). Thus, computing a factorial multiple of \(P\) will help us get there quickly. The size of the finite field depends on \(p\); so if \(p\) is small, then a smaller factorial multiple will get us our desired division failure. Read <a href="https://sites.math.washington.edu/~morrow/336_16/2016papers/thomas.pdf">this</a> for more details.</li>
+</ul>
+<p>Is this algorithm the fastest factoring algorithm? Is this algorithm actually important compared to other factoring algorithms?</p>
+<ul>
+<li>For general-purpose factoring, Lenstra&rsquo;s algorithm is the third fastest algorithm. However, it is still in active use because how long it takes to factor does not depend on the size of the number to factor, but upon the size of its smallest factor as seen in the previous question. This makes it the fastest algorithm for large numbers which have small factors. So many factoring programs use Lenstra&rsquo;s algorithm to start, then switch to more generally faster algorithms, like the <a href="https://en.wikipedia.org/wiki/Quadratic_sieve">quadratic</a> or <a href="https://en.wikipedia.org/wiki/General_number_field_sieve">general number field sieves</a>.</li>
+</ul>
+<p>Can I ask you a question personally?</p>
+<ul>
+<li>Yes, please <a href="mailto:nathanielbd@gmail.com">email me</a> with any questions.</li>
+</ul>
+<p>Where is the source code for the animations?</p>
+<ul>
+<li>You can view the source code <a href="https://github.com/nathanielbd/SoME1">here</a>. Apologies in advance for the messy code.</li>
+</ul>
 <h1 id="acknowledgments">Acknowledgments<a href="#acknowledgments" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
 <p>I learned this from <em>An Introduction to Mathematical Cryptography</em> by Hoffstein, Pipher and Silverman.</p>
 <p>Animations are made with <a href="https://www.manim.community/">ManimCE</a> and illustrations with <a href="https://www.figma.com">Figma</a>.</p>
@@ -411,7 +472,7 @@ $$</p>
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://nathanielbd.github.io/tags/mathematical-cryptography">mathematical cryptography</a></span><span class="tag"><a href="https://nathanielbd.github.io/tags/computational-number-theory">computational number theory</a></span><span class="tag"><a href="https://nathanielbd.github.io/tags/programming">programming</a></span>
 				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2107 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2695 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-08-22 18:33 -0500</p>
 			</footer>
 		</article>
