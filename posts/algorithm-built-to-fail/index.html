@@ -286,7 +286,7 @@ $$</p>
   </tr>
 </table>
 
-<p>Multiplication behaves well under modular arithmetic thanks to the useful property that multiplying then \(\mod\)ing is equivalent to \(\mod\)ing then multiplying:</p>
+<p>Multiplication behaves well under modular arithmetic thanks to the useful property that multiplying then \(\textrm{mod}\)ing is equivalent to \(\textrm{mod}\)ing then multiplying:</p>
 <p>$$(a \cdot b) \mod n \equiv (a \mod n)(b \mod n) \mod n.$$</p>
 <p>But modular division is slightly more complicated. It requires finding a number called the modular multiplicative inverse. In regular arithmetic, if we wanted to divide by 5, we could just multiply by one fifth&mdash;its reciprocal, the number to multiply to get 1. Here in modular arithmetic land, we&rsquo;re going to use the extended Euclidean algorithm to find the modular multiplicative inverse and make modular division possible.</p>
 <h2 id="extended-euclidean-algorithm">Extended Euclidean algorithm<a href="#extended-euclidean-algorithm" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
