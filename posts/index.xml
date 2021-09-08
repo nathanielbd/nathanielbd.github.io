@@ -294,6 +294,18 @@ $$</p>
 <hr>
 <hr>
 <hr>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/ex623.png" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>Pencil and paper ready!</em> Can you find where division fails when we add \(2P = (43, 126)\) to \(3P = (54, 105)\) in the curve?</td>
+</tr>
+</tbody>
+</table>
 <p>The key is to consider the scenario where \(\gcd(a, b)\) is not 1. That would mean the extended Euclidean algorithm fails to compute a modular multiplicative inverse. We fail to divide when calculating the slope and it is undefined.</p>
 <p>But if \(\gcd(a, b) = c &gt; 1\), then \(c\) is a number we can use to factor \(a\) or \(b\), since it divides both!</p>
 <table>
@@ -377,7 +389,7 @@ $$</p>
 </ul>
 <p>Is this algorithm the fastest factoring algorithm? Is this algorithm actually important compared to other factoring algorithms?</p>
 <ul>
-<li>For general-purpose factoring, Lenstra&rsquo;s algorithm is the third fastest algorithm. However, it is still in active use because how long it takes to factor does not depend on the size of the number to factor, but upon the size of its smallest factor as seen in the previous question. This makes it the fastest algorithm for large numbers which have small factors. So many factoring programs use Lenstra&rsquo;s algorithm to start, then switch to more generally faster algorithms, like the <a href="https://en.wikipedia.org/wiki/Quadratic_sieve">quadratic</a> or <a href="https://en.wikipedia.org/wiki/General_number_field_sieve">general number field sieves</a>.</li>
+<li>For general-purpose factoring, Lenstra&rsquo;s algorithm is the third fastest algorithm. However, it is still in active use because how long it takes to factor does not depend on the size of the number to factor, but upon the size of its smallest factor as seen in the previous question. This makes it the fastest algorithm for large numbers which have small factors. So many factoring programs use Lenstra&rsquo;s algorithm to start, then switch to more generally faster algorithms, like the <a href="https://en.wikipedia.org/wiki/Quadratic_sieve">quadratic</a> or <a href="https://en.wikipedia.org/wiki/General_number_field_sieve">general number field sieves</a>. Even without this utility, the algorithm is still relevant historically as it helped introduce elliptic curves to the cryptographic community, where they are now widely used.</li>
 </ul>
 <p>Can I ask you a question personally?</p>
 <ul>

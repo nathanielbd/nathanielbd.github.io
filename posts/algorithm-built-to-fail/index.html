@@ -13,7 +13,7 @@
         Elliptic curve cryptography spotted in Wikipedia&rsquo;s security certificate    It was the key to Andrew Wiles&rsquo;s famous proof of Fermat&rsquo;s Last Theorem. It was even used to fill a void in one of M. C.">
 <meta itemprop="datePublished" content="2021-08-22T17:33:48-06:00" />
 <meta itemprop="dateModified" content="2021-08-22T17:33:48-06:00" />
-<meta itemprop="wordCount" content="2725">
+<meta itemprop="wordCount" content="2776">
 
 
 
@@ -370,6 +370,18 @@ $$</p>
 <hr>
 <hr>
 <hr>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="/ex623.png" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>Pencil and paper ready!</em> Can you find where division fails when we add \(2P = (43, 126)\) to \(3P = (54, 105)\) in the curve?</td>
+</tr>
+</tbody>
+</table>
 <p>The key is to consider the scenario where \(\gcd(a, b)\) is not 1. That would mean the extended Euclidean algorithm fails to compute a modular multiplicative inverse. We fail to divide when calculating the slope and it is undefined.</p>
 <p>But if \(\gcd(a, b) = c &gt; 1\), then \(c\) is a number we can use to factor \(a\) or \(b\), since it divides both!</p>
 <table>
@@ -453,7 +465,7 @@ $$</p>
 </ul>
 <p>Is this algorithm the fastest factoring algorithm? Is this algorithm actually important compared to other factoring algorithms?</p>
 <ul>
-<li>For general-purpose factoring, Lenstra&rsquo;s algorithm is the third fastest algorithm. However, it is still in active use because how long it takes to factor does not depend on the size of the number to factor, but upon the size of its smallest factor as seen in the previous question. This makes it the fastest algorithm for large numbers which have small factors. So many factoring programs use Lenstra&rsquo;s algorithm to start, then switch to more generally faster algorithms, like the <a href="https://en.wikipedia.org/wiki/Quadratic_sieve">quadratic</a> or <a href="https://en.wikipedia.org/wiki/General_number_field_sieve">general number field sieves</a>.</li>
+<li>For general-purpose factoring, Lenstra&rsquo;s algorithm is the third fastest algorithm. However, it is still in active use because how long it takes to factor does not depend on the size of the number to factor, but upon the size of its smallest factor as seen in the previous question. This makes it the fastest algorithm for large numbers which have small factors. So many factoring programs use Lenstra&rsquo;s algorithm to start, then switch to more generally faster algorithms, like the <a href="https://en.wikipedia.org/wiki/Quadratic_sieve">quadratic</a> or <a href="https://en.wikipedia.org/wiki/General_number_field_sieve">general number field sieves</a>. Even without this utility, the algorithm is still relevant historically as it helped introduce elliptic curves to the cryptographic community, where they are now widely used.</li>
 </ul>
 <p>Can I ask you a question personally?</p>
 <ul>
@@ -473,7 +485,7 @@ $$</p>
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://nathanielbd.github.io/tags/mathematical-cryptography">mathematical cryptography</a></span><span class="tag"><a href="https://nathanielbd.github.io/tags/computational-number-theory">computational number theory</a></span><span class="tag"><a href="https://nathanielbd.github.io/tags/programming">programming</a></span>
 				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2725 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2776 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-08-22 18:33 -0500</p>
 			</footer>
 		</article>
