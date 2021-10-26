@@ -15,10 +15,10 @@
 			<pubDate>Sun, 22 Aug 2021 17:33:48 -0600</pubDate>
 			
 			<guid>https://nathanielbd.github.io/posts/algorithm-built-to-fail/</guid>
-			<description>This is my entry for 3blue1brown&amp;rsquo;s first summer of math exposition (SoME1)
+			<description>This is my entry for 3blue1brown&amp;rsquo;s first summer of math exposition (SoME1). I&amp;rsquo;m glad to report it was one of the top 100/1200+ entries and that Grant Sanderson ranked it as one of his favorite written entries!
  There&amp;rsquo;s no question that elliptic curves are incredibly important to math and cryptography.
-        Elliptic curve cryptography spotted in Wikipedia&amp;rsquo;s security certificate    It was the key to Andrew Wiles&amp;rsquo;s famous proof of Fermat&amp;rsquo;s Last Theorem. It was even used to fill a void in one of M. C.</description>
-			<content type="html"><![CDATA[<p><em>This is my entry for 3blue1brown&rsquo;s <a href="https://www.3blue1brown.com/blog/some1">first summer of math exposition (SoME1)</a></em></p>
+        Elliptic curve cryptography spotted in Wikipedia&amp;rsquo;s security certificate    It was the key to Andrew Wiles&amp;rsquo;s famous proof of Fermat&amp;rsquo;s Last Theorem.</description>
+			<content type="html"><![CDATA[<p><em>This is my entry for 3blue1brown&rsquo;s <a href="https://www.3blue1brown.com/blog/some1">first summer of math exposition (SoME1)</a>. I&rsquo;m glad to report it was one of the top 100/1200+ entries and that <a href="https://www.3blue1brown.com/blog/some1-results#all-entries">Grant Sanderson ranked it as one of his favorite written entries</a>!</em></p>
 <hr>
 <p>There&rsquo;s no question that elliptic curves are incredibly important to math and cryptography.</p>
 <table>
@@ -400,7 +400,7 @@ $$</p>
 <li>You can view the source code <a href="https://github.com/nathanielbd/SoME1">here</a>. Apologies in advance for the messy code.</li>
 </ul>
 <h1 id="acknowledgments">Acknowledgments</h1>
-<p>I learned this from <em>An Introduction to Mathematical Cryptography</em> by Hoffstein, Pipher and Silverman.</p>
+<p>I learned this from Prof Kai-wen Lan&rsquo;s MATH 5248 course and its textbook <em>An Introduction to Mathematical Cryptography</em> by Hoffstein, Pipher and Silverman.</p>
 <p>Animations are made with <a href="https://www.manim.community/">ManimCE</a> and illustrations with <a href="https://www.figma.com">Figma</a>.</p>
 ]]></content>
 		</item>
@@ -548,6 +548,7 @@ The next six questions will make your test results more accurate, as these stati
 .gist .blob-interaction-bar .octicon-search > path {fill: #fff}
 .gist .blob-interaction-bar > input {background: #000}
 .gist .blob-interaction-bar {background: #000}
+.gist-meta{display: none;}
 </style> 
 <h4 id="normie-neural-networkshttpsgithubcomnathanielbdnormie-neural-networks"><a href="https://github.com/nathanielbd/normie-neural-networks">Normie Neural Networks</a></h4>
 <p>Let&rsquo;s try doing the same thing, but with a single layer neural network. Just for fun. And also alliteration.</p>
@@ -731,6 +732,7 @@ I use KaTeX for math typesetting. When I embed GitHub gists, I add this CSS (as 
 <span class="p">.</span><span class="nc">gist</span> <span class="p">.</span><span class="nc">blob-interaction-bar</span> <span class="p">.</span><span class="nc">octicon-search</span> <span class="o">&gt;</span> <span class="nt">path</span> <span class="p">{</span><span class="n">fill</span><span class="p">:</span> <span class="mh">#fff</span><span class="p">}</span>
 <span class="p">.</span><span class="nc">gist</span> <span class="p">.</span><span class="nc">blob-interaction-bar</span> <span class="o">&gt;</span> <span class="nt">input</span> <span class="p">{</span><span class="k">background</span><span class="p">:</span> <span class="mh">#000</span><span class="p">}</span>
 <span class="p">.</span><span class="nc">gist</span> <span class="p">.</span><span class="nc">blob-interaction-bar</span> <span class="p">{</span><span class="k">background</span><span class="p">:</span> <span class="mh">#000</span><span class="p">}</span>
+<span class="p">.</span><span class="nc">gist-meta</span><span class="p">{</span><span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;}</span>
 </code></pre></div><p>This ensures that the gists are in dark theme.</p>
 <p>Due to GitHub&rsquo;s JavaScript messing with the CSS, this must be added after the embedding. I accomplish this by using a raw HTML shortcode: <code>{{.Inner}}</code>.</p>
 <hr>
@@ -804,6 +806,9 @@ host a blog, your résumé, and a portfolio.</p>
 <li>If you are using Linux, Mac, or WSL, you can start <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">here</a></li>
 <li>If you are using Windows, instead of running <code>./deploy.sh</code> in the final step, you should run <code>bash -c './deploy.sh'</code> instead</li>
 </ul>
+<hr>
+<p>*NOTE: * Hugo has transitioned to using GitHub Actions for deployment instead of the bash script referenced in this post. I plan to update this post, but in the meantime, please use the link above.</p>
+<hr>
 <p>This will host your site at <code>&lt;your-github-username&gt;.github.io</code>. If you&rsquo;d like yourself to stand out even more, you could purchase a domain name and <a href="https://docs.github.com/en/github/working-with-github-pages/about-custom-domains-and-github-pages">use that name with GitHub Pages</a>.</p>
 ]]></content>
 		</item>

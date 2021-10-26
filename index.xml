@@ -18,9 +18,9 @@
       <pubDate>Sun, 22 Aug 2021 17:33:48 -0600</pubDate>
       
       <guid>https://nathanielbd.github.io/posts/algorithm-built-to-fail/</guid>
-      <description>This is my entry for 3blue1brown&amp;rsquo;s first summer of math exposition (SoME1)
+      <description>This is my entry for 3blue1brown&amp;rsquo;s first summer of math exposition (SoME1). I&amp;rsquo;m glad to report it was one of the top 100/1200+ entries and that Grant Sanderson ranked it as one of his favorite written entries!
  There&amp;rsquo;s no question that elliptic curves are incredibly important to math and cryptography.
-        Elliptic curve cryptography spotted in Wikipedia&amp;rsquo;s security certificate    It was the key to Andrew Wiles&amp;rsquo;s famous proof of Fermat&amp;rsquo;s Last Theorem. It was even used to fill a void in one of M. C.</description>
+        Elliptic curve cryptography spotted in Wikipedia&amp;rsquo;s security certificate    It was the key to Andrew Wiles&amp;rsquo;s famous proof of Fermat&amp;rsquo;s Last Theorem.</description>
     </item>
     
     <item>
@@ -129,7 +129,16 @@ Segways need a robust mechanism for correcting itself in order to self-balance.<
       <guid>https://nathanielbd.github.io/about/</guid>
       <description>My name is Nathaniel Budijono.
 I&amp;rsquo;m a life-long autodidact currently studying computer science and math at the University of Minnesota. In the future, I hope to be an interdisciplinary computational researcher using computational structural biology or computational chemistry to create technologies for health and the climate.
-In the past, I have worked as a software engineer intern at Rally Health and AI research intern at Smart Information Flow Technologies. I spent time researching genetic interaction network visualizations and sampling algorithms to find developable proteins.</description>
+In the past, I have worked as a software engineer intern at Rally Health and AI research intern at Smart Information Flow Technologies. I spent time researching genetic interaction networks and sampling algorithms to find developable proteins.</description>
+    </item>
+    
+    <item>
+      <title>Failure</title>
+      <link>https://nathanielbd.github.io/failure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://nathanielbd.github.io/failure/</guid>
+      <description>TODO: make failure resume and prelude including spiel on starting uni early and change config.toml to make it visible</description>
     </item>
     
   </channel>
