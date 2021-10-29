@@ -3,6 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nathanielbd.github.io/</loc>
+    <lastmod>2021-10-28T17:33:48-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/parametric-equations/</loc>
+    <lastmod>2021-10-28T17:33:48-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/posts/</loc>
+    <lastmod>2021-10-28T17:33:48-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/tags/</loc>
+    <lastmod>2021-10-28T17:33:48-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielbd.github.io/posts/what-is-the-meta-logo/</loc>
+    <lastmod>2021-10-28T17:33:48-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nathanielbd.github.io/tags/computational-number-theory/</loc>
     <lastmod>2021-08-22T17:33:48-06:00</lastmod>
   </url>
@@ -13,22 +38,7 @@
   </url>
   
   <url>
-    <loc>https://nathanielbd.github.io/</loc>
-    <lastmod>2021-08-22T17:33:48-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanielbd.github.io/posts/</loc>
-    <lastmod>2021-08-22T17:33:48-06:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://nathanielbd.github.io/tags/programming/</loc>
-    <lastmod>2021-08-22T17:33:48-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanielbd.github.io/tags/</loc>
     <lastmod>2021-08-22T17:33:48-06:00</lastmod>
   </url>
   

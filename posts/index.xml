@@ -6,8 +6,69 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Sun, 22 Aug 2021 17:33:48 -0600</lastBuildDate>
+		<lastBuildDate>Thu, 28 Oct 2021 17:33:48 -0600</lastBuildDate>
 		<atom:link href="https://nathanielbd.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>What is the Meta logo?</title>
+			<link>https://nathanielbd.github.io/posts/what-is-the-meta-logo/</link>
+			<pubDate>Thu, 28 Oct 2021 17:33:48 -0600</pubDate>
+			
+			<guid>https://nathanielbd.github.io/posts/what-is-the-meta-logo/</guid>
+			<description>Today, the Facebook company rebranded itself as Meta. PR aside, what mathematically describes its new Lemniscate-like loop logo (try saying that quickly three times)?
+        The logo in question    The icon is a Bowditch curve (also called a Lissajous curve), part of a family of parametric equations where the \(x\) and \(y\) coordinates are sinusoids.
+$$ x = A\sin(at + \delta), \quad y = B\sin(bt).</description>
+			<content type="html"><![CDATA[<p>Today, the Facebook company rebranded itself as Meta. PR aside, what mathematically describes its new Lemniscate-like loop logo (try saying that quickly three times)?</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://photos5.appleinsider.com/gallery/45329-88208-Meta-Logo-xl.jpg" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">The logo in question</td>
+</tr>
+</tbody>
+</table>
+<p>The icon is a <a href="https://en.wikipedia.org/wiki/Lissajous_curve">Bowditch curve</a> (also called a Lissajous curve), part of a family of parametric equations where the \(x\) and \(y\) coordinates are sinusoids.</p>
+<p>$$
+x = A\sin(at + \delta), \quad y = B\sin(bt).
+$$</p>
+<table>
+<thead>
+<tr>
+<th align="center">
+ <iframe src="https://www.desmos.com/calculator/zun1gs45wi" width="100%" style="min-height:300px"></iframe> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Here is the equation for the logo (\(A=3, a=1, \delta=5\pi/9, B=2, b=2\)). Try tweaking the parameters and see how it changes!</td>
+</tr>
+</tbody>
+</table>
+<p>After tweaking around or refreshing your high school algebra knowledge, you can find that \(A\) and \(B\) control the width and height of the curve. The ratio of \(\frac{a}{b}\) determines the number of lobes in the figure. Lastly, \(\delta\) is called the &lsquo;phase difference.&rsquo; If we consider the Bowditch curve to be image of a three-dimensional wireframe, then \(\delta\) controls the angle at which we view it.</p>
+<table>
+<thead>
+<tr>
+<th align="center">
+ <video controls width="80%"><source src="/Bowditch3D.mp4"></video> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Interpretation of \(\delta\) being the angle at which we view a 3D wireframe. Ignoring that closer parts of the wireframe appear larger, this is precisely our original curve in 2D.</td>
+</tr>
+</tbody>
+</table>
+<p>The wireframe has the parameters</p>
+<p>$$
+x = A\cos(t), \quad y = A\sin(t), \quad z=B\sin\left(\frac{b}{a}t\right).
+$$</p>
+<p>A good mathematical exercise would be to show that the projection of this onto a plane through the \(z\)-axis indeed results in the original Bowditch curve! Given that the company has the augmented reality &lsquo;metaverse&rsquo; in mind, they certainly chose Bowditch curves as a figure that lives simultaneously in <a href="https://design.facebook.com/stories/designing-our-new-company-brand-meta/">two and three dimensions</a>.</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>The Algorithm Built to Fail</title>
@@ -302,7 +363,7 @@ $$</p>
 </thead>
 <tbody>
 <tr>
-<td align="center"><em>Pencil and paper ready!</em> Can you find where division fails when we add \(2P = (43, 126)\) to \(3P = (54, 105)\) in the curve?</td>
+<td align="center"><em>Pencil and paper ready!</em> Can you find where division fails when we add \(2P = (43, 126)\) to \(3P = (54, 105)\) in the curve? <em>Actually try it!</em></td>
 </tr>
 </tbody>
 </table>
@@ -400,7 +461,7 @@ $$</p>
 <li>You can view the source code <a href="https://github.com/nathanielbd/SoME1">here</a>. Apologies in advance for the messy code.</li>
 </ul>
 <h1 id="acknowledgments">Acknowledgments</h1>
-<p>I learned this from Prof Kai-wen Lan&rsquo;s MATH 5248 course and its textbook <em>An Introduction to Mathematical Cryptography</em> by Hoffstein, Pipher and Silverman.</p>
+<p>I learned this from Prof Kai-wen Lan&rsquo;s MATH 5248 course at the University of Minnesota and its textbook <em>An Introduction to Mathematical Cryptography</em> by Hoffstein, Pipher and Silverman.</p>
 <p>Animations are made with <a href="https://www.manim.community/">ManimCE</a> and illustrations with <a href="https://www.figma.com">Figma</a>.</p>
 ]]></content>
 		</item>

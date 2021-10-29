@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 22 Aug 2021 17:33:48 -0600</lastBuildDate>
+    <lastBuildDate>Thu, 28 Oct 2021 17:33:48 -0600</lastBuildDate>
     
 	<atom:link href="https://nathanielbd.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>parametric equations</title>
+      <link>https://nathanielbd.github.io/tags/parametric-equations/</link>
+      <pubDate>Thu, 28 Oct 2021 17:33:48 -0600</pubDate>
+      
+      <guid>https://nathanielbd.github.io/tags/parametric-equations/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>computational number theory</title>
