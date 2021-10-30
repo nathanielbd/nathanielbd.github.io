@@ -20,7 +20,7 @@
       <guid>https://nathanielbd.github.io/posts/what-is-the-meta-logo/</guid>
       <description>Today, the Facebook company rebranded itself as Meta. PR aside, what mathematically describes its new Lemniscate-like loop logo (try saying that quickly three times)?
         The logo in question    Answer: A Lissajous curve (also called a Bowditch curve), part of a family of parametric equations where the \(x\) and \(y\) coordinates are sinusoids.
-$$ x = A\sin(at + \delta), \quad y = B\sin(bt).</description>
+$$ x = A\sin(at + \delta), \quad y = B\sin(bt), \quad 0 \leq t \leq 2\pi.</description>
     </item>
     
     <item>
