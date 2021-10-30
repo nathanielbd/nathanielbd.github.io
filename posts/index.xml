@@ -16,7 +16,7 @@
 			
 			<guid>https://nathanielbd.github.io/posts/what-is-the-meta-logo/</guid>
 			<description>Today, the Facebook company rebranded itself as Meta. PR aside, what mathematically describes its new Lemniscate-like loop logo (try saying that quickly three times)?
-        The logo in question    The icon is a Bowditch curve (also called a Lissajous curve), part of a family of parametric equations where the \(x\) and \(y\) coordinates are sinusoids.
+        The logo in question    Answer: A Lissajous curve (also called a Bowditch curve), part of a family of parametric equations where the \(x\) and \(y\) coordinates are sinusoids.
 $$ x = A\sin(at + \delta), \quad y = B\sin(bt).</description>
 			<content type="html"><![CDATA[<p>Today, the Facebook company rebranded itself as Meta. PR aside, what mathematically describes its new Lemniscate-like loop logo (try saying that quickly three times)?</p>
 <table>
@@ -31,7 +31,7 @@ $$ x = A\sin(at + \delta), \quad y = B\sin(bt).</description>
 </tr>
 </tbody>
 </table>
-<p>The icon is a <a href="https://en.wikipedia.org/wiki/Lissajous_curve">Bowditch curve</a> (also called a Lissajous curve), part of a family of parametric equations where the \(x\) and \(y\) coordinates are sinusoids.</p>
+<p>Answer: A <a href="https://en.wikipedia.org/wiki/Lissajous_curve">Lissajous curve</a> (also called a Bowditch curve), part of a family of parametric equations where the \(x\) and \(y\) coordinates are sinusoids.</p>
 <p>$$
 x = A\sin(at + \delta), \quad y = B\sin(bt).
 $$</p>
@@ -39,7 +39,7 @@ $$</p>
 <thead>
 <tr>
 <th align="center">
- <iframe src="https://www.desmos.com/calculator/zun1gs45wi" width="100%" style="min-height:300px"></iframe> </th>
+ <iframe src="https://www.desmos.com/calculator/brasrdtssa" width="100%" style="min-height:300px"></iframe> </th>
 </tr>
 </thead>
 <tbody>
@@ -48,7 +48,21 @@ $$</p>
 </tr>
 </tbody>
 </table>
-<p>After tweaking around or refreshing your high school algebra knowledge, you can find that \(A\) and \(B\) control the width and height of the curve. The ratio of \(\frac{a}{b}\) determines the number of lobes in the figure. Lastly, \(\delta\) is called the &lsquo;phase difference.&rsquo; If we consider the Bowditch curve to be image of a three-dimensional wireframe, then \(\delta\) controls the angle at which we view it.</p>
+<p>After tweaking around or refreshing your high school algebra knowledge, you can find that \(A\) and \(B\) control the width and height of the curve. The ratio of \(\frac{a}{b}\) determines the number of lobes in the figure. Lastly, \(\delta\) is called the &lsquo;phase difference.&rsquo; It is the difference in starting point between the \(x\) and \(y\) sinusoids.</p>
+<table>
+<thead>
+<tr>
+<th align="center">
+ <video controls width="80%"><source src="/BowditchParametric.mp4"></video> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">From high school trigonometry, you might remember that the value of a sine function corresponds to the height of a unit circle (&ldquo;SOH&rdquo; in &ldquo;SOH-CAH-TOA&rdquo;). We can use that trick to plot the Bowditch curve. \(A\) and \(B\) are now radii and \(\delta\) is now an angle offset for their starting positions. \(a\) and \(b\) control the speeds of rotation of the circles.</td>
+</tr>
+</tbody>
+</table>
+<p>If we consider the Lissajous curve to be an image of a three-dimensional wireframe, then \(\delta\) controls the angle at which we view it.</p>
 <table>
 <thead>
 <tr>
@@ -66,7 +80,10 @@ $$</p>
 <p>$$
 x = A\cos(t), \quad y = A\sin(t), \quad z=B\sin\left(\frac{b}{a}t\right).
 $$</p>
-<p>A good mathematical exercise would be to show that the projection of this onto a plane through the \(z\)-axis indeed results in the original Bowditch curve! Given that the company has the augmented reality &lsquo;metaverse&rsquo; in mind, they certainly chose Bowditch curves as a figure that lives simultaneously in <a href="https://design.facebook.com/stories/designing-our-new-company-brand-meta/">two and three dimensions</a>.</p>
+<p>A good mathematical exercise would be to show that the projection of this onto a plane through the \(z\)-axis indeed results in the original Bowditch curve! Given that the company has the augmented reality &lsquo;metaverse&rsquo; in mind, they certainly chose Lissajous curves as a figure that lives simultaneously in <a href="https://design.facebook.com/stories/designing-our-new-company-brand-meta/">two and three dimensions</a>.</p>
+<hr>
+<p><em>If you&rsquo;re interested in how I made the animations for this post, <a href="https://gist.github.com/nathanielbd/25fb7b5a51535552bfa5fee62e49ebff">here</a> is the source code for generating them. I used <a href="https://manim.community">Manim</a>!</em></p>
+<hr>
 ]]></content>
 		</item>
 		
