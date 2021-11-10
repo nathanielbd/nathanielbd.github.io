@@ -879,14 +879,11 @@ host a blog, your résumé, and a portfolio.</p>
 <li>Make sure you like how your page looks. To see what it will look like before you make the site live, run <code>hugo serve</code> or <code>hugo server</code> to run the webpage locally. Type &lsquo;localhost:1313&rsquo; in the address bar to see your working version.</li>
 </ul>
 <h1 id="deploying-to-github-pages">Deploying to GitHub Pages</h1>
-<p>Use <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">this guide</a> as a reference.</p>
+<p>Use <a href="https://github.com/gohugoio/hugoDocs/blob/9c249cc89573e5865c258f8397515f283c1277e7/content/en/hosting-and-deployment/hosting-on-github.md">this guide</a> as a reference.</p>
 <ul>
-<li>If you are using Linux, Mac, or WSL, you can start <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">here</a></li>
+<li>If you are using Linux, Mac, or WSL, you can start <a href="https://github.com/gohugoio/hugoDocs/blob/9c249cc89573e5865c258f8397515f283c1277e7/content/en/hosting-and-deployment/hosting-on-github.md">here</a></li>
 <li>If you are using Windows, instead of running <code>./deploy.sh</code> in the final step, you should run <code>bash -c './deploy.sh'</code> instead</li>
 </ul>
-<hr>
-<p>*NOTE: * Hugo has transitioned to using GitHub Actions for deployment instead of the bash script referenced in this post. I plan to update this post, but in the meantime, please use the link above.</p>
-<hr>
 <p>This will host your site at <code>&lt;your-github-username&gt;.github.io</code>. If you&rsquo;d like yourself to stand out even more, you could purchase a domain name and <a href="https://docs.github.com/en/github/working-with-github-pages/about-custom-domains-and-github-pages">use that name with GitHub Pages</a>.</p>
 ]]></content>
 		</item>
