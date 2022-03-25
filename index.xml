@@ -50,9 +50,8 @@ $$ x = A\sin(at + \delta), \quad y = B\sin(bt), \quad 0 \leq t \leq 2\pi.</descr
       
       <guid>https://nathanielbd.github.io/projects/</guid>
       <description>An incomplete list of some things I&amp;rsquo;ve worked on outside of jobs and school that aren&amp;rsquo;t mentioned in the blog. All of the projects have their own GitHub repository of code either on my profile or one of the organizations on my profile.
-2021 I got my first industry research job!
- 2020 I turned 18 years old!
-WhoDaMan A multiplayer trivia game named after a classmate&amp;rsquo;s quote on Jeopardy!. I created the playable webapp, a tutorial, and open-source community version where anyone can contribute to learn by doing!</description>
+2022 I graduated and started my career as a data scientist!
+Ouijordle Do you want to play multiplayer cooperative Wordle? What about if it was Ouija board themed?</description>
     </item>
     
     <item>
@@ -139,8 +138,8 @@ Segways need a robust mechanism for correcting itself in order to self-balance.<
       
       <guid>https://nathanielbd.github.io/about/</guid>
       <description>My name is Nathaniel Budijono.
-I&amp;rsquo;m a life-long autodidact currently studying computer science and math at the University of Minnesota. In the future, I hope to be an interdisciplinary computational researcher using computational structural biology or computational chemistry to create technologies for health and the climate.
-In the past, I have worked as a software engineer intern at Rally Health and AI research intern at Smart Information Flow Technologies. I spent time researching genetic interaction networks and sampling algorithms to find developable proteins.</description>
+I&amp;rsquo;m a life-long autodidact currently studying undergraduate computer science and math at the University of Minnesota Twin Cities. In the future, I hope to be an interdisciplinary computational researcher using computational structural biology or computational chemistry to create technologies for health or the climate.
+In the past, I have worked as a software engineer intern at Rally Health and AI research intern at Smart Information Flow Technologies.</description>
     </item>
     
     <item>
