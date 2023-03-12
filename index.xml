@@ -138,17 +138,8 @@ Segways need a robust mechanism for correcting itself in order to self-balance.<
       
       <guid>https://nathanielbd.github.io/about/</guid>
       <description>My name is Nathaniel Budijono.
-I&amp;rsquo;m a life-long autodidact currently studying undergraduate computer science and math at the University of Minnesota Twin Cities. In the future, I hope to be an interdisciplinary computational researcher using computational structural biology or computational chemistry to create technologies for health or the climate.
+I&amp;rsquo;m a life-long autodidact and recent graduate. I studied computer science and math at the University of Minnesota-Twin Cities. Right now, I am a data scientist doing machine learning for education at Infinite Campus. In the future, I hope to be an interdisciplinary computational researcher using computational structural biology or computational chemistry to create technologies for health or the climate.
 In the past, I have worked as a software engineer intern at Rally Health and AI research intern at Smart Information Flow Technologies.</description>
-    </item>
-    
-    <item>
-      <title>Failure</title>
-      <link>https://nathanielbd.github.io/failure/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://nathanielbd.github.io/failure/</guid>
-      <description>TODO: make failure resume and prelude including spiel on starting uni early and change config.toml to make it visible</description>
     </item>
     
   </channel>

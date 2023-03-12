@@ -438,7 +438,8 @@ $$</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>I hope you were able to reinvent this algorithm&mdash;Lenstra&rsquo;s elliptic curve factorization algorithm&mdash;before its reveal.</p>
 <p>It&rsquo;s intriguing that the algorithm doesn&rsquo;t just fail, but accomplishes its goal as a result of failing to compute a value. If only math tests were like that!</p>
-<p>I plan to write a follow-up post to this one where I implement the algorithm in Python. Along the way, you can expect to learn about the programming conditions known as exceptions and how they can be used to write what might be the most intuitive implementation of the algorithm. Stay tuned and if you want to look ahead, see <a href="https://github.com/nathanielbd/HPS-crypto">the source code</a>.</p>
+<hr>
+<p><em>For part two of this series on Lenstra&rsquo;s algorithm, see <a href="https://nathanielbd.github.io/posts/python-exceptions-thru-lenstras-algo/">the next post</a> for how Python exceptions can be used to write what might be the most intuitive implementation of the algorithm.</em></p>
 <h1 id="anticipated-questions">Anticipated questions</h1>
 <p>Why do we expect adding a point to itself repeatedly eventually become the point at infinity?</p>
 <ul>
@@ -525,7 +526,7 @@ $$</p>
 </tbody>
 </table>
 <p>We can&rsquo;t use linearization about the fixed point at the origin to determine its stability; the Jacobian has pure imaginary eigenvalues, so the linearization is not robust to small nonlinear terms.</p>
-<p>However, Lyapunov showed that finding a Lyapunov function \(V\) which is locally positive definite and has a locally negative definite time derivative implies stability. This is simimlar to an energy function as the trajectories move monotonically down the basis of \(V\). Let&rsquo;s try \(V = x^2 + y^2\) for the system.</p>
+<p>However, Lyapunov showed that finding a Lyapunov function \(V\) which is locally positive definite and has a locally negative definite time derivative implies stability. This is simimlar to an energy function as the trajectories move monotonically down the basin of \(V\). Let&rsquo;s try \(V = x^2 + y^2\) for the system.</p>
 <table>
 <thead>
 <tr>
