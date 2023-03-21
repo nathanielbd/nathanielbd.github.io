@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 28 Oct 2021 17:33:48 -0600</lastBuildDate>
+    <lastBuildDate>Wed, 30 Mar 2022 16:04:16 -0500</lastBuildDate>
     
 	<atom:link href="https://nathanielbd.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Learning Python Exceptions through Lenstra&#39;s Algorithm</title>
+      <link>https://nathanielbd.github.io/posts/python-exceptions-thru-lenstras-algo/</link>
+      <pubDate>Wed, 30 Mar 2022 16:04:16 -0500</pubDate>
+      
+      <guid>https://nathanielbd.github.io/posts/python-exceptions-thru-lenstras-algo/</guid>
+      <description>This is part two of my series on Lenstra&amp;rsquo;s Algorithm. See part one here for the intuition for the algorithm.
+ In part one, we saw that Lenstra&amp;rsquo;s Algorithm can intuitively be understood as an algorithm literally built to fail. We repeatedly add a point to itself on an elliptic curve modulo the number to be factored and wait until a failure to compute a modular multiplicative inverse occurs. Because when that happens, it means that the GCD of the number to be factored and another number is non-zero.</description>
+    </item>
     
     <item>
       <title>What is the Meta logo?</title>

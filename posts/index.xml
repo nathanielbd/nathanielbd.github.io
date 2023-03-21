@@ -6,8 +6,404 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Thu, 28 Oct 2021 17:33:48 -0600</lastBuildDate>
+		<lastBuildDate>Wed, 30 Mar 2022 16:04:16 -0500</lastBuildDate>
 		<atom:link href="https://nathanielbd.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Learning Python Exceptions through Lenstra&#39;s Algorithm</title>
+			<link>https://nathanielbd.github.io/posts/python-exceptions-thru-lenstras-algo/</link>
+			<pubDate>Wed, 30 Mar 2022 16:04:16 -0500</pubDate>
+			
+			<guid>https://nathanielbd.github.io/posts/python-exceptions-thru-lenstras-algo/</guid>
+			<description>This is part two of my series on Lenstra&amp;rsquo;s Algorithm. See part one here for the intuition for the algorithm.
+ In part one, we saw that Lenstra&amp;rsquo;s Algorithm can intuitively be understood as an algorithm literally built to fail. We repeatedly add a point to itself on an elliptic curve modulo the number to be factored and wait until a failure to compute a modular multiplicative inverse occurs. Because when that happens, it means that the GCD of the number to be factored and another number is non-zero.</description>
+			<content type="html"><![CDATA[<p><em>This is part two of my series on Lenstra&rsquo;s Algorithm. See part one <a href="https://nathanielbd.github.io/posts/algorithm-built-to-fail/">here</a> for the intuition for the algorithm.</em></p>
+<hr>
+<p>In part one, we saw that Lenstra&rsquo;s Algorithm can intuitively be understood as an algorithm literally built to fail. 
+We repeatedly add a point to itself on an elliptic curve modulo the number to be factored and wait until a failure
+to compute a modular multiplicative inverse occurs. Because when that happens, it means that the GCD of the number
+to be factored and another number is non-zero. The latter number must be a factor of the former! We&rsquo;ll see that this
+pattern of waiting for a failure to occur and handling it is exactly what exceptions help us do in the Python programming
+language. Along the way, let&rsquo;s also dig deeper into the subroutines and implementation details of the algorithm.</p>
+<h1 id="what-are-exceptions">What are exceptions?</h1>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Can&#39;t divide by zero!&#34;</span><span class="p">)</span>
+</code></pre></div><p>In the above code block, if <code>x</code> is ever <code>0</code>, we will &lsquo;throw&rsquo; a <code>ZeroDivisionError</code> exception. When an exception occurs
+within a <code>try</code> block, it must be &lsquo;caught&rsquo; with an <code>except</code> block. When the exception is caught, the code within the 
+<code>except</code> block is executed instead of the code within the <code>try</code> block.</p>
+<p>What&rsquo;s even more interesting is the behavior in Python if there isn&rsquo;t an <code>except</code> block immediately after the <code>try</code> block.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">invert</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">quadratic_formula</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">determ</span> <span class="o">=</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span>
+        <span class="n">over_neg_two_a</span> <span class="o">=</span> <span class="n">invert</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">determ</span><span class="p">))</span><span class="o">*</span><span class="n">over_neg_two_a</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">determ</span><span class="p">))</span><span class="o">*</span><span class="n">over_neg_two_a</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;That isn&#39;t even a quadratic function, silly!&#34;</span><span class="p">)</span>
+
+<span class="n">quadratic_formula</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div><p>If we run this code, we first call <code>quadratic_formula</code>. It will then call <code>invert</code> in its <code>try</code> block. Next, <code>invert</code> will end up throwing a <code>ZeroDivisionError</code> because
+<code>0</code> is passed in as <code>x</code>. <code>invert</code> doesn&rsquo;t have an <code>except</code> block, so we look for what function called <code>invert</code>, which is <code>quadratic_formula</code>.</p>
+<p><code>quadratic_formula</code> actually does have an <code>except</code> block! Our exception is finally caught.</p>
+<h1 id="lets-program-lenstras-algorithm-in-python">Let&rsquo;s program Lenstra&rsquo;s algorithm in Python</h1>
+<p>We seek to factor the integer \(N\) using trying different points \(P = (a, b)\) on the elliptic curve</p>
+<p>$$
+E: Y^2 = X^3 + AX + B \mod N
+$$</p>
+<p>where \(B = b^2 - a^3 - Aa \mod N\). Suppose we will try \(k\) different points for now.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">lenstras</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># compute the next point Q by adding P to itself</span>
+            <span class="c1"># throw a NonUnityGCDEvent exception when a GCD is not 1</span>
+        <span class="k">except</span> <span class="n">NonUnityGCDEvent</span><span class="p">:</span>
+            <span class="c1"># catch the exception and return the nontrivial factor of N</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">Q</span>
+</code></pre></div><p>As stated in part 1, it&rsquo;s actually faster to compute \(Q = n!P\) for the \(n\)th iteration of the loop instead of repeated addition \(Q = P + P + \dots P = nP\).</p>
+<h2 id="the-double-and-add-algorithm">The double-and-add algorithm</h2>
+<p>For \(n! = m_0 \cdot m_1 \dots m_{n+1}\), the fastest way to compute each \(m_i P\) is via the double-and-add algorithm. We&rsquo;ll repeat it to compute \(n!\).</p>
+<p>The basic idea is to use the binary expansion of \(m_i\).</p>
+<p>$$
+m_i = r_0 + r_1 \cdot 2 + r_2 \cdot 4 + r_3 \cdot 8 + \dots r_j 2^j.
+$$</p>
+<p>Take \(n=42\) as an example. Represented in binary, it&rsquo;s 101010.</p>
+<p>$$
+\begin{aligned}
+n &amp;= 2^5 + 0 + 2^3 + 0 + 2^1 + 0 \newline
+&amp;= 32 + 8 + 2\newline
+&amp;= 42.
+\end{aligned}
+$$</p>
+<p>How can we turn the evaluation of this expansion into an algorithm?</p>
+<table>
+<thead>
+<tr>
+<th align="center">
+ <video controls width='80%'><source src='/DoubleAdd.mp4'></video></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">A walkthrough of the algorithm on the example. Notice how this uses 8 additions instead of the 41 additions required from the naive approach of computing \(nP\). Can you justify why this algorithm has a time complexity of \(O(\log_2(n))\) versus \(O(n)\) for the naive approach? <a href="https://gist.github.com/nathanielbd/f45970af570c74dc9676a3fd4b9b728c">Animation code</a></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">double_add</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">P</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># could alternatively do </span>
+        <span class="c1"># n &amp; 1</span>
+        <span class="c1"># if you&#39;re into the bitwise and operator</span>
+        <span class="k">if</span> <span class="nb">bin</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> 
+            <span class="c1"># we&#39;ll replace this with elliptic curve point addition later</span>
+            <span class="n">R</span> <span class="o">=</span> <span class="n">R</span> <span class="o">+</span> <span class="n">Q</span> 
+        <span class="c1"># again, this will be replaced with point addition</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">Q</span>
+        <span class="c1"># shift the bits right one</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">R</span> <span class="c1"># R = nP</span>
+</code></pre></div><p>Alternatively, we can implement the algorithm without bitshifting and a binary representation altogether.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">double_add</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">P</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># we&#39;re really just checking if the number is odd</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">R</span> <span class="o">=</span> <span class="n">R</span> <span class="o">+</span> <span class="n">Q</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">Q</span>
+        <span class="c1"># the bitshift is equivalent to halving and flooring</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">R</span>
+</code></pre></div><h3 id="elliptic-curve-point-addition">Elliptic curve point addition</h3>
+<p>The algorithm for point addition is given in <a href="https://nathanielbd.github.io/posts/algorithm-built-to-fail/#elliptic-curve-addition-algorithm">part 1</a>. To summarize, we solve for the third intersection between the secant line and the elliptic curve. If it&rsquo;s a point doubling, we solve for the second intersection between the tangent line and the elliptic curve. Otherwise, we handle special cases with the identity element at infinity.</p>
+<table>
+<thead>
+<tr>
+<th align="center">
+ <video controls width='80%'><source src='/PointAddition.mp4'></video> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Recall point addition for the usual case of two distinct points.</td>
+</tr>
+</tbody>
+</table>
+<p>As the focus of this post is to illustrate how Python exceptions match our intuition of how the algorithm handles failures, let&rsquo;s simply translate the algorithm into Python without delving into the details outlined in the previous post.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">pt_add</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">P</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Q</span>
+    <span class="k">if</span> <span class="n">Q</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">P</span>
+    <span class="n">x_p</span><span class="p">,</span> <span class="n">y_p</span> <span class="o">=</span> <span class="n">P</span>
+    <span class="n">x_q</span><span class="p">,</span> <span class="n">y_q</span> <span class="o">=</span> <span class="n">Q</span>
+    <span class="c1"># special case where the points share an x-coordinate</span>
+    <span class="c1"># the secant line is vertical, so the identity element is </span>
+    <span class="c1"># considered the intersection</span>
+    <span class="k">if</span> <span class="n">x_p</span> <span class="o">==</span> <span class="n">x_q</span> <span class="ow">and</span> <span class="n">y_p</span> <span class="o">==</span> <span class="o">-</span><span class="n">y_q</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="c1"># point doubling</span>
+    <span class="k">if</span> <span class="n">P</span> <span class="o">==</span> <span class="n">Q</span><span class="p">:</span>
+        <span class="c1"># division will require finding modular multiplicative</span>
+        <span class="c1"># inverse with the extended Euclidean algorithm</span>
+        <span class="n">lam</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x_p</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">A</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">y_1</span><span class="p">)</span>
+    <span class="c1"># distinct points</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># again, we will replace division with a call to</span>
+        <span class="c1"># the extended Euclidean algorithm</span>
+        <span class="n">lam</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_q</span> <span class="o">-</span> <span class="n">y_p</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x_q</span> <span class="o">-</span> <span class="n">x_p</span><span class="p">)</span>
+    <span class="n">x_r</span> <span class="o">=</span> <span class="n">lam</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x_1</span> <span class="o">-</span> <span class="n">x_2</span>
+    <span class="n">y_r</span> <span class="o">=</span> <span class="n">lam</span><span class="o">*</span><span class="p">(</span><span class="n">x_p</span> <span class="o">-</span> <span class="n">x_r</span><span class="p">)</span> <span class="o">-</span> <span class="n">y_p</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_r</span><span class="p">,</span> <span class="n">y_r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">R</span>
+</code></pre></div><h3 id="the-extended-euclidean-algorithm">The extended Euclidean algorithm</h3>
+<p><a href="https://nathanielbd.github.io/posts/algorithm-built-to-fail/#extended-euclidean-algorithm">In part 1</a>, we discuss a memory-inefficient implementation of the extended Euclidean algorithm. Let&rsquo;s revisit the example to see why it&rsquo;s inefficient.</p>
+<p>$$
+21u + 71v = \gcd(21, 71)
+$$</p>
+<table>
+<thead>
+<tr>
+<th align="center">Divide, find remainder, repeat</th>
+<th align="center">Construct Bézout coefficients \(u\) and \(v\)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">\(\begin{aligned} 71 &amp;= 3 \cdot 21 + 8 \newline 21 &amp;= 2 \cdot 8 + 5 \newline 8 &amp;= 1 \cdot 5 + 3 \newline 5 &amp;= 1 \cdot 3 + 2 \newline 3 &amp;= 1 \cdot 2 + 1 \newline 2 &amp;= 2 \cdot 1 + 0 \newline \end{aligned}\)</td>
+<td align="center">\(\begin{aligned} 8 &amp;= 1 \cdot 71 + -3 \cdot 21 \newline 5 &amp;= 0 \cdot 71 + 1 \cdot 21 - 2 (1 \cdot 71 + -3 \cdot 21) = -2 \cdot 71 + 7 \cdot 21 \newline 3 &amp;= 1 \cdot 71 + -3 \cdot 21 - 1 (-2 \cdot 71 + 7 \cdot 21) = 3 \cdot 71 + -10 \cdot 21 \newline 2 &amp;= -2 \cdot 71 + 7 \cdot 21 - 1 (3 \cdot 71 + -10 \cdot 21) = -5 \cdot 71 + 17 \cdot 21 \newline 1 &amp;= 3 \cdot 71 + -10 \cdot 21 - 1 (-5 \cdot 71 + 17 \cdot 21) = 8 \cdot 71 + -27 \cdot 21 \end{aligned}\)</td>
+</tr>
+<tr>
+<td align="center">In part 1, we went over the procedure of dividing by the remainder repeatedly. This results in a decreasing sequence of remainders. Instead of storing the entire sequence, we can get away with only storing the two most recently computed remainders.</td>
+<td align="center">Part 1 also considers a second calculation of rewriting each remainder step in order to construct the coefficients. Not only can we again store only the most recently computed coefficients, but we can also compute them in parallel with the remainders instead of after.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">extended_euclidean</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">prev_r</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
+    <span class="n">prev_u</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">prev_v</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># integer/floor division</span>
+        <span class="n">quotient</span> <span class="o">=</span> <span class="n">prev_r</span> <span class="o">//</span> <span class="n">r</span>
+        <span class="c1"># algebra required to solve for the variable</span>
+        <span class="c1"># at each iteration, using parallel assignment</span>
+        <span class="n">prev_r</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="p">,</span> <span class="n">prev_r</span> <span class="o">-</span> <span class="n">quotient</span><span class="o">*</span><span class="n">r</span>
+        <span class="n">prev_u</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="p">,</span> <span class="n">prev_u</span> <span class="o">-</span> <span class="n">quotient</span><span class="o">*</span><span class="n">u</span>
+        <span class="n">prev_v</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="p">,</span> <span class="n">prev_v</span> <span class="o">-</span> <span class="n">quotient</span><span class="o">*</span><span class="n">v</span>
+    
+    <span class="c1"># since the loop will terminate on a zero </span>
+    <span class="c1"># remainder, return the coefficients before that</span>
+    <span class="k">return</span> <span class="n">prev_u</span><span class="p">,</span> <span class="n">prev_v</span>
+</code></pre></div><p>Revisiting the same example&hellip;</p>
+<table>
+<thead>
+<tr>
+<th align="center">Step</th>
+<th align="center"><code>quotient</code></th>
+<th align="center"><code>prev_r</code></th>
+<th align="center"><code>r</code></th>
+<th align="center"><code>prev_u</code></th>
+<th align="center"><code>u</code></th>
+<th align="center"><code>prev_v</code></th>
+<th align="center"><code>v</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">undefined</td>
+<td align="center">71</td>
+<td align="center">21</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">21</td>
+<td align="center">8</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">-3</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">8</td>
+<td align="center">5</td>
+<td align="center">1</td>
+<td align="center">-2</td>
+<td align="center">-3</td>
+<td align="center">7</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">5</td>
+<td align="center">3</td>
+<td align="center">-2</td>
+<td align="center">3</td>
+<td align="center">7</td>
+<td align="center">-10</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">-5</td>
+<td align="center">-10</td>
+<td align="center">17</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">-5</td>
+<td align="center">8</td>
+<td align="center">17</td>
+<td align="center">-27</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">8</td>
+<td align="center">-13</td>
+<td align="center">-27</td>
+<td align="center">44</td>
+</tr>
+</tbody>
+</table>
+<p>Notice that the <code>r</code> column is decreasing. It terminates at 0, consistent with our while loop logic. Comparing to the previous table with our naive approach, we can see the same coefficients being computed.</p>
+<p>There&rsquo;s another optimization we can do that will allow us to save memory by not storing <code>prev_v</code> and <code>v</code>, since we can solve for the second coefficient after computing the first. We will leave that aside for now.</p>
+<h4 id="computing-a-modular-multiplicative-inverse">Computing a modular multiplicative inverse</h4>
+<p>Next, we&rsquo;ll do the necessary modifications to the extended Euclidean algorithm for it to compute modular multiplicative inverses. Recall from part 1 that we can only compute the modular multiplicative inverse of \(a \mod b\) if \(\gcd(a, b) = 1\).</p>
+<p>$$
+\begin{aligned}
+au + bv &amp;= \gcd(a, b) \newline
+au + bv &amp;= 1 \newline
+au - 1 &amp;= -bv \newline
+au - 1 &amp;\equiv 0 \mod b \newline
+au &amp;\equiv 1 \mod b.
+\end{aligned}
+$$</p>
+<p>Now we can apply the final optimization, since we only need one coefficient anyways.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">mod_mult_inverse</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">prev_r</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+    <span class="n">prev_inv</span><span class="p">,</span> <span class="n">inv</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">quotient</span> <span class="o">=</span> <span class="n">prev_r</span> <span class="o">//</span> <span class="n">new_r</span>
+        <span class="n">prev_inv</span><span class="p">,</span> <span class="n">inv</span> <span class="o">=</span> <span class="n">inv</span><span class="p">,</span> <span class="n">prev_inv</span> <span class="o">-</span> <span class="n">quotient</span><span class="o">*</span><span class="n">inv</span>
+        <span class="n">prev_r</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="p">,</span> <span class="n">prev_r</span> <span class="o">-</span> <span class="n">quotient</span><span class="o">*</span><span class="n">r</span>
+
+    <span class="k">if</span> <span class="n">prev_r</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># the last non-zero remainder will be our GCD</span>
+        <span class="c1"># if it is not one, we fail to compute the inverse</span>
+        <span class="c1"># raise an exception to be handled upstream in</span>
+        <span class="c1"># order to report the failure and capture our</span>
+        <span class="c1"># non-trivial factor    </span>
+        <span class="k">raise</span> <span class="n">NonUnityGCDEvent</span><span class="p">(</span><span class="n">prev_r</span><span class="p">)</span> <span class="c1"># &lt;-- Exception starts here (1)</span>
+        <span class="c1"># notice we pass prev_r (the non-unity GCD and non-trivial</span>
+        <span class="c1"># factor) as extra information</span>
+    <span class="k">if</span> <span class="n">inv</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># the coefficient might be negative</span>
+        <span class="c1"># in this case, find its equivalent modulo b</span>
+        <span class="n">inv</span> <span class="o">+=</span> <span class="n">b</span>
+
+    <span class="k">return</span> <span class="n">inv</span>
+
+<span class="c1"># create our own custom exception</span>
+<span class="k">class</span> <span class="nc">NonUnityGCDEvent</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Exception to be raised during computations in Lenstra&#39;s algorithm.
+</span><span class="s2">    Attributes:
+</span><span class="s2">        d -- integer GCD 1 &lt; d &lt;= N resulting from computation of a modular multiplicative inverse
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&#34;Found non-unity GCD d&#34;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">d</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div><h1 id="conclusion">Conclusion</h1>
+<p>Finally, we can see the rest of the Python code with modifications and trace the event back up.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">pt_add</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">P</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Q</span>
+    <span class="k">if</span> <span class="n">Q</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">P</span>
+    <span class="n">x_p</span><span class="p">,</span> <span class="n">y_p</span> <span class="o">=</span> <span class="n">P</span>
+    <span class="n">x_q</span><span class="p">,</span> <span class="n">y_q</span> <span class="o">=</span> <span class="n">Q</span>
+    <span class="k">if</span> <span class="n">x_p</span> <span class="o">==</span> <span class="n">x_q</span> <span class="ow">and</span> <span class="n">y_p</span> <span class="o">==</span> <span class="o">-</span><span class="n">y_q</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="c1"># point doubling</span>
+    <span class="k">if</span> <span class="n">P</span> <span class="o">==</span> <span class="n">Q</span><span class="p">:</span>
+        <span class="c1"># division now replaced with finding the modular</span>
+        <span class="c1"># multiplicative inverse</span>
+        <span class="n">lam</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x_p</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">A</span><span class="p">)</span><span class="o">*</span><span class="n">mod_mult_inverse</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">y_1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="c1"># &lt;-- Exception rises here, and continues to rise as there is no `except` block (2)</span>
+    <span class="c1"># distinct points</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># again division replaced with the modular</span>
+        <span class="c1"># multiplicative inverse</span>
+        <span class="n">lam</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_q</span> <span class="o">-</span> <span class="n">y_p</span><span class="p">)</span><span class="o">*</span><span class="n">mod_mult_inverse</span><span class="p">(</span><span class="n">x_q</span> <span class="o">-</span> <span class="n">x_p</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="c1"># &lt;-- Or rises here, depending on where it was called (2)</span>
+    <span class="n">x_r</span> <span class="o">=</span> <span class="n">lam</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x_1</span> <span class="o">-</span> <span class="n">x_2</span>
+    <span class="n">y_r</span> <span class="o">=</span> <span class="n">lam</span><span class="o">*</span><span class="p">(</span><span class="n">x_p</span> <span class="o">-</span> <span class="n">x_r</span><span class="p">)</span> <span class="o">-</span> <span class="n">y_p</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_r</span><span class="p">,</span> <span class="n">y_r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">R</span>
+
+<span class="k">def</span> <span class="nf">double_add</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">P</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># replaced addition operator with elliptic</span>
+            <span class="c1"># curve point addition function</span>
+            <span class="n">R</span> <span class="o">=</span> <span class="n">pt_add</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="c1"># &lt;-- Exception rises here next, as it called pt_add (3)</span>
+        <span class="c1"># replaced multiplication by two with elliptic</span>
+        <span class="c1"># curve point addition function</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="n">pt_add</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="c1"># &lt;-- Or exception rises here next, if we were in the middle of point doubling when the non-unity GCD was found (3)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">R</span>
+
+<span class="k">def</span> <span class="nf">lenstras</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">Q</span> <span class="o">=</span> <span class="n">double_add</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="c1"># &lt;-- Exception rises to the top of the call stack, where there is an `except` block (4)</span>
+        <span class="k">except</span> <span class="n">NonUnityGCDEvent</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># catch the exception and return the non-trivial factor of N</span>
+            <span class="k">return</span> <span class="n">e</span><span class="o">.</span><span class="n">d</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">Q</span>
+    <span class="c1"># computation of k!P did not result in a non-trivial factor</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div><p>You can see that the exceptions allow the computer implementation of the algorithm to follow the same flow as you would if you were performing Lenstra&rsquo;s algorithm by hand; you would go down elliptic curve/modular arithmetic rabbit hole until you found the factor by failure, remembered what led you down that particular hole, and immediately stop. An implementation without exceptions would require unnecessary returning of a flag indicating failure through all of the helper functions, then checking it at the top of the call stack and computing the GCD. It doesn&rsquo;t evoke the intuition of computing by failure or the thought process of a human performing the algorithm at all.</p>
+<h1 id="anticipated-questions">Anticipated questions</h1>
+<p>What if you don&rsquo;t find any factors after \(k\) tries? Or if \(d = N\)?</p>
+<ul>
+<li>You pick a different curve. There are <a href="https://en.wikipedia.org/wiki/Lenstra_elliptic-curve_factorization#Why_does_the_algorithm_work?">a few factors</a> that affect how likely it is to encounter a division failure during calculations, but they are out of scope of this already quite long blog post. The bottom line is picking a curve and starting point gives us another chance at finding a subgroup with a number of elements that&rsquo;s &ldquo;smooth&rdquo; &mdash;has small prime factors&mdash; which will allow us to get a division failure quicker.</li>
+</ul>
+<hr>
+<p><em>I learned this algorithm from an excellant textbook, &lsquo;An Introduction to Mathematical Cryptography&rsquo; by Hoffstein, Pipher, and Silverman. You can view Python implementations of selected algorithms from that textbook, including the one we just went over, <a href="https://github.com/nathanielbd/HPS-crypto">here</a></em></p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>What is the Meta logo?</title>
@@ -58,7 +454,7 @@ $$</p>
 </thead>
 <tbody>
 <tr>
-<td align="center">From high school trigonometry, you might remember that the value of a sine function corresponds to the height of a unit circle (&ldquo;SOH&rdquo; in &ldquo;SOH-CAH-TOA&rdquo;). We can use that trick to plot the Bowditch curve. \(A\) and \(B\) are now radii and \(\delta\) is now an angle offset for their starting positions. \(a\) and \(b\) control the speeds of rotation of the circles.</td>
+<td align="center">From high school trigonometry, you might remember that the value of a sine function corresponds to the height of a triangle inscribed in a unit circle (&ldquo;SOH&rdquo; in &ldquo;SOH-CAH-TOA&rdquo;). We can use that trick to plot the Bowditch curve. \(A\) and \(B\) are now radii and \(\delta\) is now an angle offset for their starting positions. \(a\) and \(b\) control the speeds of rotation of the circles.</td>
 </tr>
 </tbody>
 </table>
@@ -158,7 +554,7 @@ $$</p>
 <p>Roughly speaking, we say that a set has a group structure if we can define an operation on all its elements which behaves like addition. That is, for a set \(G\) and \(+\), an operation on \(G\), if</p>
 <ul>
 <li>For all \(a\), \(b\), \(c\) in \(G\), we have \((a + b) + c = a + (b + c)\)</li>
-<li>There exists \(0\) in \(G\) such that, for every \(a\) in \(G\), we have \(0 + a = a + 0 = a\). \(0\) is known as the <em>identity element</em> of \(G\)$</li>
+<li>There exists \(0\) in \(G\) such that, for every \(a\) in \(G\), we have \(0 + a = a + 0 = a\). \(0\) is known as the <em>identity element</em> of \(G\)</li>
 <li>For each \(a\) in \(G\), there exists a unique \(b\) in \(G\) such that \(a + b = b + a = 0\). \(b = -a\) is known as the <em>inverse</em> of \(a\),</li>
 </ul>
 <p>then \(G\) has group structure.</p>
@@ -216,8 +612,8 @@ $$</p>
 <p>and points \(P = (x_p, y_p)\) and \(Q = (x_q, y_q)\),</p>
 <ol>
 <li>If \(P = \mathcal{O}\), then \(P + Q = Q\)</li>
-<li>If \(Q = \mathcal{O}\), then \(p + Q = P\)</li>
-<li>If \(x_p = x_q\) and \(y_p = y_q\), then \(P + Q = \mathcal{O}\)</li>
+<li>If \(Q = \mathcal{O}\), then \(P + Q = P\)</li>
+<li>If \(x_p = x_q\) and \(y_p = - y_q\), then \(P + Q = \mathcal{O}\). We have an undefined slope from dividing by zero, as \(P\) and \(Q\) have the same \(x\)-coordinate, resulting in a vertical line to the identity element at infinity.</li>
 <li>Let the slope of the line through \(P\) and \(Q\) be</li>
 </ol>
 <p>$$
@@ -294,7 +690,8 @@ $$</p>
 <h2 id="extended-euclidean-algorithm">Extended Euclidean algorithm</h2>
 <p>Given integers \(a\) and \(b\), the extended Euclidean algorithm finds solutions to</p>
 <p>$$\begin{equation}au + bv = \gcd(a, b),\end{equation}$$</p>
-<p>where \(\gcd(a, b)\) is the greatest common divisor (GCD) of \(a\) and \(b\), the largest number that divides both numbers of interest evenly. Let&rsquo;s see how it works with an example with \(a = 21\) and \(b = 71\). First, we compute \(\gcd(a, b)\) using the regular, non-extended, Euclidean algorithm. You simply store remainder, divide, and repeat.</p>
+<p>where \(\gcd(a, b)\) is the greatest common divisor (GCD) of \(a\) and \(b\), the largest number that divides both numbers of interest evenly. \(u\) and \(v\) are known as the Bézout coefficients of \(a\) and \(b\). When \(a\) and \(b\) are coprime (their \(gcd\) is 1), these coefficients will give us the modular multiplicative inverse we seek.</p>
+<p>Let&rsquo;s see how it works with an example with \(a = 21\) and \(b = 71\). First, we compute \(\gcd(a, b)\) using the regular, non-extended, Euclidean algorithm. You simply store remainder, divide, and repeat.</p>
 <p>$$
 \begin{aligned}
 71 &amp;= 3 \cdot 21 + 8 \newline
@@ -384,8 +781,10 @@ $$</p>
 </tr>
 </tbody>
 </table>
-<p>The key is to consider the scenario where \(\gcd(a, b)\) is not 1. That would mean the extended Euclidean algorithm fails to compute a modular multiplicative inverse. We fail to divide when calculating the slope and it is undefined.</p>
-<p>But if \(\gcd(a, b) = c &gt; 1\), then \(c\) is a number we can use to factor \(a\) or \(b\), since it divides both!</p>
+<p>The key is to consider the scenario where \(\gcd(a, b)\) is not 1. That would mean the extended Euclidean algorithm fails to compute a modular multiplicative inverse. We fail to divide when calculating the slope and it is undefined. If \(\gcd(a, b) = c &gt; 1\), then \(c\) is a number we can use to factor \(a\) or \(b\), since it divides both. Our failure to divide in trying to compute a slope while adding points on the elliptic curve together results in finding a nontrivial factor! So an algorithm to factor can be trying many different curves and many different points until we encounter this scenario.</p>
+<hr>
+<p><em>Note: In the above example, division fails when we add \(2P\) to \(3P\) because \(5P\) is equal to the point at infinity \(\mathcal{O}\) on the elliptic curve. This is because we try to divide by zero! In the world of modular arithmetic, we&rsquo;ve attempted to find the multiplicative inverse of a number that&rsquo;s divisible by the modulus.</em></p>
+<hr>
 <table>
 <thead>
 <tr>
@@ -441,14 +840,14 @@ $$</p>
 <hr>
 <p><em>For part two of this series on Lenstra&rsquo;s algorithm, see <a href="https://nathanielbd.github.io/posts/python-exceptions-thru-lenstras-algo/">the next post</a> for how Python exceptions can be used to write what might be the most intuitive implementation of the algorithm.</em></p>
 <h1 id="anticipated-questions">Anticipated questions</h1>
-<p>Why do we expect adding a point to itself repeatedly eventually become the point at infinity?</p>
+<p>Why do we expect adding a point to itself repeatedly eventually become the point at infinity from dividing by zero?</p>
 <ul>
-<li>When you have a group with finitely many elements like we do with elliptic curves modulo a number, then computing the multiples of an element by repeatedly adding it to itself will generate new points in the group, including the identity element. If you add one more multiple to the identity element, then we will be back where we started. Thus, mathematicians call the set of elements generated by doing this a cyclic subgroup of the original group. We expect this to happen because of the point&rsquo;s inclusion in a cyclic subgroup:</li>
+<li>You should learn about <a href="https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory)">Lagrange&rsquo;s theorem</a> for more details than I will discuss here. When you have a group with finitely many elements like we do with elliptic curves modulo a number, then computing the multiples of an element by repeatedly adding it to itself will generate new points in the group, including the identity element. If you add one more multiple to the identity element, then we will be back where we started. Thus, mathematicians call the set of elements generated by doing this a cyclic subgroup of the original group. We expect this to happen because of the point&rsquo;s inclusion in a cyclic subgroup:</li>
 </ul>
 <p>$$H = \{ \dots \mathcal{O}, P, 2P, \dots \mathcal{O}, \dots \}$$</p>
 <p>Who made this wonderful algorithm?</p>
 <ul>
-<li>Hendrik Lenstra, a Dutch mathematician. Three of his brothers are also mathematicians, and he actually was the one who <a href="https://im-possible.info/english/articles/escher_printgallery/">once used ellipctic curves to fill the void in M. C. Escher&rsquo;s <em>Print Gallery</em></a>.</li>
+<li>Hendrik Lenstra, a Dutch mathematician. Three of his brothers are also mathematicians, and he actually was the one who <a href="https://im-possible.info/english/articles/escher_printgallery/">once used elliptic curves to fill the void in M. C. Escher&rsquo;s <em>Print Gallery</em></a>.</li>
 </ul>
 <table>
 <thead>
@@ -504,7 +903,7 @@ $$</p>
 </tr>
 </tbody>
 </table>
-<p>I recently participated in the first annual <a href="https://www.manim.community/">Manim</a> math animation engine hackathon! The theme was anniversaries, so I created the above animation to celebrate the 164th anniversary of mathematician Aleksandr Lyapunov&rsquo;s birth. This extended some ideas I presented from <a href="http://www.stevenstrogatz.com/books/nonlinear-dynamics-and-chaos-with-applications-to-physics-biology-chemistry-and-engineering">Steven Strogatz&rsquo;s nonlinear dynamics textbook</a> at the University of Minnesota&rsquo;s <a href="https://www-users.math.umn.edu/~mahrud/drp/">math directed reading program</a> symposium.</p>
+<p>I recently participated in the first annual <a href="https://www.manim.community/">Manim</a> math animation engine hackathon! The theme was anniversaries, so I created the above animation to celebrate the 164th anniversary of mathematician Aleksandr Lyapunov&rsquo;s birth. This extended some ideas I presented from <a href="http://www.stevenstrogatz.com/books/nonlinear-dynamics-and-chaos-with-applications-to-physics-biology-chemistry-and-engineering">Steven Strogatz&rsquo;s nonlinear dynamics textbook</a> at the University of Minnesota&rsquo;s <a href="https://www-users.math.umn.edu/~mahrud/drp/">math directed reading program</a> symposium. Here&rsquo;s the <a href="https://github.com/nathanielbd/animating-strogatz">source code</a> for the animation and visualizations.</p>
 <h1 id="the-math">The math</h1>
 <p>Consider the system</p>
 <p>$$
@@ -526,7 +925,7 @@ $$</p>
 </tbody>
 </table>
 <p>We can&rsquo;t use linearization about the fixed point at the origin to determine its stability; the Jacobian has pure imaginary eigenvalues, so the linearization is not robust to small nonlinear terms.</p>
-<p>However, Lyapunov showed that finding a Lyapunov function \(V\) which is locally positive definite and has a locally negative definite time derivative implies stability. This is simimlar to an energy function as the trajectories move monotonically down the basin of \(V\). Let&rsquo;s try \(V = x^2 + y^2\) for the system.</p>
+<p>However, Lyapunov showed that finding a Lyapunov function \(V\) which is locally positive definite and has a locally negative definite time derivative implies stability. This is similar to an energy function as the trajectories move monotonically down the basin of \(V\). Let&rsquo;s try \(V = x^2 + y^2\) for the system.</p>
 <table>
 <thead>
 <tr>
@@ -595,7 +994,7 @@ The next six questions will make your test results more accurate, as these stati
 <p>From this, it sounds like DULM looks at the distribution of personality classes for different answers and somehow takes that into account for the final result. I assume they add a &lsquo;correction term&rsquo; to the coordinates based on that distribution. This assumption is necessary since the <a href="https://raw.githubusercontent.com/nathanielbd/normie-neural-networks/master/stats.json">sparse statistical data</a> that DULM makes public does not include any X or Y means or covariances.</p>
 <h2 id="web-scraping">Web scraping</h2>
 <p>Due to the last assumption, the first round of web scraping answered the perspective and normie questions randomly while leaving the statistical questions in their default options (except answering male/female/other) and recorded the resulting X- and Y-coordinates. In order to solve for the weights, this first round needed to collect at least 146 samples (25 dynamic questions, 9 Yes-No questions, and the male/female/other question) for the system not to be <a href="https://en.wikipedia.org/wiki/Underdetermined_system">underdetermined</a>.</p>
-<p>Also due to the last assumption, the second round of web scraping required a sample for each of the 14400 combinations (2 3-option questions, 3 4-option questions, and 2 5-option questions) of answers to the statistical quesitons. This time, I also recorded the resulting personality class for each sample.</p>
+<p>Also due to the last assumption, the second round of web scraping required a sample for each of the 14400 combinations (2 3-option questions, 3 4-option questions, and 2 5-option questions) of answers to the statistical questions. This time, I also recorded the resulting personality class for each sample.</p>
 <p>During my investigation, DULM actually added their own CAPTCHA robot test, which made web scraping a little more difficult.</p>
 <table>
 <thead>
@@ -749,7 +1148,7 @@ for 1...epochs
 </thead>
 <tbody>
 <tr>
-<td align="center">\(w\) is the <a href="https://en.wikipedia.org/wiki/Normal_(geometry)"><em>normal vector</em></a> to the decision boundary. It is updated when there is a classification mistake <em>i.e.</em> when \(d\not=y\). <a href="https://gist.github.com/nathanielbd/9f61a02fd76b244cb180db171998c814">Code</a></td>
+<td align="center">\(w\) is the <a href="https://en.wikipedia.org/wiki/Normal_(geometry)"><em>normal vector</em></a> to the decision boundary. It is updated when there is a classification mistake <em>i.e.</em> when \(d\not=y\). <a href="https://gist.github.com/nathanielbd/9f61a02fd76b244cb180db171998c814">Animation code</a></td>
 </tr>
 </tbody>
 </table>
@@ -770,11 +1169,25 @@ for 1...epochs
 </tbody>
 </table>
 <p><em>Note</em>: You might have noticed that \(b\) is not changed in the training algorithm despite being a parameter. In practice, we often solve this by having \(w_0\) be the bias and appending 1 as the first entry of each row \(x\) in \(X\).</p>
-<h3 id="convergence">Convergence</h3>
+<h3 id="activation-functions">Activation functions</h3>
+<p>Notice in the definition of \(f\) that we predicted the class based on whether the sign of \(w \cdot x + b\) was positive or negative. This alludes to the concept of an activation function: an operation applied on the outputs of a neuron so that its computation is not merely matrix or vector multiplication. Activation functions like <a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a> and <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a> are non-linear transformations. They are, along with using the outputs of neurons as the inputs to other neurons, what enables the aforementioned ability of deep neural networks to approximate any function.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1280px-Logistic-curve.svg.png" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Yup, not linear</td>
+</tr>
+</tbody>
+</table>
+<h3 id="convergence-and-self-correction">Convergence and self-correction</h3>
 <p>The training algorithm stops when \(w\) ceases to change by a certain amount with each step.</p>
 <p>More importantly, this is achieved <em>despite</em> the random initialization of \(w\). The training algorithm can correct mistakes during training by the vector addition</p>
 <p>$$w := w + r(d-y)x,$$</p>
-<p>which rotates the decision boundary in the appropriate direction, as seen in the animation. Deep learning makes a more powerful generalization to convergence and self-correction: loss functions. While linear decision boundaries can measure their performance by computing the dot product and therefore the <a href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity</a> of its norm and positive-class data points, we can define loss functions which establishes how well the neural network is approximating the desired function. Since these loss functions are differentiable with respect to our parameters, we can iteratively subtract multiples of the gradient for self-correction instead of vector addition like the perceptron does. Actually, there are a rich class of optimization algorithms based on the gradient and Hessian of the loss function.</p>
+<p>which rotates the decision boundary in the appropriate direction, as seen in the animation. Deep learning makes a more powerful generalization to convergence and self-correction: loss functions. While linear decision boundaries can measure their performance by computing the dot product and therefore the <a href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity</a> of its norm and positive-class data points, we can define loss functions which establishes how well the neural network is approximating the desired function by giving a formula quantifying the mistakes in terms of \(w\). Since these loss functions are differentiable with respect to our parameters, we can iteratively subtract multiples of the gradient (which gives us the change in \(w\) that will maximize the loss and thus mistakes) for self-correction instead of vector addition like the perceptron does. Actually, there are a rich class of optimization algorithms based on the gradient and Hessian (a matrix of second-order derivatives) of the loss function.</p>
 <table>
 <thead>
 <tr>
@@ -787,10 +1200,20 @@ for 1...epochs
 </tr>
 </tbody>
 </table>
-<h3 id="activation-functions">Activation functions</h3>
-<p>Notice in the definition of \(f\) that we predicted the class based on whether the sign of \(w \cdot x + b\) was positive or negative. This alludes to the concept of an activation function: an operation applied on the outputs of the neural network so that its computation is not merely matrix or vector multiplication. Can you convince yourself that matrix multiplication alone does not enable universal function approximation? That activation functions like <a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a> does? What about <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a>?</p>
 <hr>
-<p>Although in retrospect it is easy to trace many of the features of the deep learning paradigm to the perceptron, this connectionist view of AI is one that was developed over several decades after Frank Rosenblatt&rsquo;s original research on the perceptron. To me, it&rsquo;s a fun toy example to plant the seeds in an enthusiast&rsquo;s mind for the future contributions by Werbos, Rumelhart, Hopfield, McCullough, and more!</p>
+<p>Although in retrospect it is easy to trace many of the features of the deep learning paradigm to the perceptron, this connectionist view of AI is one that was developed over several decades after Frank Rosenblatt&rsquo;s original research on the perceptron. To me, it&rsquo;s a fun toy example to plant the seeds in an enthusiast&rsquo;s mind for the future contributions by Werbos, Rumelhart, Hopfield, McCullough, and more! The groundwork for neural networks is apparent in it; the last big idea needed was the <a href="https://en.wikipedia.org/wiki/Backpropagation">backpropagation algorithm</a>, which allowed for self-correction once the neurons fed their outputs as inputs to another. The concept is explained very well and at length by others, especially <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">3blue1brown&rsquo;s video series</a>. This intent of this post isn&rsquo;t to provide a thorough explanation of the deep learning, but to highlight the historical origins of many of its ideas in the perceptron, which I don&rsquo;t often see mentioned online.</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://orgs.mines.edu/daa/wp-content/uploads/sites/38/2019/08/1_Gh5PS4R_A5drl5ebd_gNrg@2x.jpg" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">A simple feed-forward neural network. Each neuron is similar to a perceptron with an activation function that uses the backpropagation algorithm to vary \(w\) and correct itself. The arrows indicate the passing of outputs as inputs from one layer of neurons to the next.</td>
+</tr>
+</tbody>
+</table>
 ]]></content>
 		</item>
 		
@@ -929,7 +1352,7 @@ host a blog, your résumé, and a portfolio.</p>
 <h2 id="code-obfuscation">Code Obfuscation</h2>
 <p>Obfuscation is the process of deliberately making code hard to read by humans. In the case of a JavaScript app like Protobowl, it makes the scripts sent to the user for the web-page smaller and quicker to download. This meant that while they will be harder to find, if there is a vulnerability in <code>app.js</code>, I would be able to execute it on my device (the client).</p>
 <p>A common pattern in obfuscation is renaming variables from their human-readable names to typically 1-2 letter names. However, you cannot change strings without changing the behavior of the program. Therefore, any string found in the source code will be found verbatim in the obfuscated code I find on my device. The tricky part would be finding a string that would lead me directly to a vulnerability&hellip;</p>
-<h2 id="css-selector-strings-and-the-dom">CSS Selector Strings and the DOM</h2>
+<h2 id="css-selector-strings">CSS Selector Strings</h2>
 <p>My idea for a vulnerability was to trigger an event to reveal the current question&rsquo;s answer before the question had actually ended. I knew the HTML for the page looked like this:</p>
 <pre><code>&lt;div id=&quot;history&quot;&gt;
 	&lt;div class=&quot;bundle qid-54769933ea23cca9055100a1 active&quot;&gt;...&lt;/div&gt;
@@ -959,7 +1382,6 @@ host a blog, your résumé, and a portfolio.</p>
 </tbody>
 </table>
 <p>To avoid ruining the puzzle, I&rsquo;ll leave it as an exercise for the reader to <a href="https://www.merriam-webster.com/dictionary/grok">grok</a> each line of the obfuscated code.</p>
-<h3 id="the-bom">The BOM</h3>
 <p>I&rsquo;d later learn to look for the <code>window</code> object in the console several <a href="https://www.w3schools.com/js/js_window.asp">w3schools pages later</a>. I was surprised to find out that all global functions and objects are children of this <code>window</code>, including one called <code>$o</code> (at least it was called that in the build at the time) that contained the answer to the current question.</p>
 <h2 id="automation">Automation</h2>
 <p>Turning this exploit into a point farm would yield what I consider to be my first lines of code.</p>
@@ -991,7 +1413,7 @@ host a blog, your résumé, and a portfolio.</p>
 </tr>
 </tbody>
 </table>
-<p>The first code I ever read was obfuscated and the first code I ever wrote was a webgame exploit, but I&rsquo;d argue that this natural introduction to the DOM, HTML, and CSS gave me a good start as a beginner.</p>
+<p>The first code I ever read was obfuscated, and the first code I ever wrote was a webgame exploit. It&rsquo;s an unusual first exposure to code, but I&rsquo;d argue that this natural introduction to the DOM, HTML, and CSS gave me a good start as a beginner.</p>
 <h1 id="morsecodeme">morsecode.me</h1>
 <p>This is a weekend project by <a href="https://twitter.com/bkanber">Burak Kanber</a> that hosts Morse code chat rooms. In my attempt to create a tool to allow me to chat without knowing any Morse code, I got a healthy taste of JavaScript higher-order functions, concurrency, and <code>Promise</code>s.</p>
 <table>

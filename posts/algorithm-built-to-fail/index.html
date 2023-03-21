@@ -13,7 +13,7 @@
         Elliptic curve cryptography spotted in Wikipedia&rsquo;s security certificate    It was the key to Andrew Wiles&rsquo;s famous proof of Fermat&rsquo;s Last Theorem.">
 <meta itemprop="datePublished" content="2021-08-22T17:33:48-06:00" />
 <meta itemprop="dateModified" content="2021-08-22T17:33:48-06:00" />
-<meta itemprop="wordCount" content="2787">
+<meta itemprop="wordCount" content="2968">
 
 
 
@@ -156,7 +156,7 @@
 <p>Roughly speaking, we say that a set has a group structure if we can define an operation on all its elements which behaves like addition. That is, for a set \(G\) and \(+\), an operation on \(G\), if</p>
 <ul>
 <li>For all \(a\), \(b\), \(c\) in \(G\), we have \((a + b) + c = a + (b + c)\)</li>
-<li>There exists \(0\) in \(G\) such that, for every \(a\) in \(G\), we have \(0 + a = a + 0 = a\). \(0\) is known as the <em>identity element</em> of \(G\)$</li>
+<li>There exists \(0\) in \(G\) such that, for every \(a\) in \(G\), we have \(0 + a = a + 0 = a\). \(0\) is known as the <em>identity element</em> of \(G\)</li>
 <li>For each \(a\) in \(G\), there exists a unique \(b\) in \(G\) such that \(a + b = b + a = 0\). \(b = -a\) is known as the <em>inverse</em> of \(a\),</li>
 </ul>
 <p>then \(G\) has group structure.</p>
@@ -214,8 +214,8 @@
 <p>and points \(P = (x_p, y_p)\) and \(Q = (x_q, y_q)\),</p>
 <ol>
 <li>If \(P = \mathcal{O}\), then \(P + Q = Q\)</li>
-<li>If \(Q = \mathcal{O}\), then \(p + Q = P\)</li>
-<li>If \(x_p = x_q\) and \(y_p = y_q\), then \(P + Q = \mathcal{O}\)</li>
+<li>If \(Q = \mathcal{O}\), then \(P + Q = P\)</li>
+<li>If \(x_p = x_q\) and \(y_p = - y_q\), then \(P + Q = \mathcal{O}\). We have an undefined slope from dividing by zero, as \(P\) and \(Q\) have the same \(x\)-coordinate, resulting in a vertical line to the identity element at infinity.</li>
 <li>Let the slope of the line through \(P\) and \(Q\) be</li>
 </ol>
 <p>$$
@@ -292,7 +292,8 @@ $$</p>
 <h2 id="extended-euclidean-algorithm">Extended Euclidean algorithm<a href="#extended-euclidean-algorithm" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 <p>Given integers \(a\) and \(b\), the extended Euclidean algorithm finds solutions to</p>
 <p>$$\begin{equation}au + bv = \gcd(a, b),\end{equation}$$</p>
-<p>where \(\gcd(a, b)\) is the greatest common divisor (GCD) of \(a\) and \(b\), the largest number that divides both numbers of interest evenly. Let&rsquo;s see how it works with an example with \(a = 21\) and \(b = 71\). First, we compute \(\gcd(a, b)\) using the regular, non-extended, Euclidean algorithm. You simply store remainder, divide, and repeat.</p>
+<p>where \(\gcd(a, b)\) is the greatest common divisor (GCD) of \(a\) and \(b\), the largest number that divides both numbers of interest evenly. \(u\) and \(v\) are known as the Bézout coefficients of \(a\) and \(b\). When \(a\) and \(b\) are coprime (their \(gcd\) is 1), these coefficients will give us the modular multiplicative inverse we seek.</p>
+<p>Let&rsquo;s see how it works with an example with \(a = 21\) and \(b = 71\). First, we compute \(\gcd(a, b)\) using the regular, non-extended, Euclidean algorithm. You simply store remainder, divide, and repeat.</p>
 <p>$$
 \begin{aligned}
 71 &amp;= 3 \cdot 21 + 8 \newline
@@ -382,8 +383,10 @@ $$</p>
 </tr>
 </tbody>
 </table>
-<p>The key is to consider the scenario where \(\gcd(a, b)\) is not 1. That would mean the extended Euclidean algorithm fails to compute a modular multiplicative inverse. We fail to divide when calculating the slope and it is undefined.</p>
-<p>But if \(\gcd(a, b) = c &gt; 1\), then \(c\) is a number we can use to factor \(a\) or \(b\), since it divides both!</p>
+<p>The key is to consider the scenario where \(\gcd(a, b)\) is not 1. That would mean the extended Euclidean algorithm fails to compute a modular multiplicative inverse. We fail to divide when calculating the slope and it is undefined. If \(\gcd(a, b) = c &gt; 1\), then \(c\) is a number we can use to factor \(a\) or \(b\), since it divides both. Our failure to divide in trying to compute a slope while adding points on the elliptic curve together results in finding a nontrivial factor! So an algorithm to factor can be trying many different curves and many different points until we encounter this scenario.</p>
+<hr>
+<p><em>Note: In the above example, division fails when we add \(2P\) to \(3P\) because \(5P\) is equal to the point at infinity \(\mathcal{O}\) on the elliptic curve. This is because we try to divide by zero! In the world of modular arithmetic, we&rsquo;ve attempted to find the multiplicative inverse of a number that&rsquo;s divisible by the modulus.</em></p>
+<hr>
 <table>
 <thead>
 <tr>
@@ -439,14 +442,14 @@ $$</p>
 <hr>
 <p><em>For part two of this series on Lenstra&rsquo;s algorithm, see <a href="https://nathanielbd.github.io/posts/python-exceptions-thru-lenstras-algo/">the next post</a> for how Python exceptions can be used to write what might be the most intuitive implementation of the algorithm.</em></p>
 <h1 id="anticipated-questions">Anticipated questions<a href="#anticipated-questions" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
-<p>Why do we expect adding a point to itself repeatedly eventually become the point at infinity?</p>
+<p>Why do we expect adding a point to itself repeatedly eventually become the point at infinity from dividing by zero?</p>
 <ul>
-<li>When you have a group with finitely many elements like we do with elliptic curves modulo a number, then computing the multiples of an element by repeatedly adding it to itself will generate new points in the group, including the identity element. If you add one more multiple to the identity element, then we will be back where we started. Thus, mathematicians call the set of elements generated by doing this a cyclic subgroup of the original group. We expect this to happen because of the point&rsquo;s inclusion in a cyclic subgroup:</li>
+<li>You should learn about <a href="https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory)">Lagrange&rsquo;s theorem</a> for more details than I will discuss here. When you have a group with finitely many elements like we do with elliptic curves modulo a number, then computing the multiples of an element by repeatedly adding it to itself will generate new points in the group, including the identity element. If you add one more multiple to the identity element, then we will be back where we started. Thus, mathematicians call the set of elements generated by doing this a cyclic subgroup of the original group. We expect this to happen because of the point&rsquo;s inclusion in a cyclic subgroup:</li>
 </ul>
 <p>$$H = \{ \dots \mathcal{O}, P, 2P, \dots \mathcal{O}, \dots \}$$</p>
 <p>Who made this wonderful algorithm?</p>
 <ul>
-<li>Hendrik Lenstra, a Dutch mathematician. Three of his brothers are also mathematicians, and he actually was the one who <a href="https://im-possible.info/english/articles/escher_printgallery/">once used ellipctic curves to fill the void in M. C. Escher&rsquo;s <em>Print Gallery</em></a>.</li>
+<li>Hendrik Lenstra, a Dutch mathematician. Three of his brothers are also mathematicians, and he actually was the one who <a href="https://im-possible.info/english/articles/escher_printgallery/">once used elliptic curves to fill the void in M. C. Escher&rsquo;s <em>Print Gallery</em></a>.</li>
 </ul>
 <table>
 <thead>
@@ -486,7 +489,7 @@ $$</p>
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://nathanielbd.github.io/tags/mathematical-cryptography">mathematical cryptography</a></span><span class="tag"><a href="https://nathanielbd.github.io/tags/computational-number-theory">computational number theory</a></span><span class="tag"><a href="https://nathanielbd.github.io/tags/programming">programming</a></span>
 				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2787 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2968 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-08-22 18:33 -0500</p>
 			</footer>
 		</article>
