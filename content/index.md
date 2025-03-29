@@ -4,7 +4,7 @@ title: Nathaniel Budijono
 
 I studied computer science, math, computational biology, and computational chemistry at the University of Minnesota.
 
-My professional experience has spanned building ETL pipelines, researching genetic interaction networks, and using language models to study the linguistics of incels.
+My professional experience has spanned building ETL pipelines, researching genetic interaction networks, productionalizing explainable machine learning models to serve millions of students, and using language models to study the linguistics of incels.
 
 I support
 - [Nucleate Dojo](https://dojo.nucleate.xyz/), lowering the barrier of entry for undergrads to work in biotech
