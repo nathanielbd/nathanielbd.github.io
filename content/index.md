@@ -11,4 +11,4 @@ I support
 - [Socratica](https://socratica.info), for spreading the joy of making and being a friend to those alone in the corner
 - [NAVA](https://nava.org/), for creating a space to take flags seriously and have fun
 
-I'm open to talking if what you find here interests you! [Book a call with me](https://calendly.com/nathanielbd/) or write to nathanielbd (at) gmail (dot) com.
+I'm open to talking if what you find here interests you! [Book a call with me](https://calendly.com/nathanielbd/) or write to nathaniel (first letter of last name) (third letter of last name) (at) gmail (dot) com.
